@@ -33,6 +33,7 @@
   --color-oxblood-soft: #f3e8e3;
   --color-white-card: #ffffff;
   --color-cream-hover: #f2ecde;
+  --color-oxblood-hover: color-mix(in oklab, #7a2e2e 88%, black);
 
   --chart-1: #7a2e2e;
   --chart-2: #6b5d52;
@@ -75,6 +76,7 @@
   --color-oxblood: var(--color-oxblood);
   --color-oxblood-soft: var(--color-oxblood-soft);
   --color-cream-hover: var(--color-cream-hover);
+  --color-oxblood-hover: var(--color-oxblood-hover);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -134,5 +136,16 @@
   }
   html {
     @apply font-body;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

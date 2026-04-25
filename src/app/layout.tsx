@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import { Header } from "@/components/site/header";
+import { Footer } from "@/components/site/footer";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -56,7 +58,11 @@ export default function RootLayout({
       className={`${fraunces.variable} ${plex.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="font-body bg-paper text-ink min-h-screen">
-        <div className="grain min-h-screen flex flex-col">{children}</div>
+        <div className="grain min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

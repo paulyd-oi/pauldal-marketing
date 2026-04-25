@@ -1,6 +1,7 @@
 import { Hero } from "@/components/site/hero";
 import { AboutTeaser } from "@/components/site/about-teaser";
 import { ServicesTeaser } from "@/components/site/services-teaser";
+import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
 
 export default function Home() {
   return (
@@ -8,7 +9,8 @@ export default function Home() {
       <Hero />
       <AboutTeaser />
       <ServicesTeaser />
-      {/* TODO: portfolio teaser */}
+      <PortfolioTeaser />
+      {/* TODO: closing CTA section */}
       <div className="h-screen" />
     </>
   );

@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Paul Dal Studio — Marketing Site
 
-## Getting Started
+Public-facing marketing site for [pauldalstudios.com](https://pauldalstudios.com). Built with the same design language as the FRAME admin app (app.pauldalstudios.com) — Fraunces + IBM Plex Sans typography, oxblood accent, editorial paper aesthetic.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router, TypeScript, Turbopack)
+- React 19
+- Tailwind CSS v4
+- shadcn/ui (base-nova, neutral)
+- Framer Motion
+- Three.js + React Three Fiber + Drei
+- Lucide React icons
+
+## Local Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs on **port 3850** (FRAME uses 3849).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Path | Description |
+|------|-------------|
+| `/` | Home |
+| `/about` | About |
+| `/services` | Services |
+| `/portfolio` | Portfolio |
+| `/book` | Book |
 
-## Learn More
+## Production Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Push to `main` → Vercel auto-deploys. Domain mapping to pauldalstudios.com TBD.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design Tokens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Brand tokens ported from FRAME live in three places:
+- `src/app/globals.css` — CSS custom properties
+- `src/lib/design-tokens.ts` — typed TypeScript constants
+- Tailwind theme — utility classes (`text-oxblood`, `bg-paper`, `font-display`, etc.)

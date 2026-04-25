@@ -2,6 +2,7 @@ import { Hero } from "@/components/site/hero";
 import { AboutTeaser } from "@/components/site/about-teaser";
 import { ServicesTeaser } from "@/components/site/services-teaser";
 import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
+import { ClosingCTA } from "@/components/site/closing-cta";
 
 export default function Home() {
   return (
@@ -10,8 +11,7 @@ export default function Home() {
       <AboutTeaser />
       <ServicesTeaser />
       <PortfolioTeaser />
-      {/* TODO: closing CTA section */}
-      <div className="h-screen" />
+      <ClosingCTA />
     </>
   );
 }

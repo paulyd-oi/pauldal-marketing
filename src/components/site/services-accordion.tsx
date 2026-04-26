@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const ITEMS = [
+export interface AccordionItem {
+  title: string;
+  description: string;
+}
+
+export const DEFAULT_ACCORDION_ITEMS: AccordionItem[] = [
   {
     title: "Discovery call",
     description:
@@ -46,7 +51,11 @@ const ITEMS = [
   },
 ];
 
-export function ServicesAccordion() {
+export function ServicesAccordion({
+  items = DEFAULT_ACCORDION_ITEMS,
+}: {
+  items?: AccordionItem[];
+}) {
   const [open, setOpen] = useState<Set<number>>(new Set());
 
   function toggle(index: number) {
@@ -63,7 +72,7 @@ export function ServicesAccordion() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      {ITEMS.map((item, i) => {
+      {items.map((item, i) => {
         const isOpen = open.has(i);
         return (
           <div key={item.title} className="border-b border-hairline">
@@ -81,7 +90,7 @@ export function ServicesAccordion() {
             </button>
             <div
               className={`overflow-hidden transition-all duration-200 motion-reduce:transition-none ${
-                isOpen ? "max-h-40 pb-6" : "max-h-0"
+                isOpen ? "max-h-60 pb-6" : "max-h-0"
               }`}
             >
               <p className="font-body text-base leading-relaxed text-ink/70">

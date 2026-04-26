@@ -4,15 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./mobile-menu";
 
-const NAV_LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
+const SERVICES_SUBLINKS = [
+  { href: "/services", label: "Services overview" },
+  { href: "/weddings", label: "Weddings" },
+  { href: "/events", label: "Events" },
+  { href: "/business", label: "Business" },
 ];
+
+const SERVICES_PATHS = SERVICES_SUBLINKS.map((s) => s.href);
 
 export function Header() {
   const pathname = usePathname();
@@ -43,20 +46,63 @@ export function Header() {
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              href="/about"
+              className={cn(
+                "font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                pathname === "/about"
+                  ? "text-oxblood underline decoration-1 underline-offset-4"
+                  : "text-foreground/70 hover:text-oxblood"
+              )}
+            >
+              About
+            </Link>
+
+            {/* Services dropdown */}
+            <div className="group relative">
               <Link
-                key={href}
-                href={href}
+                href="/services"
                 className={cn(
-                  "font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
-                  pathname === href
+                  "inline-flex items-center gap-1 font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                  SERVICES_PATHS.includes(pathname)
                     ? "text-oxblood underline decoration-1 underline-offset-4"
                     : "text-foreground/70 hover:text-oxblood"
                 )}
               >
-                {label}
+                Services
+                <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
               </Link>
-            ))}
+              <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100">
+                <div className="min-w-[200px] border border-hairline bg-paper py-2 shadow-sm">
+                  {SERVICES_SUBLINKS.map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      className={cn(
+                        "block px-5 py-2.5 font-body text-sm tracking-wide transition-colors duration-[180ms]",
+                        pathname === href
+                          ? "text-oxblood"
+                          : "text-foreground/80 hover:bg-cream-hover hover:text-oxblood"
+                      )}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <Link
+              href="/portfolio"
+              className={cn(
+                "font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                pathname === "/portfolio"
+                  ? "text-oxblood underline decoration-1 underline-offset-4"
+                  : "text-foreground/70 hover:text-oxblood"
+              )}
+            >
+              Portfolio
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">

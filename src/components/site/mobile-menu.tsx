@@ -8,10 +8,13 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const MENU_LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/book", label: "Book" },
+  { href: "/about", label: "About", indent: false },
+  { href: "/services", label: "Services", indent: false },
+  { href: "/weddings", label: "Weddings", indent: true },
+  { href: "/events", label: "Events", indent: true },
+  { href: "/business", label: "Business", indent: true },
+  { href: "/portfolio", label: "Portfolio", indent: false },
+  { href: "/book", label: "Book", indent: false },
 ];
 
 interface MobileMenuProps {
@@ -73,16 +76,19 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </div>
 
           <nav className="flex flex-col px-6 pt-8">
-            {MENU_LINKS.map(({ href, label }) => (
+            {MENU_LINKS.map(({ href, label, indent }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={onClose}
                 className={cn(
-                  "font-display text-3xl py-6 transition-colors duration-[180ms]",
+                  "transition-colors duration-[180ms]",
+                  indent
+                    ? "py-3 pl-6 font-body text-xl text-ink/80"
+                    : "py-5 font-display text-3xl text-ink",
                   pathname === href
                     ? "text-oxblood"
-                    : "text-ink hover:text-oxblood"
+                    : "hover:text-oxblood"
                 )}
               >
                 {label}

@@ -170,6 +170,39 @@ const content: LandingPageContent = {
     attribution: "A recent client",
     context: "Founder, San Diego SaaS company",
   },
+  faqHeadlineImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
+  faqItems: [
+    {
+      question: "What's included in a brand shoot?",
+      answer:
+        "On-location coverage, art-directed setups based on the brief, full editorial editing, online gallery delivery, and a commercial usage license for your owned channels.",
+    },
+    {
+      question: "How long until we get the deliverables?",
+      answer:
+        "Edited photo galleries deliver in two to three weeks. Brand video edits deliver in four to six weeks. Quick-turn social cuts available as an add-on.",
+    },
+    {
+      question: "Can we book hourly for a single shoot?",
+      answer:
+        "Yes. Hourly add-on coverage is available at three hundred per hour on top of any package. Useful for additional locations, talent, or product setups.",
+    },
+    {
+      question: "Do you provide a commercial license?",
+      answer:
+        "Yes. All business work includes a commercial usage license for owned channels — website, social, email, decks. Paid media usage is quoted separately.",
+    },
+    {
+      question: "Can you work from a brief or moodboard?",
+      answer:
+        "Yes. A creative brief or moodboard sharpens the shoot. If you don't have one, I can build a simple shot list from a thirty-minute discovery call.",
+    },
+    {
+      question: "Do you travel for shoots?",
+      answer:
+        "All of Southern California is included with no travel fee. Outside SoCal is quoted at cost.",
+    },
+  ],
   finalCta: {
     headline: "Tell me about your brand.",
     subhead: "I read every inquiry personally. Reply within 24 hours.",

@@ -6,6 +6,8 @@ import { ServicesAccordion, type AccordionItem } from "./services-accordion";
 import { EditorialTestimonial } from "./editorial-testimonial";
 import { MarqueeTestimonial } from "./marquee-testimonial";
 import { SectionDivider } from "./section-divider";
+import { PhotoFlankedHeading } from "./photo-flanked-heading";
+import { FAQAccordion } from "./faq-accordion";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
@@ -53,6 +55,8 @@ export interface LandingPageContent {
     bgVariant?: "paper" | "cream" | "ink";
   };
   testimonialVariant?: "editorial" | "marquee";
+  faqHeadlineImageId: string;
+  faqItems: { question: string; answer: string }[];
   finalCta: {
     headline: string;
     subhead: string;
@@ -311,6 +315,16 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           </div>
         </div>
       </section>
+
+      {/* FAQ — photo-flanked heading + accordion */}
+      <PhotoFlankedHeading
+        headline="BEFORE YOU BOOK, A FEW THINGS WORTH KNOWING."
+        body="The questions I get asked most. If yours isn't here, send it through the contact form — happy to walk through anything."
+        imageId={content.faqHeadlineImageId}
+        imageAlt="Paul Dal Studio behind the scenes"
+        photoSide="right"
+      />
+      <FAQAccordion items={content.faqItems} />
 
       {/* Testimonial — editorial pull-quote OR marquee variant */}
       {content.testimonialVariant === "marquee" ? (

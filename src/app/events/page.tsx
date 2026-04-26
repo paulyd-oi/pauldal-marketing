@@ -170,6 +170,39 @@ const content: LandingPageContent = {
     attribution: "A recent client",
     context: "Event organizer, San Diego",
   },
+  faqHeadlineImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
+  faqItems: [
+    {
+      question: "How quickly do we get the photos?",
+      answer:
+        "Galleries deliver in two to four weeks depending on coverage length. Same-day teaser frames are available as an add-on if you need something to post that night.",
+    },
+    {
+      question: "Can you turn around a recap video fast?",
+      answer:
+        "Yes. Standard event films deliver in four to six weeks. Rush turnaround in seven to ten days is available as an add-on for an additional fee.",
+    },
+    {
+      question: "What kinds of events do you cover?",
+      answer:
+        "Corporate, conferences, fundraisers, private parties, milestone celebrations, brand launches, large-scale church and ministry events. If it has people and energy, I can document it.",
+    },
+    {
+      question: "Do you provide photo + video together?",
+      answer:
+        "Yes. Hybrid coverage is the default. Hiring one team that does both means tighter coordination and a single point of contact instead of two crews getting in each other's way.",
+    },
+    {
+      question: "How do payment plans work?",
+      answer:
+        "Twenty-five percent retainer locks the date. Balance is due seven days before the event. Card or bank transfer.",
+    },
+    {
+      question: "Do you travel?",
+      answer:
+        "All of Southern California is included with no travel fee. Anywhere outside SoCal is quoted at cost.",
+    },
+  ],
   finalCta: {
     headline: "Tell me about your event.",
     subhead: "I read every inquiry personally. Reply within 24 hours.",

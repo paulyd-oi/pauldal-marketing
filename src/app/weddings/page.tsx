@@ -171,6 +171,39 @@ const content: LandingPageContent = {
     context: "Wedding client, San Diego",
   },
   testimonialVariant: "marquee",
+  faqHeadlineImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
+  faqItems: [
+    {
+      question: "How long until we get our photos and video?",
+      answer:
+        "Photo galleries deliver in two to four weeks. Wedding films deliver in six to eight weeks. You'll get a teaser of ten to fifteen favorite frames within forty-eight hours so you have something to share right away.",
+    },
+    {
+      question: "Do you deliver raw files?",
+      answer:
+        "No. The edit is half the work. Raw files don't represent the final image and they don't represent how the work is meant to be seen. You'll receive high-resolution edited JPEGs with a print release.",
+    },
+    {
+      question: "Will you help us plan the day?",
+      answer:
+        "Yes. I send a detailed timeline questionnaire sixty days out and we build the photo and video timeline together. I've shot a hundred plus events. I know how the day flows.",
+    },
+    {
+      question: "How do payment plans work?",
+      answer:
+        "Twenty-five percent retainer locks the date. The balance splits into payments that finish two weeks before the wedding. No fees for splitting. Card or bank transfer.",
+    },
+    {
+      question: "Do you travel?",
+      answer:
+        "Yes. San Diego is home base. All of Southern California is included with no travel fee. Anywhere outside SoCal, travel is quoted at cost.",
+    },
+    {
+      question: "Can we book just photo or just video?",
+      answer:
+        "Yes. Photo-only and video-only are both available. The hybrid package exists because hiring two separate teams usually means they don't talk to each other and the day suffers. One team that does both keeps things calm.",
+    },
+  ],
   finalCta: {
     headline: "Tell me about your wedding.",
     subhead: "I read every inquiry personally. Reply within 24 hours.",

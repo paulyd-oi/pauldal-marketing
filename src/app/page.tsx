@@ -6,6 +6,7 @@ import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
 import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
+import { AsymmetricPanel } from "@/components/site/asymmetric-panel";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -48,6 +49,18 @@ export default function Home() {
       <AboutTeaser />
       <ServicesTeaser />
       <PortfolioTeaser />
+      {/* TODO: Swap to real case study when first feature is ready */}
+      <AsymmetricPanel
+        eyebrow="FEATURED WORK"
+        pullQuote="He shows up early, watches everything, then quietly catches the moments nobody asks him to catch."
+        body="Full-day documentary coverage. Photo and video by one team. Delivered in twelve days."
+        ctaLabel="See more work"
+        ctaHref="/portfolio"
+        imageId="09079dde-3a23-4762-83e7-31fd9aab2600"
+        imageAlt="Featured wedding documentary work by Paul Dal Studio"
+        photoSide="right"
+        panelVariant="ink"
+      />
       <SectionDivider />
       <ClosingCTA />
     </>

@@ -170,6 +170,7 @@ const content: LandingPageContent = {
     attribution: "A recent client",
     context: "Wedding client, San Diego",
   },
+  testimonialVariant: "marquee",
   finalCta: {
     headline: "Tell me about your wedding.",
     subhead: "I read every inquiry personally. Reply within 24 hours.",

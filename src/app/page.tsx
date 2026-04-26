@@ -5,7 +5,7 @@ import { ServicesTeaser } from "@/components/site/services-teaser";
 import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
 import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
-import { EditorialTestimonial } from "@/components/site/editorial-testimonial";
+import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -38,11 +38,12 @@ export default function Home() {
       <Hero />
       <SectionDivider />
       {/* TODO: replace with real homepage testimonial */}
-      <EditorialTestimonial
+      <MarqueeTestimonial
+        eyebrow="TAYLOR + SAM"
         quote="He doesn't shoot what's there. He shoots what mattered."
-        attribution="A recent client"
-        context="Wedding, San Diego — 2025"
-        bgVariant="cream"
+        attribution="Wedding, San Diego"
+        marqueeText="CLIENT LOVE"
+        bgVariant="ink"
       />
       <AboutTeaser />
       <ServicesTeaser />

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
 import { ServicesAccordion, type AccordionItem } from "./services-accordion";
 import { EditorialTestimonial } from "./editorial-testimonial";
+import { MarqueeTestimonial } from "./marquee-testimonial";
 import { SectionDivider } from "./section-divider";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
@@ -51,6 +52,7 @@ export interface LandingPageContent {
     context?: string;
     bgVariant?: "paper" | "cream" | "ink";
   };
+  testimonialVariant?: "editorial" | "marquee";
   finalCta: {
     headline: string;
     subhead: string;
@@ -310,13 +312,23 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* Testimonial — editorial pull-quote */}
-      <EditorialTestimonial
-        quote={content.testimonial.quote}
-        attribution={content.testimonial.attribution}
-        context={content.testimonial.context}
-        bgVariant={content.testimonial.bgVariant ?? "cream"}
-      />
+      {/* Testimonial — editorial pull-quote OR marquee variant */}
+      {content.testimonialVariant === "marquee" ? (
+        <MarqueeTestimonial
+          eyebrow={content.testimonial.attribution}
+          quote={content.testimonial.quote}
+          attribution={content.testimonial.context}
+          marqueeText="CLIENT LOVE"
+          bgVariant="ink"
+        />
+      ) : (
+        <EditorialTestimonial
+          quote={content.testimonial.quote}
+          attribution={content.testimonial.attribution}
+          context={content.testimonial.context}
+          bgVariant={content.testimonial.bgVariant ?? "cream"}
+        />
+      )}
 
       {/* Final CTA */}
       <section className="bg-ink py-32 lg:py-48">

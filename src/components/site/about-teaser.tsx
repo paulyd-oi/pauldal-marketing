@@ -16,7 +16,7 @@ export function AboutTeaser() {
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
               <Image
                 src={ABOUT_PHOTO}
-                alt="Paul Dal Studio"
+                alt="Paul Dal — San Diego hybrid photographer and videographer"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -26,8 +26,8 @@ export function AboutTeaser() {
 
           <div className="max-w-md">
             <Reveal delay={0.1}>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                About
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                01 <span className="mx-2 text-ink/40">/</span> About
               </p>
             </Reveal>
             <Reveal delay={0.2}>

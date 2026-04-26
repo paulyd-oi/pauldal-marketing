@@ -36,7 +36,7 @@ export function Hero() {
         >
           <Image
             src={HERO_IMAGE_URL}
-            alt="Haritha's celebration — cake cutting captured in golden light"
+            alt="Event photography by Paul Dal Studio — celebration at Stone Brewery, San Diego"
             fill
             priority
             sizes="100vw"
@@ -58,22 +58,18 @@ export function Hero() {
         </motion.p>
 
         <motion.h1
-          className="max-w-4xl font-display leading-[0.95] tracking-tight text-paper"
+          className="max-w-4xl font-display text-5xl leading-[0.95] tracking-tight text-paper sm:text-6xl lg:text-8xl"
           {...(prefersReduced ? {} : fadeIn(0.4))}
         >
-          <span className="block text-5xl sm:text-6xl lg:text-8xl">
-            San Diego hybrid
-          </span>
-          <span className="mt-2 block text-3xl italic text-paper/85 sm:text-4xl lg:text-6xl">
-            photographer + videographer
-          </span>
+          Photography is how I pay&nbsp;attention.
         </motion.h1>
 
         <motion.p
           className="mt-8 max-w-md font-body text-base leading-relaxed text-paper/80 lg:text-lg"
           {...(prefersReduced ? {} : fadeIn(0.6))}
         >
-          Weddings, events, business, editorial. Available worldwide.
+          San Diego hybrid photographer + videographer. Weddings, events,
+          business, editorial. Available worldwide.
         </motion.p>
 
         <motion.div className="mt-10" {...(prefersReduced ? {} : fadeIn(0.8))}>

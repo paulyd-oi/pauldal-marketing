@@ -8,7 +8,7 @@ const OG_IMAGE =
 export const metadata: Metadata = {
   title: "Book",
   description:
-    "Tell me about what you're planning — weddings, events, business shoots, editorial. I'll reply within 24 hours.",
+    "Tell Paul about your project — weddings, events, business, editorial photography in San Diego and worldwide. Response within 24 hours.",
   openGraph: {
     title: "Book — Paul Dal Studio",
     description:

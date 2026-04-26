@@ -14,11 +14,11 @@ const PORTRAIT =
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Born in the Philippines, sharpened in San Diego. Paul Dal is a hybrid photographer and videographer documenting weddings, events, and editorial projects worldwide.",
+    "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, 200+ events documented, editorial eye. Available worldwide.",
   openGraph: {
     title: "About — Paul Dal Studio",
     description:
-      "Born in the Philippines, sharpened in San Diego. Hybrid photographer and videographer available worldwide.",
+      "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
     url: "https://pauldalstudios.com/about",
     siteName: "Paul Dal Studio",
     type: "website",
@@ -28,14 +28,37 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About — Paul Dal Studio",
     description:
-      "Born in the Philippines, sharpened in San Diego. Hybrid photographer and videographer available worldwide.",
+      "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
     images: [OG_IMAGE],
   },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Paul Dal",
+  jobTitle: "Photographer and Videographer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Paul Dal Studio",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Diego",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  url: "https://pauldalstudios.com/about",
+  sameAs: ["https://instagram.com/pauldalstudio"],
 };
 
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-paper py-32 lg:py-48">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
@@ -69,7 +92,7 @@ export default function AboutPage() {
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
                   <Image
                     src={PORTRAIT}
-                    alt="Paul Dal"
+                    alt="Paul Dal — San Diego hybrid photographer and videographer"
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"
@@ -175,7 +198,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
                 <Image
                   src="https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/54e26ae7-85be-4ca8-09f6-9953ab48bb00/public"
-                  alt="Event coverage by Paul Dal Studio"
+                  alt="Event photography by Paul Dal Studio — live coverage in San Diego"
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"

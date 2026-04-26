@@ -32,8 +32,8 @@ export function ServicesTeaser() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="max-w-md lg:sticky lg:top-32 lg:self-start">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                Services
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                02 <span className="mx-2 text-ink/40">/</span> Services
               </p>
             </Reveal>
             <Reveal delay={0.1}>

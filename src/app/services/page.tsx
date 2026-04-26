@@ -9,11 +9,11 @@ const OG_IMAGE =
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Weddings, events, business, editorial — four ways Paul Dal Studio works. San Diego based, available worldwide.",
+    "Wedding, event, business, and editorial photography + video by Paul Dal Studio. San Diego hybrid creative. Packages and process.",
   openGraph: {
     title: "Services — Paul Dal Studio",
     description:
-      "Weddings, events, business, editorial — four ways Paul Dal Studio works.",
+      "Wedding, event, business, and editorial photography + video by Paul Dal Studio. San Diego hybrid creative.",
     url: "https://pauldalstudios.com/services",
     siteName: "Paul Dal Studio",
     type: "website",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Services — Paul Dal Studio",
     description:
-      "Weddings, events, business, editorial — four ways Paul Dal Studio works.",
+      "Wedding, event, business, and editorial photography + video by Paul Dal Studio. San Diego hybrid creative.",
     images: [OG_IMAGE],
   },
 };

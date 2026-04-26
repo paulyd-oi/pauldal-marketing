@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
+import { SocialProofBadge } from "@/components/site/social-proof-badge";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -28,11 +29,11 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pauldalstudios.com"),
   title: {
-    default: "Paul Dal Studio — San Diego hybrid photographer + videographer",
+    default: "Paul Dal Studio — Photography is how I pay attention",
     template: "%s — Paul Dal Studio",
   },
   description:
-    "Weddings, events, business, editorial. San Diego based, available worldwide.",
+    "Paul Dal Studio — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -52,7 +53,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "Paul Dal Studio",
   description:
-    "San Diego hybrid photographer and videographer for weddings, events, business, and editorial projects.",
+    "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented since 2019. Available worldwide.",
   url: "https://pauldalstudios.com",
   address: {
     "@type": "PostalAddress",
@@ -89,6 +90,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <SocialProofBadge />
         </div>
       </body>
     </html>

@@ -35,8 +35,8 @@ export function PortfolioTeaser() {
         <div className="mb-16 grid grid-cols-1 items-end gap-8 lg:mb-20 lg:grid-cols-2 lg:gap-20">
           <div className="max-w-md">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                Selected work
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                03 <span className="mx-2 text-ink/40">/</span> Portfolio
               </p>
             </Reveal>
             <Reveal delay={0.1}>

@@ -10,11 +10,11 @@ const OG_IMAGE = `${CF}/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public`;
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "A selection of weddings, events, and editorial projects by Paul Dal Studio. Full archive available on request.",
+    "Selected work by Paul Dal Studio — weddings, events, business, and editorial photography in San Diego and beyond. Full archive on request.",
   openGraph: {
     title: "Portfolio — Paul Dal Studio",
     description:
-      "A selection of weddings, events, and editorial projects by Paul Dal Studio.",
+      "Selected work by Paul Dal Studio — weddings, events, business, and editorial photography in San Diego and beyond.",
     url: "https://pauldalstudios.com/portfolio",
     siteName: "Paul Dal Studio",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portfolio — Paul Dal Studio",
     description:
-      "A selection of weddings, events, and editorial projects by Paul Dal Studio.",
+      "Selected work by Paul Dal Studio — weddings, events, business, and editorial photography in San Diego and beyond.",
     images: [OG_IMAGE],
   },
 };

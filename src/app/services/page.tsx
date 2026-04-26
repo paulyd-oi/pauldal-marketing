@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { ServicesAccordion } from "@/components/site/services-accordion";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -49,8 +50,12 @@ const SERVICES = [
       "First-look gallery within 72 hours",
       "Full delivery in 4–6 weeks",
     ],
-    investment:
-      "Packages start at $X,XXX. Custom quotes for destination weddings or extended coverage.",
+    investment: [
+      "Starting from $2,500 for half-day coverage.",
+      "Most couples invest $3,500–$5,000 for full-day photo + video.",
+      "Premium packages up to $7,500.",
+      "Custom quotes for destination weddings or extended coverage.",
+    ],
     bg: "bg-paper",
   },
   {
@@ -71,8 +76,11 @@ const SERVICES = [
       "Same-day teaser delivery",
       "Full delivery within 7 days",
     ],
-    investment:
-      "Packages start at $X,XXX based on hours + deliverables.",
+    investment: [
+      "Half-day events from $1,500.",
+      "Full-day coverage from $2,800.",
+      "Same-day teaser delivery included.",
+    ],
     bg: "bg-cream-hover",
   },
   {
@@ -94,8 +102,12 @@ const SERVICES = [
       "Shoot day",
       "Edits + delivery within a week",
     ],
-    investment:
-      "Half-day from $X,XXX. Full-day from $X,XXX. Custom packages for content subscriptions.",
+    investment: [
+      "Half-day brand sessions from $1,500.",
+      "Full-day brand sessions from $2,800.",
+      "Hybrid brand package (photo + video) from $4,500.",
+      "Hourly add-on: $300/hr.",
+    ],
     bg: "bg-paper",
   },
   {
@@ -117,8 +129,11 @@ const SERVICES = [
       "Production day(s)",
       "Post + delivery on agreed timeline",
     ],
-    investment:
-      "Project-based. Inquire with brief for tailored quote.",
+    investment: [
+      "Project-based pricing — inquire with your brief for a tailored quote.",
+      "Half-day editorial from $1,800.",
+      "Full-day editorial from $4,500+.",
+    ],
     bg: "bg-cream-hover",
   },
 ] as const;
@@ -152,15 +167,6 @@ function DetailBlock({
 export default function ServicesPage() {
   return (
     <>
-      {/* Draft pill */}
-      <div className="border-b border-hairline bg-cream-hover px-6 py-3">
-        <p className="mx-auto max-w-screen-2xl font-body text-xs uppercase tracking-widest text-ink/70 text-center">
-          <span className="mr-3 bg-oxblood px-2 py-1 text-paper">Draft</span>
-          Service details are being refined — check back for final pricing and
-          process.
-        </p>
-      </div>
-
       {/* Hero */}
       <section className="bg-paper py-32 lg:py-48">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
@@ -228,9 +234,16 @@ export default function ServicesPage() {
                     <h4 className="mb-3 font-body text-xs uppercase tracking-widest text-muted-foreground">
                       Investment
                     </h4>
-                    <p className="font-body text-sm leading-relaxed text-ink/85">
-                      {service.investment}
-                    </p>
+                    <ul className="space-y-1.5">
+                      {service.investment.map((line) => (
+                        <li
+                          key={line}
+                          className="font-body text-sm leading-relaxed text-ink/85"
+                        >
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </Reveal>
                 <Reveal delay={0.5}>
@@ -248,6 +261,108 @@ export default function ServicesPage() {
           </div>
         </section>
       ))}
+
+      {/* How it works */}
+      <section className="bg-paper py-24 lg:py-32">
+        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+          <div className="mb-16 max-w-2xl lg:mb-20">
+            <Reveal>
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                05 <span className="mx-2 text-ink/40">/</span> Process
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
+                How we work together.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="font-body text-base leading-relaxed text-ink/70 lg:text-lg">
+                From first email to delivery, here&apos;s what to expect.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {[
+              {
+                num: "1",
+                title: "Reach out",
+                desc: "Tell me about your project — date, location, vision. I read every inquiry personally and respond within 24 hours.",
+              },
+              {
+                num: "2",
+                title: "Get the details",
+                desc: "I'll send pricing, packages, and a deeper look at how I work. No pressure, no auto-replies.",
+              },
+              {
+                num: "3",
+                title: "We talk it through",
+                desc: "Quick discovery call to align on creative direction, timeline, and what success looks like for you.",
+              },
+              {
+                num: "4",
+                title: "Lock the date",
+                desc: "Sign the contract, send a 30% deposit. Your date is yours.",
+              },
+              {
+                num: "5",
+                title: "Show up and shoot",
+                desc: "I arrive prepared. We work through the timeline together. You stay present, I handle the rest.",
+              },
+              {
+                num: "6",
+                title: "Deliver the work",
+                desc: "Sneak peeks within 72 hours. Full edited gallery in 2–4 weeks. We celebrate it together.",
+              },
+            ].map((step, i) => (
+              <Reveal key={step.num} delay={i * 0.08}>
+                <div className="flex gap-5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-oxblood font-body text-sm font-medium text-paper">
+                    {step.num}
+                  </div>
+                  <div>
+                    <h3 className="mb-2 font-display text-xl text-ink">
+                      {step.title}
+                    </h3>
+                    <p className="font-body text-sm leading-relaxed text-ink/70">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What's included */}
+      <section className="bg-cream-hover py-24 lg:py-32">
+        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+          <div className="mb-16 max-w-2xl lg:mb-20">
+            <Reveal>
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                06 <span className="mx-2 text-ink/40">/</span> Included
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
+                What&apos;s included with every project.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="font-body text-sm leading-relaxed text-ink/70">
+                Standard across all services. Custom packages may add or extend
+                these.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1}>
+            <ServicesAccordion />
+          </Reveal>
+        </div>
+      </section>
 
       {/* Closing CTA */}
       <section className="bg-ink py-32 lg:py-48">

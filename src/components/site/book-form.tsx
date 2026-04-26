@@ -220,6 +220,28 @@ export function BookForm() {
         </div>
       </fieldset>
 
+      {/* Budget */}
+      <label className="block">
+        <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
+          Project budget
+        </span>
+        <select
+          name="budget"
+          defaultValue=""
+          className="w-full appearance-none border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+        >
+          <option value="">Discuss with you</option>
+          <option value="Under $1,500">Under $1,500</option>
+          <option value="$1,500–$3,000">$1,500–$3,000</option>
+          <option value="$3,000–$5,000">$3,000–$5,000</option>
+          <option value="$5,000–$7,500">$5,000–$7,500</option>
+          <option value="$7,500+">$7,500+</option>
+        </select>
+        <p className="mt-2 font-body text-xs text-ink/50">
+          Helps me match the right package to your project.
+        </p>
+      </label>
+
       {/* Event date */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
@@ -241,19 +263,6 @@ export function BookForm() {
           name="location"
           type="text"
           placeholder="San Diego, Encinitas, etc."
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood focus:outline-none"
-        />
-      </label>
-
-      {/* Budget */}
-      <label className="block">
-        <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Budget
-        </span>
-        <input
-          name="budget"
-          type="text"
-          placeholder="Optional — leave blank if you'd rather discuss"
           className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood focus:outline-none"
         />
       </label>

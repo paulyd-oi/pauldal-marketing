@@ -1,15 +1,14 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://pauldalstudios.com";
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = "https://pauldalstudios.com";
   const now = new Date();
-  const routes = ["", "/about", "/services", "/portfolio", "/book"];
 
-  return routes.map((route) => ({
-    url: `${BASE_URL}${route}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.8,
-  }));
+  return [
+    { url: base, lastModified: now, priority: 1.0 },
+    { url: `${base}/about`, lastModified: now, priority: 0.8 },
+    { url: `${base}/services`, lastModified: now, priority: 0.8 },
+    { url: `${base}/portfolio`, lastModified: now, priority: 0.7 },
+    { url: `${base}/book`, lastModified: now, priority: 0.9 },
+  ];
 }

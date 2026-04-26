@@ -2,10 +2,29 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/site/reveal";
 import { BookForm } from "@/components/site/book-form";
 
+const OG_IMAGE =
+  "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
+
 export const metadata: Metadata = {
   title: "Book",
   description:
     "Tell me about what you're planning — weddings, events, business shoots, editorial. I'll reply within 24 hours.",
+  openGraph: {
+    title: "Book — Paul Dal Studio",
+    description:
+      "Tell me about what you're planning. I'll reply within 24 hours.",
+    url: "https://pauldalstudios.com/book",
+    siteName: "Paul Dal Studio",
+    type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book — Paul Dal Studio",
+    description:
+      "Tell me about what you're planning. I'll reply within 24 hours.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function BookPage() {

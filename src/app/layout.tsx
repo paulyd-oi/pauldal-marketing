@@ -28,11 +28,11 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pauldalstudios.com"),
   title: {
-    default: "Paul Dal Studio",
+    default: "Paul Dal Studio — San Diego hybrid photographer + videographer",
     template: "%s — Paul Dal Studio",
   },
   description:
-    "San Diego hybrid photographer + videographer, available worldwide.",
+    "Weddings, events, business, editorial. San Diego based, available worldwide.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -47,6 +47,29 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Paul Dal Studio",
+  description:
+    "San Diego hybrid photographer and videographer for weddings, events, business, and editorial projects.",
+  url: "https://pauldalstudios.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Diego",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  areaServed: "Worldwide",
+  priceRange: "$$",
+  image:
+    "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public",
+  founder: {
+    "@type": "Person",
+    name: "Paul Dal",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,6 +81,10 @@ export default function RootLayout({
       className={`${fraunces.variable} ${plex.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="font-body bg-paper text-ink min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="grain min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">{children}</main>

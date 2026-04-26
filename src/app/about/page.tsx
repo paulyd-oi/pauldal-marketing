@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { ParallaxPhoto, FadingQuote } from "@/components/site/about-scroll-effects";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -64,16 +65,18 @@ export default function AboutPage() {
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
             <Reveal>
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
-                <Image
-                  src={PORTRAIT}
-                  alt="Paul Dal"
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
+              <ParallaxPhoto>
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
+                  <Image
+                    src={PORTRAIT}
+                    alt="Paul Dal"
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </ParallaxPhoto>
             </Reveal>
 
             <div className="max-w-md lg:pt-12">
@@ -110,9 +113,11 @@ export default function AboutPage() {
       <section className="bg-cream-hover py-24 lg:py-32">
         <div className="mx-auto max-w-2xl px-6 lg:px-12">
           <Reveal>
-            <blockquote className="mb-10 font-display text-3xl italic leading-snug tracking-tight text-ink lg:text-5xl">
-              &ldquo;Photography is how I pay attention.&rdquo;
-            </blockquote>
+            <FadingQuote>
+              <blockquote className="mb-10 font-display text-3xl italic leading-snug tracking-tight text-ink lg:text-5xl">
+                &ldquo;Photography is how I pay attention.&rdquo;
+              </blockquote>
+            </FadingQuote>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
@@ -182,7 +187,7 @@ export default function AboutPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-ink py-24 lg:py-32">
+      <section className="bg-ink py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
           <Reveal>
             <h2 className="mb-8 font-display text-4xl leading-[1.05] tracking-tight text-paper lg:text-6xl">

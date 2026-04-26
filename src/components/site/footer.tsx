@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExternalLink, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const PAGE_LINKS = [
   { href: "/about", label: "About" },
@@ -50,7 +50,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 font-body text-sm text-ink transition-colors duration-[180ms] hover:text-oxblood"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" /></svg>
                   Instagram
                 </a>
               </li>

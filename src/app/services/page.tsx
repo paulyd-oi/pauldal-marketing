@@ -162,11 +162,11 @@ export default function ServicesPage() {
       </div>
 
       {/* Hero */}
-      <section className="bg-paper py-24 lg:py-32">
+      <section className="bg-paper py-32 lg:py-48">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/70">
                 Services
               </p>
             </Reveal>
@@ -250,7 +250,7 @@ export default function ServicesPage() {
       ))}
 
       {/* Closing CTA */}
-      <section className="bg-ink py-24 lg:py-32">
+      <section className="bg-ink py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
           <Reveal>
             <h2 className="mb-4 font-display text-4xl leading-[1.05] tracking-tight text-paper lg:text-6xl">

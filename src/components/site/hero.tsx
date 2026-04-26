@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { HeroCamera3D } from "./hero-camera-3d";
 
 const HERO_IMAGE_URL =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -45,6 +46,8 @@ export function Hero() {
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
+
+      <HeroCamera3D />
 
       <div className="relative mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
         <motion.p

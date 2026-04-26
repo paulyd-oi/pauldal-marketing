@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { PortfolioGrid } from "@/components/site/portfolio-grid";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const OG_IMAGE = `${CF}/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public`;
@@ -82,11 +82,11 @@ export default function PortfolioPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-paper py-24 lg:py-32">
+      <section className="bg-paper py-32 lg:py-48">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/70">
                 Portfolio
               </p>
             </Reveal>
@@ -108,45 +108,12 @@ export default function PortfolioPage() {
       {/* Grid */}
       <section className="bg-paper pb-24 lg:pb-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {PROJECTS.map((project, i) => (
-              <Reveal key={project.cfImageId} delay={i * 0.05}>
-                <div className="group block">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
-                    <Image
-                      src={`${CF}/${project.cfImageId}/public`}
-                      alt={project.title}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 hidden bg-gradient-to-t from-ink/70 via-ink/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:block" />
-                    <div className="absolute bottom-0 left-0 right-0 hidden p-6 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100 lg:block">
-                      <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/80">
-                        {project.category}
-                      </p>
-                      <h3 className="font-display text-2xl leading-tight text-paper">
-                        {project.title}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="mt-4 lg:hidden">
-                    <p className="mb-2 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                      {project.category}
-                    </p>
-                    <h3 className="font-display text-2xl leading-tight text-ink">
-                      {project.title}
-                    </h3>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <PortfolioGrid projects={PROJECTS} />
         </div>
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-ink py-24 lg:py-32">
+      <section className="bg-ink py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
           <Reveal>
             <h2 className="mb-8 font-display text-4xl leading-[1.05] tracking-tight text-paper lg:text-6xl">

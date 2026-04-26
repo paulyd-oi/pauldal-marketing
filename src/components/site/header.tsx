@@ -62,10 +62,13 @@ export function Header() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMenuOpen(true)}
-              className="text-ink lg:hidden"
+              className="-mr-2 flex items-center gap-1.5 p-2 text-ink lg:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
+              <span className="font-body text-xs tracking-wide [font-variant:small-caps]">
+                Menu
+              </span>
             </button>
 
             <Link

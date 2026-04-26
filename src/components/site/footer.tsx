@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { BrandMark } from "./brand-mark";
 
 const PAGE_LINKS = [
   { href: "/about", label: "About" },
@@ -14,7 +15,10 @@ export function Footer() {
       <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-4 lg:gap-8">
           <div>
-            <p className="font-display text-2xl text-ink">Paul Dal Studio</p>
+            <p className="flex items-center gap-3 font-display text-2xl text-ink">
+              <BrandMark size="sm" />
+              Paul Dal Studio
+            </p>
             <p className="mt-2 font-body text-sm text-muted-foreground">
               San Diego — Available worldwide
             </p>

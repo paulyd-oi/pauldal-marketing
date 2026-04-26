@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { ParallaxPhoto, FadingQuote } from "@/components/site/about-scroll-effects";
+import { SectionDivider } from "@/components/site/section-divider";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -82,6 +83,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* Photo + origin story */}
       <section className="bg-paper pb-24 lg:pb-32">

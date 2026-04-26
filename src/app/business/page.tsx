@@ -167,7 +167,8 @@ const content: LandingPageContent = {
     // TODO: replace with real testimonial when available
     quote:
       "We hired Paul for our launch. He delivered 80 polished images and a 90-second brand film in five days. Half our investor deck is his work.",
-    attribution: "— Founder, San Diego SaaS company",
+    attribution: "A recent client",
+    context: "Founder, San Diego SaaS company",
   },
   finalCta: {
     headline: "Tell me about your brand.",

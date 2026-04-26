@@ -167,7 +167,8 @@ const content: LandingPageContent = {
     // TODO: replace with real testimonial when available
     quote:
       "Paul was the calmest person at our event. He captured every speaker, every room, every detail — and we didn't see him work. The teaser images hit social the same night.",
-    attribution: "— Event organizer, San Diego",
+    attribution: "A recent client",
+    context: "Event organizer, San Diego",
   },
   finalCta: {
     headline: "Tell me about your event.",

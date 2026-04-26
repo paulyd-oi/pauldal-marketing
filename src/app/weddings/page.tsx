@@ -167,7 +167,8 @@ const content: LandingPageContent = {
     // TODO: replace with real testimonial when available
     quote:
       "Paul didn't just take photos — he was part of the day. He read the room, knew when to step back, and somehow captured every moment that mattered.",
-    attribution: "— Wedding client, San Diego",
+    attribution: "A recent client",
+    context: "Wedding client, San Diego",
   },
   finalCta: {
     headline: "Tell me about your wedding.",

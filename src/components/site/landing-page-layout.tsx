@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
 import { ServicesAccordion, type AccordionItem } from "./services-accordion";
+import { EditorialTestimonial } from "./editorial-testimonial";
+import { SectionDivider } from "./section-divider";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
@@ -46,6 +48,8 @@ export interface LandingPageContent {
   testimonial: {
     quote: string;
     attribution: string;
+    context?: string;
+    bgVariant?: "paper" | "cream" | "ink";
   };
   finalCta: {
     headline: string;
@@ -155,6 +159,9 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           </Reveal>
         </div>
       </section>
+
+      {/* Brand mark divider */}
+      <SectionDivider />
 
       {/* Intro — editorial split */}
       <section className="bg-cream-hover py-24 lg:py-32">
@@ -303,21 +310,13 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* Testimonial */}
-      <section className="bg-cream-hover py-32 lg:py-48">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
-          <Reveal>
-            <blockquote className="mb-8 font-display text-3xl italic leading-snug tracking-tight text-ink lg:text-5xl">
-              &ldquo;{content.testimonial.quote}&rdquo;
-            </blockquote>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="font-body text-sm uppercase tracking-widest text-ink/60">
-              {content.testimonial.attribution}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      {/* Testimonial — editorial pull-quote */}
+      <EditorialTestimonial
+        quote={content.testimonial.quote}
+        attribution={content.testimonial.attribution}
+        context={content.testimonial.context}
+        bgVariant={content.testimonial.bgVariant ?? "cream"}
+      />
 
       {/* Final CTA */}
       <section className="bg-ink py-32 lg:py-48">

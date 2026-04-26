@@ -1,89 +1,174 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import Image from "next/image";
 import { BrandMark } from "./brand-mark";
 
-const PAGE_LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/book", label: "Book" },
+const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
+
+const NAV_ITEMS = [
+  { href: "/", label: "HOME" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/services", label: "SERVICES" },
+  { href: "/weddings", label: "WEDDINGS" },
+  { href: "/events", label: "EVENTS" },
+  { href: "/business", label: "BUSINESS" },
+  { href: "/portfolio", label: "PORTFOLIO" },
+  { href: "/book", label: "BOOK" },
 ];
+
+const LEFT_PHOTOS = [
+  {
+    id: "09079dde-3a23-4762-83e7-31fd9aab2600",
+    alt: "Event coverage by Paul Dal Studio — Stone Brewery, San Diego",
+  },
+  {
+    id: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
+    alt: "Wedding photography — Encinitas, San Diego",
+  },
+  {
+    id: "c677437a-cb68-4084-39f7-84ca10557700",
+    alt: "Editorial studio session — Paul Dal Studio",
+  },
+];
+
+const RIGHT_PHOTOS = [
+  {
+    id: "572fc2e5-5737-4841-7c9b-a717b6413500",
+    alt: "Corporate gala photography — Del Mar, San Diego",
+  },
+  {
+    id: "e491bf5a-ef22-4627-d5bf-450844197b00",
+    alt: "Brand portraits — Founders Series, Paul Dal Studio",
+  },
+  {
+    id: "6c0df0fa-2eda-4511-b622-a532ab1ee000",
+    alt: "Wedding photography — La Jolla, San Diego",
+  },
+];
+
+function PhotoStrip({
+  photos,
+}: {
+  photos: { id: string; alt: string }[];
+}) {
+  return (
+    <div className="flex gap-2">
+      {photos.map((photo) => (
+        <div
+          key={photo.id}
+          className="relative h-24 flex-1 overflow-hidden lg:h-28"
+        >
+          <Image
+            src={`${CF_BASE}/${photo.id}/w=400,h=300,fit=cover`}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 768px) 16vw, 33vw"
+            className="object-cover"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function Footer() {
   return (
-    <footer className="mt-32 border-t border-hairline py-16 lg:py-24">
-      <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-4 lg:gap-8">
-          <div>
-            <p className="flex items-center gap-3 font-display text-2xl text-ink">
-              <BrandMark size="sm" />
-              Paul Dal Studio
-            </p>
-            <p className="mt-2 font-body text-sm text-muted-foreground">
-              San Diego — Available worldwide
-            </p>
-          </div>
-
-          <div>
-            <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
-              Pages
-            </p>
-            <ul className="mt-4 space-y-3">
-              {PAGE_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="font-body text-sm text-ink transition-colors duration-[180ms] hover:text-oxblood"
-                  >
-                    {label}
-                  </Link>
-                </li>
+    <footer>
+      {/* Section A — Photo + Wordmark Block */}
+      <div className="bg-ink px-6 py-16 text-paper lg:px-12 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          {/* Mobile: stack wordmark on top, then 6-photo grid */}
+          <div className="md:hidden">
+            <div className="flex flex-col items-center text-center">
+              <BrandMark size="md" />
+              <p className="mt-3 font-display text-3xl tracking-tight">
+                PAUL DAL STUDIO
+              </p>
+              <p className="mt-3 text-xs uppercase tracking-widest text-paper/70">
+                SAN DIEGO + BEYOND
+              </p>
+            </div>
+            {/* TODO: Swap left-side trio for behind-the-scenes shots once curated */}
+            <div className="mt-12 grid grid-cols-3 grid-rows-2 gap-2">
+              {[...LEFT_PHOTOS, ...RIGHT_PHOTOS].map((photo) => (
+                <div
+                  key={photo.id}
+                  className="relative aspect-[4/3] w-full overflow-hidden"
+                >
+                  <Image
+                    src={`${CF_BASE}/${photo.id}/w=400,h=300,fit=cover`}
+                    alt={photo.alt}
+                    fill
+                    sizes="33vw"
+                    className="object-cover"
+                  />
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div>
-            <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
-              Connect
-            </p>
-            <ul className="mt-4 space-y-3">
-              <li>
-                <a
-                  href="https://instagram.com/pauldalstudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-body text-sm text-ink transition-colors duration-[180ms] hover:text-oxblood"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" /></svg>
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:hello@pauldalstudios.com"
-                  className="inline-flex items-center gap-2 font-body text-sm text-ink transition-colors duration-[180ms] hover:text-oxblood"
-                >
-                  <Mail className="h-4 w-4" />
-                  Email
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
-              Contact
-            </p>
-            <p className="mt-4 font-body text-sm leading-relaxed text-ink">
-              Available for weddings, events, business, editorial worldwide. San
-              Diego based.
-            </p>
+          {/* Desktop: 3-col with photos flanking wordmark */}
+          <div className="hidden grid-cols-3 items-center gap-8 md:grid">
+            {/* TODO: Swap left-side trio for behind-the-scenes shots once curated */}
+            <PhotoStrip photos={LEFT_PHOTOS} />
+            <div className="flex flex-col items-center text-center">
+              <BrandMark size="md" />
+              <p className="mt-3 font-display text-3xl tracking-tight lg:text-4xl">
+                PAUL DAL STUDIO
+              </p>
+              <p className="mt-3 text-xs uppercase tracking-widest text-paper/70">
+                SAN DIEGO + BEYOND
+              </p>
+            </div>
+            <PhotoStrip photos={RIGHT_PHOTOS} />
           </div>
         </div>
+      </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-hairline pt-12 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p>&copy; 2026 Paul Dal Studio</p>
-          <p className="[font-variant:small-caps]">Crafted with intention</p>
+      {/* Section B — Horizontal Site Nav */}
+      <div className="border-t border-paper/20 bg-ink px-6 py-6 text-paper lg:py-8">
+        <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3 lg:gap-x-12">
+          {NAV_ITEMS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="font-display text-sm uppercase tracking-widest transition-colors duration-200 hover:text-cream-hover"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      {/* Section C — Meta Row */}
+      <div className="border-t border-paper/20 bg-ink px-6 py-4 text-paper/60">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-y-2 md:flex-row md:justify-between">
+          <p className="text-xs">
+            &copy; 2026 Paul Dal Studio. All rights reserved.
+          </p>
+          <p className="text-xs uppercase tracking-widest">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-paper"
+            >
+              PRIVACY
+            </Link>
+            <span className="mx-2">/</span>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-paper"
+            >
+              TERMS
+            </Link>
+            <span className="mx-2">/</span>
+            <a
+              href="https://instagram.com/pauldalstudio"
+              target="_blank"
+              rel="noopener"
+              className="transition-colors hover:text-paper"
+            >
+              INSTAGRAM
+            </a>
+          </p>
         </div>
       </div>
     </footer>

@@ -58,7 +58,7 @@ function PhotoStrip({
           className="relative h-24 flex-1 overflow-hidden lg:h-28"
         >
           <Image
-            src={`${CF_BASE}/${photo.id}/w=400,h=300,fit=cover`}
+            src={`${CF_BASE}/${photo.id}/public`}
             alt={photo.alt}
             fill
             sizes="(min-width: 768px) 16vw, 33vw"
@@ -95,7 +95,7 @@ export function Footer() {
                   className="relative aspect-[4/3] w-full overflow-hidden"
                 >
                   <Image
-                    src={`${CF_BASE}/${photo.id}/w=400,h=300,fit=cover`}
+                    src={`${CF_BASE}/${photo.id}/public`}
                     alt={photo.alt}
                     fill
                     sizes="33vw"

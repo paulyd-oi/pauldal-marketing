@@ -2,12 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
+import { getPersonalPhotoByCfId } from "@/lib/portfolio-public";
+import { ABOUT_PHOTO_IDS } from "@/lib/about-photos";
 
-// TODO: replace with real Paul self-portrait
-const ABOUT_PHOTO =
+// Static fallback URL — used when the PERSONAL gallery endpoint is
+// unreachable or the expected CF ID isn't in the gallery. Mirrors the
+// FALLBACK_PORTRAIT_URL in /about/page.tsx so visual continuity between
+// the homepage teaser and /about is preserved even when degraded.
+const FALLBACK_ABOUT_PHOTO_URL =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/00a26873-4171-4b0c-f991-867f2f1c6700/public";
 
-export function AboutTeaser() {
+export async function AboutTeaser() {
+  const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
+  const photoUrl = heroPhoto?.url ?? FALLBACK_ABOUT_PHOTO_URL;
+  const photoAlt =
+    heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer";
+
   return (
     <section className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
@@ -15,8 +25,8 @@ export function AboutTeaser() {
           <Reveal>
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
               <Image
-                src={ABOUT_PHOTO}
-                alt="Paul Dal — San Diego hybrid photographer and videographer"
+                src={photoUrl}
+                alt={photoAlt}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"

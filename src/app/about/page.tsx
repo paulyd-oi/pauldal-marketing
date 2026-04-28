@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
-import { ParallaxPhoto, FadingQuote } from "@/components/site/about-scroll-effects";
 import { SectionDivider } from "@/components/site/section-divider";
 import {
   AboutHeroCarousel,
@@ -20,10 +18,11 @@ import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-// Static fallback used when the PERSONAL gallery is unreachable or the
-// expected CF ID isn't in the gallery.
-const FALLBACK_PORTRAIT_URL =
-  "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/00a26873-4171-4b0c-f991-867f2f1c6700/public";
+const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
+
+function cfUrl(cfId: string): string {
+  return `${CF_BASE}/${cfId}/public`;
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
@@ -38,11 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
-  const personPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage);
-  const portraitUrl = heroPhoto?.url ?? FALLBACK_PORTRAIT_URL;
-  const portraitAlt =
-    heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer";
+  const [personPhoto, beat1Photo, beat2Photo, beat3Photo, beat4Photo] =
+    await Promise.all([
+      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage),
+      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat1),
+      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat2),
+      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat3),
+      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat4),
+    ]);
 
   const personJsonLd = {
     "@context": "https://schema.org",
@@ -117,84 +119,104 @@ export default async function AboutPage() {
 
       <SectionDivider />
 
-      {/* Photo + origin story */}
-      <section className="bg-paper pb-24 lg:pb-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
-            <Reveal>
-              <ParallaxPhoto>
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
-                  <Image
-                    src={portraitUrl}
-                    alt={portraitAlt}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </ParallaxPhoto>
-            </Reveal>
-
-            <div className="max-w-md lg:pt-12">
-              <Reveal delay={0.1}>
-                <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
-                  I was born in the Philippines and moved to the United States
-                  when I was five. Growing up between two cultures taught me to
-                  notice details: how light fills a room differently depending
-                  on where you are, how people carry themselves when they feel at
-                  home.
-                </p>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
-                  I picked up a camera in 2019 and never put it down. What
-                  started as documenting moments for friends turned into a
-                  discipline: learning to read light, anticipate movement, and
-                  stay present when it matters.
-                </p>
-              </Reveal>
-              <Reveal delay={0.3}>
-                <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-                  I shoot both photo and video because some moments need
-                  stillness, and others need motion. The camera I reach for
-                  depends on the story, not the deliverable.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Faith + community */}
-      <section className="bg-cream-hover py-24 lg:py-32">
-        <div className="mx-auto max-w-2xl px-6 lg:px-12">
+      {/* Beat 1 — The beginning */}
+      <section className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-3xl px-6 lg:px-12">
           <Reveal>
-            <FadingQuote>
-              <blockquote className="mb-10 font-display text-3xl italic leading-snug tracking-tight text-ink lg:text-5xl">
-                &ldquo;Photography is how I pay attention.&rdquo;
-              </blockquote>
-            </FadingQuote>
+            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
+              01 — The beginning
+            </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
-              For the last four years I&apos;ve served as the creative director
-              and videographer at my church, a community of ten thousand
-              members. I&apos;ve documented over two hundred events: services,
-              conferences, worship nights, baptisms, outreach.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
             <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-              That work sharpened everything: speed, instinct, storytelling
-              under pressure. It also grounded me. My faith is central to how I
-              see the world and the people in it. I bring that same attention to
-              every project, whether it&apos;s a wedding, a brand shoot, or an
-              editorial story.
+              Photo and film started as a hobby. I was always drawn to cameras,
+              edits, music, movement, and the way a moment could feel different
+              when it was framed with intention. But it was not until I started
+              serving at my church in 2021 that this became more than a hobby.
             </p>
           </Reveal>
         </div>
       </section>
+
+      {/* Parallax stub — beat 1 */}
+      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
+        <img
+          src={cfUrl(ABOUT_PHOTO_IDS.beat1)}
+          alt={beat1Photo?.alt ?? "Paul Dal — early work"}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      {/* Beat 2 — The calling */}
+      <section className="bg-cream-hover py-16 lg:py-24">
+        <div className="mx-auto max-w-3xl px-6 lg:px-12">
+          <Reveal>
+            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
+              02 — The calling
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
+              Serving in church unlocked a real passion for storytelling. I
+              believe creativity, photo, and video are gifts God has given me.
+              Because of that, this work has never really felt like work. I
+              genuinely love what I get to do, especially when it blesses
+              people, preserves meaningful moments, and helps others see the
+              beauty in what they lived through.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Parallax stub — beat 2 */}
+      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
+        <img
+          src={cfUrl(ABOUT_PHOTO_IDS.beat2)}
+          alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      {/* Beat 3 — The craft */}
+      <section className="bg-paper py-16 lg:py-24">
+        <div className="mx-auto max-w-3xl px-6 lg:px-12">
+          <Reveal>
+            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
+              03 — The craft
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
+              Since then in San Diego, I have served as creative director, led
+              photo teams, directed and contributed to film projects, helped
+              shoot a pilot episode, captured more than 200 events, and
+              documented over 70 weddings. That same experience now carries
+              into weddings, engagements, events, brands, and editorial work
+              through Paul Dal Studios. I work fluently across both photography
+              and video with a documentary eye, an editorial finish, and a
+              craft I am still actively growing.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Parallax stub — beat 3 (clapperboard / Awaken 2030) */}
+      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
+        <img
+          src={cfUrl(ABOUT_PHOTO_IDS.beat3)}
+          alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      {/* Parallax stub — beat 4 (pre-CTA punctuation) */}
+      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
+        <img
+          src={cfUrl(ABOUT_PHOTO_IDS.beat4)}
+          alt={beat4Photo?.alt ?? "Paul Dal — at work"}
+          className="h-auto w-full object-cover"
+        />
+      </div>
 
       {/* Closing CTA */}
       <section className="bg-ink py-24 lg:py-32">

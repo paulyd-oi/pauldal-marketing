@@ -2,13 +2,26 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 interface Project {
   title: string;
   category: string;
   cfImageId: string;
+}
+
+const CATEGORY_TO_SERVICE: Record<string, string> = {
+  Weddings: "weddings",
+  Events: "events",
+  Business: "business",
+  Editorial: "editorial",
+};
+
+function inquireHref(category: string) {
+  const service = CATEGORY_TO_SERVICE[category];
+  return service ? `/book?service=${service}` : "/book";
 }
 
 interface PortfolioLightboxProps {
@@ -115,6 +128,14 @@ export function PortfolioLightbox({
               <h3 className="mt-1 font-display text-xl text-paper">
                 {project.title}
               </h3>
+              <Link
+                href={inquireHref(project.category)}
+                onClick={onClose}
+                className="focus-ring group mt-4 inline-flex items-center gap-2 font-body text-xs uppercase tracking-widest text-paper/70 transition-colors hover:text-oxblood"
+              >
+                Inquire about this work
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
         </motion.div>

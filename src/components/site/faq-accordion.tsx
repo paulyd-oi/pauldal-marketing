@@ -37,7 +37,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
               <button
                 type="button"
                 onClick={() => toggle(i)}
-                className="flex w-full cursor-pointer items-center justify-between text-left"
+                className="focus-ring flex w-full cursor-pointer items-center justify-between text-left"
               >
                 <span className="font-display text-sm uppercase tracking-widest text-ink">
                   {item.question}

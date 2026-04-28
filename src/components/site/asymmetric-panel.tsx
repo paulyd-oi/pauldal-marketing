@@ -54,7 +54,7 @@ export function AsymmetricPanel({
       <p className="mt-8 max-w-md font-body text-base">{body}</p>
       <Link
         href={ctaHref}
-        className="mt-10 inline-block text-sm uppercase tracking-widest underline underline-offset-4 transition-opacity hover:opacity-70"
+        className="focus-ring mt-10 inline-block text-sm uppercase tracking-widest underline underline-offset-4 transition-opacity hover:opacity-70"
       >
         {ctaLabel}
       </Link>

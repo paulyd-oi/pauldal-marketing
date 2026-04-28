@@ -115,7 +115,7 @@ export default function PrivacyPage() {
                   Email{" "}
                   <a
                     href="mailto:admin@pauldalstudios.com"
-                    className="text-oxblood underline underline-offset-4 hover:text-oxblood-hover"
+                    className="focus-ring text-oxblood underline underline-offset-4 hover:text-oxblood-hover"
                   >
                     admin@pauldalstudios.com
                   </a>{" "}

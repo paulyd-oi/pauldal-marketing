@@ -63,7 +63,7 @@ export function PortfolioLightbox({
         >
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 z-10 p-2 text-paper/70 transition-colors hover:text-paper"
+            className="focus-ring absolute right-4 top-4 z-10 p-2 text-paper/70 transition-colors hover:text-paper"
             aria-label="Close lightbox"
           >
             <X className="h-6 w-6" />
@@ -76,7 +76,7 @@ export function PortfolioLightbox({
                   e.stopPropagation();
                   onPrev();
                 }}
-                className="absolute left-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
+                className="focus-ring absolute left-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
                 aria-label="Previous photo"
               >
                 <ChevronLeft className="h-8 w-8" />
@@ -86,7 +86,7 @@ export function PortfolioLightbox({
                   e.stopPropagation();
                   onNext();
                 }}
-                className="absolute right-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
+                className="focus-ring absolute right-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
                 aria-label="Next photo"
               >
                 <ChevronRight className="h-8 w-8" />

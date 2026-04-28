@@ -35,7 +35,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
           <Reveal key={project.cfImageId} delay={i * 0.05}>
             <button
               type="button"
-              className="group block w-full cursor-pointer text-left"
+              className="focus-ring group block w-full cursor-pointer text-left"
               onClick={() => setSelectedIndex(i)}
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">

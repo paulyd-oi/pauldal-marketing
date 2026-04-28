@@ -128,7 +128,7 @@ export function BookForm() {
             setProjectType("");
             setState({ status: "idle" });
           }}
-          className="group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
+          className="focus-ring group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
         >
           Send another message
           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -158,7 +158,7 @@ export function BookForm() {
           name="name"
           type="text"
           required
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
         {state.fieldErrors?.name && (
           <p className="mt-2 font-body text-sm text-oxblood">
@@ -176,7 +176,7 @@ export function BookForm() {
           name="email"
           type="email"
           required
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
         {state.fieldErrors?.email && (
           <p className="mt-2 font-body text-sm text-oxblood">
@@ -193,7 +193,7 @@ export function BookForm() {
         <input
           name="phone"
           type="tel"
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
         {state.fieldErrors?.phone && (
           <p className="mt-2 font-body text-sm text-oxblood">
@@ -216,10 +216,10 @@ export function BookForm() {
                 value={t}
                 checked={projectType === t}
                 onChange={() => setProjectType(t)}
-                className="sr-only"
+                className="peer sr-only"
               />
               <span
-                className={`inline-block border px-4 py-2 font-body text-sm transition-colors ${
+                className={`inline-block border px-4 py-2 font-body text-sm transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-oxblood ${
                   projectType === t
                     ? "border-oxblood bg-oxblood text-paper"
                     : "border-hairline text-ink hover:bg-cream-hover"
@@ -240,7 +240,7 @@ export function BookForm() {
         <select
           name="budget"
           defaultValue=""
-          className="w-full appearance-none border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full appearance-none border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         >
           <option value="">Discuss with you</option>
           <option value="Under $1,500">Under $1,500</option>
@@ -262,7 +262,7 @@ export function BookForm() {
         <input
           name="eventDate"
           type="date"
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
       </label>
 
@@ -275,7 +275,7 @@ export function BookForm() {
           name="location"
           type="text"
           placeholder="San Diego, Encinitas, etc."
-          className="w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood"
         />
       </label>
 
@@ -289,7 +289,7 @@ export function BookForm() {
           required
           rows={6}
           placeholder="What are you planning? Dates, venues, vibe. Anything you want to share."
-          className="w-full resize-y border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood focus:outline-none"
+          className="focus-ring-tight w-full resize-y border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood"
         />
         {state.fieldErrors?.message && (
           <p className="mt-2 font-body text-sm text-oxblood">
@@ -310,7 +310,7 @@ export function BookForm() {
         <button
           type="submit"
           disabled={state.status === "submitting"}
-          className="inline-flex w-full items-center justify-center bg-oxblood px-8 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
+          className="focus-ring inline-flex w-full items-center justify-center bg-oxblood px-8 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
         >
           {state.status === "submitting" ? (
             <>
@@ -328,7 +328,7 @@ export function BookForm() {
           I&apos;ll only use these to reply to you. No newsletters.{" "}
           <a
             href="/privacy"
-            className="underline underline-offset-2 hover:text-oxblood"
+            className="focus-ring underline underline-offset-2 hover:text-oxblood"
           >
             Privacy
           </a>

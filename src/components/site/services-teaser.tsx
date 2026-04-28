@@ -50,7 +50,7 @@ export function ServicesTeaser() {
             <Reveal delay={0.3}>
               <Link
                 href="/services"
-                className="group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
+                className="focus-ring group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
               >
                 View all services
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -63,7 +63,7 @@ export function ServicesTeaser() {
               <Reveal key={service.slug} delay={0.1 + i * 0.08}>
                 <Link
                   href={`/services#${service.slug}`}
-                  className="group block h-full bg-paper p-8 transition-colors hover:bg-cream-hover lg:p-10"
+                  className="focus-ring-inset group block h-full bg-paper p-8 transition-colors hover:bg-cream-hover lg:p-10"
                 >
                   <h3 className="mb-4 font-display text-2xl leading-tight text-ink lg:text-3xl">
                     {service.name}

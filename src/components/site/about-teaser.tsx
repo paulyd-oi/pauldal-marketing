@@ -48,7 +48,7 @@ export function AboutTeaser() {
             <Reveal delay={0.4}>
               <Link
                 href="/about"
-                className="group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
+                className="focus-ring group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
               >
                 More about me
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

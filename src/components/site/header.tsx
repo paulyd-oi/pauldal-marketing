@@ -40,7 +40,7 @@ export function Header() {
         <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-6 lg:h-20 lg:px-12">
           <Link
             href="/"
-            className="font-display text-lg tracking-tight text-ink lg:text-xl"
+            className="focus-ring font-display text-lg tracking-tight text-ink lg:text-xl"
           >
             Paul Dal Studio
           </Link>
@@ -49,7 +49,7 @@ export function Header() {
             <Link
               href="/about"
               className={cn(
-                "font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
                 pathname === "/about"
                   ? "text-oxblood underline decoration-1 underline-offset-4"
                   : "text-foreground/70 hover:text-oxblood"
@@ -63,7 +63,7 @@ export function Header() {
               <Link
                 href="/services"
                 className={cn(
-                  "inline-flex items-center gap-1 font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                  "focus-ring inline-flex items-center gap-1 font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
                   SERVICES_PATHS.includes(pathname)
                     ? "text-oxblood underline decoration-1 underline-offset-4"
                     : "text-foreground/70 hover:text-oxblood"
@@ -79,7 +79,7 @@ export function Header() {
                       key={href}
                       href={href}
                       className={cn(
-                        "block px-5 py-2.5 font-body text-sm tracking-wide transition-colors duration-[180ms]",
+                        "focus-ring-inset block px-5 py-2.5 font-body text-sm tracking-wide transition-colors duration-[180ms]",
                         pathname === href
                           ? "text-oxblood"
                           : "text-foreground/80 hover:bg-cream-hover hover:text-oxblood"
@@ -95,7 +95,7 @@ export function Header() {
             <Link
               href="/portfolio"
               className={cn(
-                "font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
                 pathname === "/portfolio"
                   ? "text-oxblood underline decoration-1 underline-offset-4"
                   : "text-foreground/70 hover:text-oxblood"
@@ -108,7 +108,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMenuOpen(true)}
-              className="-mr-2 flex min-h-11 min-w-11 items-center gap-1.5 p-3 text-ink lg:hidden"
+              className="focus-ring -mr-2 flex min-h-11 min-w-11 items-center gap-1.5 p-3 text-ink lg:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -119,7 +119,7 @@ export function Header() {
 
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-oxblood font-body text-sm tracking-wide text-paper transition-colors duration-[180ms] hover:bg-oxblood-hover max-lg:min-h-11 max-lg:px-5 max-lg:py-3 lg:px-5 lg:py-2"
+              className="focus-ring inline-flex items-center justify-center bg-oxblood font-body text-sm tracking-wide text-paper transition-colors duration-[180ms] hover:bg-oxblood-hover max-lg:min-h-11 max-lg:px-5 max-lg:py-3 lg:px-5 lg:py-2"
             >
               Book
             </Link>

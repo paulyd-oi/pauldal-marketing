@@ -131,7 +131,7 @@ export function Footer() {
             <Link
               key={href}
               href={href}
-              className="font-display text-sm uppercase tracking-widest transition-colors duration-200 hover:text-cream-hover"
+              className="focus-ring font-display text-sm uppercase tracking-widest transition-colors duration-200 hover:text-cream-hover"
             >
               {label}
             </Link>
@@ -148,14 +148,14 @@ export function Footer() {
           <p className="text-xs uppercase tracking-widest">
             <Link
               href="/privacy"
-              className="transition-colors hover:text-paper"
+              className="focus-ring transition-colors hover:text-paper"
             >
               PRIVACY
             </Link>
             <span className="mx-2">/</span>
             <Link
               href="/terms"
-              className="transition-colors hover:text-paper"
+              className="focus-ring transition-colors hover:text-paper"
             >
               TERMS
             </Link>
@@ -164,7 +164,7 @@ export function Footer() {
               href="https://instagram.com/pauldalstudio"
               target="_blank"
               rel="noopener"
-              className="transition-colors hover:text-paper"
+              className="focus-ring transition-colors hover:text-paper"
             >
               INSTAGRAM
             </a>

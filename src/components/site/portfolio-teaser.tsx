@@ -49,7 +49,7 @@ export function PortfolioTeaser() {
             <Reveal delay={0.2}>
               <Link
                 href="/portfolio"
-                className="group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
+                className="focus-ring group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
               >
                 View full portfolio
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -61,7 +61,7 @@ export function PortfolioTeaser() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {PROJECTS.map((project, i) => (
             <Reveal key={project.slug} delay={i * 0.1}>
-              <Link href="/portfolio" className="group block">
+              <Link href="/portfolio" className="focus-ring group block">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
                   <Image
                     src={project.imageUrl}

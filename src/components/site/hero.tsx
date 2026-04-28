@@ -72,7 +72,7 @@ export function Hero() {
         <motion.div className="mt-10" {...(prefersReduced ? {} : fadeIn(0.8))}>
           <Link
             href="/book"
-            className="inline-flex items-center bg-oxblood px-7 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover"
+            className="focus-ring inline-flex items-center bg-oxblood px-7 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover"
           >
             Start a project
             <ArrowRight className="ml-2 h-4 w-4" />

@@ -68,7 +68,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           <div className="flex h-16 items-center justify-end px-6">
             <button
               onClick={onClose}
-              className="text-ink"
+              className="focus-ring text-ink"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -82,7 +82,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 href={href}
                 onClick={onClose}
                 className={cn(
-                  "transition-colors duration-[180ms]",
+                  "focus-ring transition-colors duration-[180ms]",
                   indent
                     ? "py-3 pl-6 font-body text-xl text-ink/80"
                     : "py-5 font-display text-3xl text-ink",

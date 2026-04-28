@@ -79,7 +79,7 @@ export function ServicesAccordion({
             <button
               type="button"
               onClick={() => toggle(i)}
-              className="flex w-full cursor-pointer items-center justify-between py-6 text-left"
+              className="focus-ring flex w-full cursor-pointer items-center justify-between py-6 text-left"
             >
               <h4 className="font-display text-xl text-ink">{item.title}</h4>
               <ChevronDown

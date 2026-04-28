@@ -190,7 +190,7 @@ export default function AboutPage() {
               <Reveal delay={0.3}>
                 <Link
                   href="/services"
-                  className="group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
+                  className="focus-ring group inline-flex items-center font-body text-sm tracking-wide text-oxblood transition-colors hover:text-oxblood-hover"
                 >
                   View services
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -223,7 +223,7 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <Link
               href="/book"
-              className="group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
+              className="focus-ring group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
             >
               Start a project
               <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />

@@ -56,7 +56,7 @@ export function ClosingCTA() {
         <Reveal delay={0.3}>
           <Link
             href="/book"
-            className="group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
+            className="focus-ring group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
           >
             Start a project
             <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />

@@ -131,7 +131,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             <div className="mt-10">
               <Link
                 href={content.hero.cta.href}
-                className="group inline-flex items-center bg-oxblood px-7 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover"
+                className="focus-ring group inline-flex items-center bg-oxblood px-7 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover"
               >
                 {content.hero.cta.label}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -363,7 +363,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           <Reveal delay={0.2}>
             <Link
               href={content.finalCta.cta.href}
-              className="group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
+              className="focus-ring group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
             >
               {content.finalCta.cta.label}
               <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />

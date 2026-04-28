@@ -89,13 +89,17 @@ export function ServicesAccordion({
               />
             </button>
             <div
-              className={`overflow-hidden transition-all duration-200 motion-reduce:transition-none ${
-                isOpen ? "max-h-60 pb-6" : "max-h-0"
+              className={`grid transition-[grid-template-rows] duration-200 ease-out motion-reduce:transition-none ${
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
             >
-              <p className="font-body text-base leading-relaxed text-ink/70">
-                {item.description}
-              </p>
+              <div className="overflow-hidden">
+                <p className={`font-body text-base leading-relaxed text-ink/70 ${
+                  isOpen ? "pb-6" : ""
+                }`}>
+                  {item.description}
+                </p>
+              </div>
             </div>
           </div>
         );

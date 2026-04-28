@@ -49,13 +49,17 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
                 />
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
-                  isOpen ? "max-h-96 py-4" : "max-h-0"
+                className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                 }`}
               >
-                <p className="font-body text-base leading-relaxed text-ink/70">
-                  {item.answer}
-                </p>
+                <div className="overflow-hidden">
+                  <p className={`font-body text-base leading-relaxed text-ink/70 ${
+                    isOpen ? "py-4" : ""
+                  }`}>
+                    {item.answer}
+                  </p>
+                </div>
               </div>
             </div>
           );

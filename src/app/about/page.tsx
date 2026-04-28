@@ -7,6 +7,7 @@ import {
   AboutHeroCarousel,
   type AboutCarouselCover,
 } from "@/components/site/about-hero-carousel";
+import { ParallaxPhoto } from "@/components/site/parallax-photo";
 import {
   CATEGORY_LABELS,
   getCategoriesWithGalleries,
@@ -17,12 +18,6 @@ import { ABOUT_PHOTO_IDS } from "@/lib/about-photos";
 import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
-
-const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
-
-function cfUrl(cfId: string): string {
-  return `${CF_BASE}/${cfId}/public`;
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
@@ -138,12 +133,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Parallax stub — beat 1 */}
-      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
-        <img
-          src={cfUrl(ABOUT_PHOTO_IDS.beat1)}
+      {/* Parallax — beat 1 (post-Beginning, ~3:2 landscape default) */}
+      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
+        <ParallaxPhoto
+          cfId={ABOUT_PHOTO_IDS.beat1}
           alt={beat1Photo?.alt ?? "Paul Dal — early work"}
-          className="h-auto w-full object-cover"
         />
       </div>
 
@@ -168,12 +162,12 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Parallax stub — beat 2 */}
-      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
-        <img
-          src={cfUrl(ABOUT_PHOTO_IDS.beat2)}
+      {/* Parallax — beat 2 (post-Calling, slightly wider 16:9) */}
+      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
+        <ParallaxPhoto
+          cfId={ABOUT_PHOTO_IDS.beat2}
           alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
-          className="h-auto w-full object-cover"
+          aspect={16 / 9}
         />
       </div>
 
@@ -200,21 +194,20 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Parallax stub — beat 3 (clapperboard / Awaken 2030) */}
-      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
-        <img
-          src={cfUrl(ABOUT_PHOTO_IDS.beat3)}
+      {/* Parallax — beat 3 (post-Craft, clapperboard photo is portrait-orientation) */}
+      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
+        <ParallaxPhoto
+          cfId={ABOUT_PHOTO_IDS.beat3}
           alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
-          className="h-auto w-full object-cover"
+          aspect={4 / 5}
         />
       </div>
 
-      {/* Parallax stub — beat 4 (pre-CTA punctuation) */}
-      <div className="parallax-photo-frame mx-auto my-12 max-w-4xl overflow-hidden bg-ink">
-        <img
-          src={cfUrl(ABOUT_PHOTO_IDS.beat4)}
+      {/* Parallax — beat 4 (pre-CTA punctuation, default 3:2) */}
+      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
+        <ParallaxPhoto
+          cfId={ABOUT_PHOTO_IDS.beat4}
           alt={beat4Photo?.alt ?? "Paul Dal — at work"}
-          className="h-auto w-full object-cover"
         />
       </div>
 

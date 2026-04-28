@@ -135,7 +135,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 className={cn(
                   "focus-ring transition-colors duration-[180ms]",
                   indent
-                    ? "py-3 pl-6 font-body text-xl text-ink/80"
+                    ? "py-3 pl-6 font-body text-xl text-ink/70"
                     : "py-5 font-display text-3xl text-ink",
                   pathname === href
                     ? "text-oxblood"

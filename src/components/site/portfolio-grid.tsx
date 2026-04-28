@@ -48,7 +48,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
                 />
                 <div className="absolute inset-0 hidden bg-gradient-to-t from-ink/70 via-ink/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:block" />
                 <div className="absolute bottom-0 left-0 right-0 hidden p-6 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100 lg:block">
-                  <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/80">
+                  <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/70">
                     {project.category}
                   </p>
                   <h3 className="font-display text-2xl leading-tight text-paper">

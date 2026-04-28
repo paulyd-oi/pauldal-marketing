@@ -83,7 +83,7 @@ export function ServicesAccordion({
             >
               <h4 className="font-display text-xl text-ink">{item.title}</h4>
               <ChevronDown
-                className={`h-5 w-5 shrink-0 text-ink/40 transition-transform duration-200 motion-reduce:transition-none ${
+                className={`h-5 w-5 shrink-0 text-ink/50 transition-transform duration-200 motion-reduce:transition-none ${
                   isOpen ? "rotate-180" : ""
                 }`}
               />

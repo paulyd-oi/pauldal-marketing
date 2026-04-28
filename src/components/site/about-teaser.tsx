@@ -26,8 +26,8 @@ export function AboutTeaser() {
 
           <div className="max-w-md">
             <Reveal delay={0.1}>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
-                01 <span className="mx-2 text-ink/40">/</span> About
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                01 <span className="mx-2 text-ink/50">/</span> About
               </p>
             </Reveal>
             <Reveal delay={0.2}>
@@ -36,7 +36,7 @@ export function AboutTeaser() {
               </h2>
             </Reveal>
             <Reveal delay={0.3}>
-              <p className="mb-8 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="mb-8 font-body text-base leading-relaxed text-ink lg:text-lg">
                 I started shooting in 2019. A kid from the Philippines who
                 moved to the US at five, learned to see through a viewfinder
                 somewhere along the way. I serve as creative director at my

@@ -75,7 +75,7 @@ export default function AboutPage() {
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
                 I&apos;m Paul, a hybrid photographer and videographer based in
                 San Diego, available anywhere in the world you need me.
               </p>
@@ -107,7 +107,7 @@ export default function AboutPage() {
 
             <div className="max-w-md lg:pt-12">
               <Reveal delay={0.1}>
-                <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
                   I was born in the Philippines and moved to the United States
                   when I was five. Growing up between two cultures taught me to
                   notice details: how light fills a room differently depending
@@ -116,7 +116,7 @@ export default function AboutPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.2}>
-                <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
                   I picked up a camera in 2019 and never put it down. What
                   started as documenting moments for friends turned into a
                   discipline: learning to read light, anticipate movement, and
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
-                <p className="font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
                   I shoot both photo and video because some moments need
                   stillness, and others need motion. The camera I reach for
                   depends on the story, not the deliverable.
@@ -146,7 +146,7 @@ export default function AboutPage() {
             </FadingQuote>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+            <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
               For the last four years I&apos;ve served as the creative director
               and videographer at my church, a community of ten thousand
               members. I&apos;ve documented over two hundred events: services,
@@ -154,7 +154,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
               That work sharpened everything: speed, instinct, storytelling
               under pressure. It also grounded me. My faith is central to how I
               see the world and the people in it. I bring that same attention to

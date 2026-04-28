@@ -57,14 +57,14 @@ export function MarqueeTestimonial({
       <Reveal>
         <div className="relative z-10 mx-auto max-w-2xl bg-paper p-12 text-ink lg:p-16">
           <div className="text-center">
-            <p className="text-xs uppercase tracking-widest text-ink/60">
+            <p className="text-xs uppercase tracking-widest text-ink/50">
               {eyebrow}
             </p>
             <p className="mt-6 font-display text-2xl italic leading-snug lg:text-3xl">
               &ldquo;{quote}&rdquo;
             </p>
             {attribution && (
-              <p className="mt-6 text-sm text-ink/60">{attribution}</p>
+              <p className="mt-6 text-sm text-ink/50">{attribution}</p>
             )}
           </div>
         </div>

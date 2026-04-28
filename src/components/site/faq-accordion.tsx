@@ -43,7 +43,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
                   {item.question}
                 </span>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-ink/40 transition-transform duration-300 ease-out motion-reduce:transition-none ${
+                  className={`h-5 w-5 shrink-0 text-ink/50 transition-transform duration-300 ease-out motion-reduce:transition-none ${
                     isOpen ? "rotate-180" : ""
                   }`}
                 />

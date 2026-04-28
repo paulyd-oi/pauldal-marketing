@@ -62,7 +62,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-8 max-w-md font-body text-base leading-relaxed text-paper/80 lg:text-lg"
+          className="mt-8 max-w-md font-body text-base leading-relaxed text-paper/70 lg:text-lg"
           {...(prefersReduced ? {} : fadeIn(0.6))}
         >
           San Diego hybrid photographer + videographer. Weddings, events,

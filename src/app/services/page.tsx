@@ -155,7 +155,7 @@ function DetailBlock({
         {items.map((item) => (
           <li
             key={item}
-            className="font-body text-sm leading-relaxed text-ink/85"
+            className="font-body text-sm leading-relaxed text-ink"
           >
             {item}
           </li>
@@ -183,7 +183,7 @@ export default function ServicesPage() {
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
                 Each project starts the same: listen, plan, shoot, deliver.
                 Below is what&apos;s available.
               </p>
@@ -212,7 +212,7 @@ export default function ServicesPage() {
               <div className="max-w-md">
                 {service.prose.map((p, pi) => (
                   <Reveal key={pi} delay={0.2 + pi * 0.1}>
-                    <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                    <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
                       {p}
                     </p>
                   </Reveal>
@@ -239,7 +239,7 @@ export default function ServicesPage() {
                       {service.investment.map((line) => (
                         <li
                           key={line}
-                          className="font-body text-sm leading-relaxed text-ink/85"
+                          className="font-body text-sm leading-relaxed text-ink"
                         >
                           {line}
                         </li>
@@ -268,8 +268,8 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="mb-16 max-w-2xl lg:mb-20">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
-                05 <span className="mx-2 text-ink/40">/</span> Process
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                05 <span className="mx-2 text-ink/50">/</span> Process
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -293,8 +293,8 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="mb-16 max-w-2xl lg:mb-20">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
-                06 <span className="mx-2 text-ink/40">/</span> Included
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                06 <span className="mx-2 text-ink/50">/</span> Included
               </p>
             </Reveal>
             <Reveal delay={0.1}>

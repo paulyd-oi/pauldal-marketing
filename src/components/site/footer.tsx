@@ -140,7 +140,7 @@ export function Footer() {
       </div>
 
       {/* Section C — Meta Row */}
-      <div className="border-t border-paper/20 bg-ink px-6 py-4 text-paper/60">
+      <div className="border-t border-paper/20 bg-ink px-6 py-4 text-paper/50">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-y-2 md:flex-row md:justify-between">
           <p className="text-xs">
             &copy; 2026 Paul Dal Studio. All rights reserved.

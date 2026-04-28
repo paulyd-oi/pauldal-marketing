@@ -8,7 +8,7 @@ export function ClosingCTA() {
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
         <Reveal>
           <p className="mb-8 font-body text-xs uppercase tracking-widest text-paper/50">
-            04 <span className="mx-2 text-paper/30">/</span> Connect
+            04 <span className="mx-2 text-paper/50">/</span> Connect
           </p>
         </Reveal>
 

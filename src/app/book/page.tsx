@@ -47,7 +47,7 @@ export default function BookPage() {
                 </h1>
               </Reveal>
               <Reveal delay={0.2}>
-                <p className="mb-8 max-w-md font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                <p className="mb-8 max-w-md font-body text-base leading-relaxed text-ink lg:text-lg">
                   Tell me about what you&apos;re planning. Weddings, events,
                   business shoots, editorial. I&apos;ll read everything you
                   send and reply within 24 hours.

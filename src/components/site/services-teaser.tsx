@@ -32,8 +32,8 @@ export function ServicesTeaser() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="max-w-md lg:sticky lg:top-32 lg:self-start">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
-                02 <span className="mx-2 text-ink/40">/</span> Services
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                02 <span className="mx-2 text-ink/50">/</span> Services
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -42,7 +42,7 @@ export function ServicesTeaser() {
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="mb-8 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="mb-8 font-body text-base leading-relaxed text-ink lg:text-lg">
                 Each project starts the same: listen, plan, shoot, deliver.
                 Below is what I&apos;m available for.
               </p>
@@ -68,7 +68,7 @@ export function ServicesTeaser() {
                   <h3 className="mb-4 font-display text-2xl leading-tight text-ink lg:text-3xl">
                     {service.name}
                   </h3>
-                  <p className="mb-6 font-body text-sm leading-relaxed text-ink/75 lg:text-base">
+                  <p className="mb-6 font-body text-sm leading-relaxed text-ink/70 lg:text-base">
                     {service.description}
                   </p>
                   <span className="inline-flex items-center font-body text-xs uppercase tracking-widest text-oxblood">

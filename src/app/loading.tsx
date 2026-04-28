@@ -6,7 +6,7 @@ export default function Loading() {
           aria-hidden="true"
           className="block h-1.5 w-1.5 animate-pulse rounded-full bg-oxblood"
         />
-        <p className="font-body text-xs uppercase tracking-widest text-ink/60">
+        <p className="font-body text-xs uppercase tracking-widest text-ink/50">
           Loading
         </p>
       </div>

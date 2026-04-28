@@ -96,7 +96,7 @@ export default function PortfolioPage() {
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
                 A selection of weddings, events, and editorial projects. Full
                 archive available on request.
               </p>

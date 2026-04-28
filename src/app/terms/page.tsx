@@ -28,7 +28,7 @@ export default function TermsPage() {
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
                 Last updated April 27, 2026
               </p>
             </Reveal>
@@ -38,7 +38,7 @@ export default function TermsPage() {
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
                 Plain-language terms covering bookings, deposits, deliverables,
                 and copyright. Your individual project contract is the source
                 of truth for the specifics; this page covers the defaults.
@@ -51,7 +51,7 @@ export default function TermsPage() {
       {/* Body */}
       <section className="bg-paper pb-24 lg:pb-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="max-w-2xl space-y-10 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+          <div className="max-w-2xl space-y-10 font-body text-base leading-relaxed text-ink lg:text-lg">
             <Reveal>
               <div>
                 <h2 className="mb-4 font-display text-2xl text-ink lg:text-3xl">

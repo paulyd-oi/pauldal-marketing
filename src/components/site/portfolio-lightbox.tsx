@@ -122,7 +122,7 @@ export function PortfolioLightbox({
               />
             </div>
             <div className="mt-4 text-center">
-              <p className="font-body text-xs uppercase tracking-widest text-paper/60">
+              <p className="font-body text-xs uppercase tracking-widest text-paper/50">
                 {project.category}
               </p>
               <h3 className="mt-1 font-display text-xl text-paper">

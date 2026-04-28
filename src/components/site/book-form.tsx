@@ -151,7 +151,7 @@ export function BookForm() {
         <h3 className="mb-6 font-display text-3xl leading-tight text-ink lg:text-4xl">
           Got it.
         </h3>
-        <p className="mb-2 max-w-md font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+        <p className="mb-2 max-w-md font-body text-base leading-relaxed text-ink lg:text-lg">
           I&apos;ll be in touch within 24 hours.
         </p>
         <p className="mb-8 font-body text-base text-ink/70">Paul</p>

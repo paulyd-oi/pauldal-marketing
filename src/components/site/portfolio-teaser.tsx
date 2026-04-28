@@ -35,8 +35,8 @@ export function PortfolioTeaser() {
         <div className="mb-16 grid grid-cols-1 items-end gap-8 lg:mb-20 lg:grid-cols-2 lg:gap-20">
           <div className="max-w-md">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
-                03 <span className="mx-2 text-ink/40">/</span> Portfolio
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                03 <span className="mx-2 text-ink/50">/</span> Portfolio
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -72,7 +72,7 @@ export function PortfolioTeaser() {
                   />
                   <div className="absolute inset-0 hidden bg-gradient-to-t from-ink/70 via-ink/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:block" />
                   <div className="absolute bottom-0 left-0 right-0 hidden p-6 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100 lg:block">
-                    <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/80">
+                    <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/70">
                       {project.category}
                     </p>
                     <h3 className="font-display text-2xl leading-tight text-paper">

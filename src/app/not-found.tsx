@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
         <div className="max-w-3xl">
           <Reveal>
-            <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+            <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
               404. Lost in transit.
             </p>
           </Reveal>
@@ -18,7 +18,7 @@ export default function NotFound() {
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mb-12 max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+            <p className="mb-12 max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
               The page you&apos;re looking for doesn&apos;t exist anymore, or
               never did. Head back home, or get in touch directly.
             </p>

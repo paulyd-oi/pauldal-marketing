@@ -91,7 +91,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-8 max-w-xl font-body text-base leading-relaxed text-paper/80 lg:text-lg">
+            <p className="mt-8 max-w-xl font-body text-base leading-relaxed text-paper/70 lg:text-lg">
               {content.hero.subhead}
             </p>
           </Reveal>
@@ -115,7 +115,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           <div className="border-y border-hairline py-12 lg:py-16">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
               <Reveal>
-                <p className="font-body text-xs uppercase tracking-widest text-ink/60">
+                <p className="font-body text-xs uppercase tracking-widest text-ink/50">
                   Investment
                 </p>
               </Reveal>
@@ -124,14 +124,14 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
                   {content.pricingSummary.cards.map((card, i) => (
                     <Reveal key={card.label} delay={i * 0.08}>
                       <li className="flex flex-wrap items-baseline gap-x-4 font-display text-2xl leading-snug tracking-tight text-ink lg:text-3xl">
-                        <span className="text-ink/55">{card.label}</span>
+                        <span className="text-ink/50">{card.label}</span>
                         <span>{card.value}</span>
                       </li>
                     </Reveal>
                   ))}
                 </ul>
                 <Reveal delay={0.3}>
-                  <p className="mt-8 font-body text-sm text-ink/60 lg:text-base">
+                  <p className="mt-8 font-body text-sm text-ink/50 lg:text-base">
                     {content.pricingSummary.note}
                   </p>
                 </Reveal>
@@ -161,7 +161,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             </Reveal>
             <div className="max-w-xl lg:pt-8">
               <Reveal delay={0.1}>
-                <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+                <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
                   {content.intro.eyebrow}
                 </p>
               </Reveal>
@@ -172,7 +172,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
               </Reveal>
               {content.intro.paragraphs.map((p, i) => (
                 <Reveal key={i} delay={0.3 + i * 0.1}>
-                  <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
+                  <p className="mb-6 font-body text-base leading-relaxed text-ink lg:text-lg">
                     {p}
                   </p>
                 </Reveal>
@@ -187,7 +187,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="mb-16 max-w-2xl lg:mb-20">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
                 {content.gallery.eyebrow}
               </p>
             </Reveal>
@@ -217,7 +217,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           {content.gallery.caption &&
             !/sample work|replace with curated/i.test(content.gallery.caption) && (
               <Reveal delay={0.5}>
-                <p className="mt-8 font-body text-xs uppercase tracking-widest text-ink/40">
+                <p className="mt-8 font-body text-xs uppercase tracking-widest text-ink/50">
                   {content.gallery.caption}
                 </p>
               </Reveal>
@@ -230,7 +230,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="mb-16 max-w-2xl lg:mb-20">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
                 {content.accordion.eyebrow}
               </p>
             </Reveal>
@@ -256,7 +256,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="mb-16 max-w-2xl lg:mb-20">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/60">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
                 {content.process.eyebrow}
               </p>
             </Reveal>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/site/hero";
+import { HomepageHero } from "@/components/site/homepage-hero";
 import { AboutTeaser } from "@/components/site/about-teaser";
 import { ServicesTeaser } from "@/components/site/services-teaser";
 import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
@@ -7,6 +7,12 @@ import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
 import { AsymmetricPanel } from "@/components/site/asymmetric-panel";
+import {
+  getFeaturedHomepageGalleries,
+  pickByDate,
+} from "@/lib/portfolio-public";
+
+export const revalidate = 60;
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -33,10 +39,26 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  // Direction 5 hero: full-bleed primary cover (deterministic daily
+  // rotation through featuredOnHomepage galleries) + scroll-revealing
+  // grid of additional covers below. Falls back to all galleries if
+  // none are flagged for homepage curation.
+  const homepageGalleries = await getFeaturedHomepageGalleries();
+  const heroGallery =
+    pickByDate(homepageGalleries) ?? homepageGalleries[0] ?? null;
+  const gridGalleries = heroGallery
+    ? homepageGalleries.filter((g) => g.id !== heroGallery.id).slice(0, 8)
+    : [];
+
   return (
     <>
-      <Hero />
+      {heroGallery && (
+        <HomepageHero
+          heroGallery={heroGallery}
+          gridGalleries={gridGalleries}
+        />
+      )}
       <SectionDivider />
       {/* TODO: replace with real homepage testimonial */}
       <MarqueeTestimonial

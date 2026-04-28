@@ -450,3 +450,49 @@ Per ground rules: **failure documented, audit performed manually against the imp
 - **`src/app/sitemap.ts`, `src/app/robots.ts`, `src/app/favicon.ico`** — non-visual.
 - **`public/**`** — static assets, no .tsx surface.
 - **`/privacy` and `/terms`** — referenced in footer (`footer.tsx:148-160`) but **the routes do not exist in `src/app/`** (logged as S3-/book-3).
+
+---
+
+## Sprint History
+
+### 2026-04-27 — Sprint #1 (commit `8c2a07a`)
+
+Shipped 11 fixes:
+- **S2-1** em-dash sweep across body prose (testimonial copy preserved)
+- **S2-2** keyboard-accessible Services dropdown
+- **S2-3** focus rings sitewide
+- **S2-4** mobile touch targets ≥44px
+- **S2-6** pricing 3-card hero-metric strip → editorial list
+- **S2-12** `PhotoFlankedHeading` uppercase dropped (sentence case)
+- **S2-13** deposit copy unified to 25% across services + process steps
+- **S2-14** `HeroCamera3D` deleted, three.js + drei + types removed
+- **S3-/book-1** + **S3-/book-2** + **S3-/book-3** book form: focus rings on every input, `?service=` query prefill, /privacy + /terms stub routes + privacy microcopy
+- **S3-landing-6** placeholder "Sample work — replace with curated…" caption no longer rendered
+
+### 2026-04-28 — Sprint #2 (commits `14cd8c1` … TBD)
+
+Shipped (safe block, Phases 1–12):
+- **S2-22** book form client-side email validation, future-only date picker, scroll-to-top on success
+- **S2-21** custom `not-found.tsx` + `loading.tsx`
+- **S2-18** `MobileMenu` focus trap + return-focus on close
+- **S3-/portfolio-4** "Inquire about this work" link inside the lightbox, mapped to `?service=` from photo category
+- **S3-/about-1** redundant Services overview section removed from /about
+- **S3-/-3** homepage `ClosingCTA` cycling-text rotator → static phrase
+- **S2-5** (DRY half) `<ProcessSteps />` extracted to a single component, consumed by /services and `LandingPageLayout`
+- **S2-16** accordions: rigid `max-h-*` replaced with grid-rows trick (no clipping on long answers)
+- **S2-17** `SocialProofBadge` visible on mobile
+- **S2-20** header `backdrop-blur-sm` on scroll removed
+
+Shipping (risky block, Phases 13–15) immediately after the safe-block push:
+- **S2-7** OKLCH color tokens, dead token cleanup, `src/components/ui/button.tsx` deleted
+- **S2-8** + **S2-9** + **S2-11** section padding scale (3 rhythms), hero h1 leading consolidated, /book h1 sized to peer pages
+- **S2-15** body-text opacity ramp consolidated to 3 steps
+
+### Remaining open
+
+- **S2-19** `BrandMark` SVG asset (design asset workflow)
+- **S3-/portfolio-2** image curation across pages (content workflow)
+- **S2-5 (redesign half)** `<ProcessSteps />` icon-grid pattern still cliché — DRY done, redesign pending
+- Testimonials: 4 placeholder testimonials (homepage marquee + 3 landing pages) still in production. Awaiting real client quotes.
+
+All other audit items closed.

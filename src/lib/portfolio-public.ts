@@ -107,6 +107,32 @@ function cfUrl(cloudflareImageId: string): string {
   return `${CF_BASE}/${cloudflareImageId}/public`;
 }
 
+// SSOT for the FrameGallery → PortfolioGallery transform. Used by both
+// getPortfolioGalleries() and getPersonalGallery() so the URL shape, alt
+// fallback, and indexed photo numbering stay consistent across endpoints.
+function mapToPortfolioGallery(g: FramePortfolioGallery): PortfolioGallery {
+  return {
+    id: g.id,
+    name: g.name,
+    publishedAt: g.publishedAt,
+    category: g.category ?? null,
+    featuredOnHomepage: g.featuredOnHomepage ?? false,
+    coverCfImageId: g.coverPhoto!.cloudflareImageId,
+    coverImageUrl: cfUrl(g.coverPhoto!.cloudflareImageId),
+    coverAlt: g.name,
+    coverWidth: g.coverPhoto!.width,
+    coverHeight: g.coverPhoto!.height,
+    photos: g.photos.map((p, idx) => ({
+      id: p.id,
+      url: cfUrl(p.cloudflareImageId),
+      alt: `Photo ${idx + 1} of ${g.photos.length} from ${g.name}`,
+      width: p.width,
+      height: p.height,
+    })),
+    photoCount: g.photoCount,
+  };
+}
+
 export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
   let data: FramePortfolioResponse;
 
@@ -150,26 +176,7 @@ export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
     );
   });
 
-  return withCovers.map((g) => ({
-    id: g.id,
-    name: g.name,
-    publishedAt: g.publishedAt,
-    category: g.category ?? null,
-    featuredOnHomepage: g.featuredOnHomepage ?? false,
-    coverCfImageId: g.coverPhoto!.cloudflareImageId,
-    coverImageUrl: cfUrl(g.coverPhoto!.cloudflareImageId),
-    coverAlt: g.name,
-    coverWidth: g.coverPhoto!.width,
-    coverHeight: g.coverPhoto!.height,
-    photos: g.photos.map((p, idx) => ({
-      id: p.id,
-      url: cfUrl(p.cloudflareImageId),
-      alt: `Photo ${idx + 1} of ${g.photos.length} from ${g.name}`,
-      width: p.width,
-      height: p.height,
-    })),
-    photoCount: g.photoCount,
-  }));
+  return withCovers.map(mapToPortfolioGallery);
 }
 
 // Filter all galleries by category (preserves the createdAt-desc sort
@@ -235,4 +242,64 @@ export function pickByDate<T>(items: T[]): T | null {
   const start = new Date(Date.UTC(today.getUTCFullYear(), 0, 0));
   const dayOfYear = Math.floor((today.getTime() - start.getTime()) / 86_400_000);
   return items[dayOfYear % items.length];
+}
+
+// ---------------------------------------------------------------------------
+// PERSONAL gallery consumers
+//
+// PERSONAL galleries are served from a separate FRAME endpoint
+// (/api/public/personal-assets) so they never appear on the public
+// /portfolio surface. They feed /about (hero + parallax beats),
+// /brand-content (founder portrait), and Schema.org Person.image.
+// ---------------------------------------------------------------------------
+
+const PERSONAL_API_URL = `${FRAME_API_BASE}/api/public/personal-assets`;
+
+// Fetches the most recent published PERSONAL gallery from FRAME.
+// Returns null if none exists. FRAME sorts portfolioOrder asc + createdAt
+// desc, so first entry is the right pick for v1 (single-gallery assumption).
+export async function getPersonalGallery(): Promise<PortfolioGallery | null> {
+  try {
+    const res = await fetch(PERSONAL_API_URL, { next: { revalidate: 60 } });
+    if (!res.ok) {
+      console.error(
+        `[portfolio-public] FRAME personal-assets returned ${res.status}`,
+      );
+      return null;
+    }
+    const data = (await res.json()) as FramePortfolioResponse;
+    if (!data.galleries || !Array.isArray(data.galleries)) return null;
+    const gallery = data.galleries.find((g) => g.coverPhoto !== null);
+    if (!gallery) return null;
+    return mapToPortfolioGallery(gallery);
+  } catch (error) {
+    console.error("[portfolio-public] FRAME personal-assets fetch failed", error);
+    return null;
+  }
+}
+
+// Returns the photos array of the personal gallery, or empty array.
+// Order is FRAME's display order (admin drag-sort).
+export async function getPersonalPhotos(): Promise<PortfolioPhoto[]> {
+  const gallery = await getPersonalGallery();
+  return gallery?.photos ?? [];
+}
+
+// Extract the Cloudflare image ID from a CF "public" variant URL like
+// https://imagedelivery.net/<account>/<cf-id>/public
+function extractCfId(url: string): string | null {
+  const match = url.match(/imagedelivery\.net\/[^/]+\/([^/]+)\//);
+  return match?.[1] ?? null;
+}
+
+// Returns a specific photo from the personal gallery by Cloudflare image ID.
+// Used to deterministically pick photos for hero, beats, schema, etc.
+// Returns null if the gallery doesn't exist or the photo isn't found.
+export async function getPersonalPhotoByCfId(
+  cfId: string,
+): Promise<PortfolioPhoto | null> {
+  const photos = await getPersonalPhotos();
+  return (
+    photos.find((p) => p.id === cfId || extractCfId(p.url) === cfId) ?? null
+  );
 }

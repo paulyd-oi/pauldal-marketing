@@ -15,6 +15,9 @@ interface PortfolioLightboxProps {
   onNext: () => void;
 }
 
+const CHROME_BUTTON =
+  "inline-flex items-center justify-center rounded-full bg-black/40 text-white transition-[background-color,transform] duration-150 hover:bg-black/60 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+
 export function PortfolioLightbox({
   gallery,
   photoIndex,
@@ -61,10 +64,10 @@ export function PortfolioLightbox({
         >
           <button
             onClick={onClose}
-            className="focus-ring absolute right-4 top-4 z-10 p-2 text-paper/70 transition-colors hover:text-paper"
+            className={`${CHROME_BUTTON} absolute right-4 top-4 z-20 h-11 w-11`}
             aria-label="Close lightbox"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" strokeWidth={2} />
           </button>
 
           {totalPhotos > 1 && (
@@ -74,20 +77,20 @@ export function PortfolioLightbox({
                   e.stopPropagation();
                   onPrev();
                 }}
-                className="focus-ring absolute left-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
+                className={`${CHROME_BUTTON} absolute left-3 top-1/2 z-10 h-12 w-12 -translate-y-1/2 md:left-4 md:h-14 md:w-14`}
                 aria-label="Previous photo"
               >
-                <ChevronLeft className="h-8 w-8" />
+                <ChevronLeft className="h-7 w-7 md:h-8 md:w-8" strokeWidth={2} />
               </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onNext();
                 }}
-                className="focus-ring absolute right-4 top-1/2 z-10 -translate-y-1/2 p-2 text-paper/50 transition-colors hover:text-oxblood"
+                className={`${CHROME_BUTTON} absolute right-3 top-1/2 z-10 h-12 w-12 -translate-y-1/2 md:right-4 md:h-14 md:w-14`}
                 aria-label="Next photo"
               >
-                <ChevronRight className="h-8 w-8" />
+                <ChevronRight className="h-7 w-7 md:h-8 md:w-8" strokeWidth={2} />
               </button>
             </>
           )}
@@ -107,11 +110,16 @@ export function PortfolioLightbox({
                 priority
               />
             </div>
-            <div className="mt-4 text-center">
-              <p className="font-body text-xs uppercase tracking-widest text-paper/50">
+            <div className="mt-4 flex flex-col items-center text-center">
+              <span className="inline-flex items-center rounded-full bg-black/40 px-3 py-1 font-body text-base font-medium tracking-wide text-white">
                 {photoIndex + 1} / {totalPhotos}
-              </p>
-              <h3 className="mt-1 font-display text-xl text-paper">
+              </span>
+              {totalPhotos > 1 && (
+                <p className="mt-2 hidden font-body text-xs text-white/50 md:block">
+                  Use arrow keys to navigate
+                </p>
+              )}
+              <h3 className="mt-3 font-display text-xl text-paper">
                 {gallery.name}
               </h3>
               <Link

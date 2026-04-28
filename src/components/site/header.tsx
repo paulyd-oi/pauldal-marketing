@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./mobile-menu";
@@ -21,11 +21,39 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const servicesPanelRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 0);
   });
+
+  useEffect(() => {
+    if (!servicesOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        servicesRef.current &&
+        !servicesRef.current.contains(event.target as Node)
+      ) {
+        setServicesOpen(false);
+      }
+    }
+    function handleKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setServicesOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [servicesOpen]);
+
+  useEffect(() => {
+    setServicesOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -59,9 +87,30 @@ export function Header() {
             </Link>
 
             {/* Services dropdown */}
-            <div className="group relative">
-              <Link
-                href="/services"
+            <div
+              ref={servicesRef}
+              className="relative"
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={servicesOpen}
+                aria-controls="services-menu"
+                onClick={() => setServicesOpen((v) => !v)}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setServicesOpen(true);
+                    requestAnimationFrame(() => {
+                      const first = servicesPanelRef.current?.querySelector<HTMLAnchorElement>(
+                        "a"
+                      );
+                      first?.focus();
+                    });
+                  }
+                }}
                 className={cn(
                   "focus-ring inline-flex items-center gap-1 font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
                   SERVICES_PATHS.includes(pathname)
@@ -70,14 +119,32 @@ export function Header() {
                 )}
               >
                 Services
-                <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
-              </Link>
-              <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100">
+                <ChevronDown
+                  className={cn(
+                    "h-3 w-3 transition-transform duration-200",
+                    servicesOpen && "rotate-180"
+                  )}
+                />
+              </button>
+              <div
+                id="services-menu"
+                ref={servicesPanelRef}
+                role="menu"
+                className={cn(
+                  "absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 transition-[opacity,visibility] duration-150",
+                  servicesOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0"
+                )}
+              >
                 <div className="min-w-[200px] border border-hairline bg-paper py-2 shadow-sm">
                   {SERVICES_SUBLINKS.map(({ href, label }) => (
                     <Link
                       key={href}
                       href={href}
+                      role="menuitem"
+                      tabIndex={servicesOpen ? 0 : -1}
+                      onClick={() => setServicesOpen(false)}
                       className={cn(
                         "focus-ring-inset block px-5 py-2.5 font-body text-sm tracking-wide transition-colors duration-[180ms]",
                         pathname === href

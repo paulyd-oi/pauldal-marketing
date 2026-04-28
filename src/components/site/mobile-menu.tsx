@@ -7,27 +7,19 @@ import { useEffect, useCallback, useRef } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Mirrors SERVICES_SUBLINKS in header.tsx — indented entries are the
-// vertical taxonomy categories (synced with FRAME GalleryCategory).
-const MENU_LINKS = [
-  { href: "/about", label: "About", indent: false },
-  { href: "/services", label: "Services", indent: false },
-  { href: "/weddings", label: "Weddings", indent: true },
-  { href: "/engagements", label: "Engagements", indent: true },
-  { href: "/milestones", label: "Milestone Celebrations", indent: true },
-  { href: "/performances", label: "Performances", indent: true },
-  { href: "/brand-content", label: "Brand Content", indent: true },
-  { href: "/events", label: "Events", indent: true },
-  { href: "/portfolio", label: "Portfolio", indent: false },
-  { href: "/book", label: "Book", indent: false },
-];
+// Mirrors the desktop services dropdown — link list is provided by the
+// parent (server-fetched in src/components/site/header.tsx) so dynamic
+// visibility (Option C) reflects which categories currently have
+// galleries. Indented entries render as nested taxonomy categories.
+export type MobileMenuLink = { href: string; label: string; indent: boolean };
 
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
+  links: MobileMenuLink[];
 }
 
-export function MobileMenu({ open, onClose }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
   const pathname = usePathname();
   const prefersReduced = useReducedMotion();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -132,7 +124,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </div>
 
           <nav className="flex flex-col px-6 pt-8">
-            {MENU_LINKS.map(({ href, label, indent }) => (
+            {links.map(({ href, label, indent }) => (
               <Link
                 key={href}
                 href={href}

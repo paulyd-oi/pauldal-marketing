@@ -22,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Family & Lifestyle Photography San Diego — Paul Dal Studio",
     description:
       "Family sessions, lifestyle shoots, candid moments at home or in your favorite outdoor spots. Photography that captures who your family is right now.",
+    alternates: { canonical: "https://pauldalstudios.com/family-lifestyle" },
     openGraph: {
       title: "Family & Lifestyle Photography — Paul Dal Studio",
       description:
@@ -30,6 +31,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Paul Dal Studio",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Family & lifestyle photography by Paul Dal Studio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Family & Lifestyle Photography — Paul Dal Studio",
+      description:
+        "Family sessions and lifestyle shoots that capture who your family is right now. San Diego based.",
+      images: [ogImage],
     },
   };
 }

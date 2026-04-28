@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Milestone Celebration Photography San Diego — Paul Dal Studio",
     description:
       "Quinceañera, Sweet 16, milestone birthday photography by Paul Dal Studio. Documentary-style coverage that captures the joy, the family, the details. San Diego based.",
+    alternates: { canonical: "https://pauldalstudios.com/milestones" },
     openGraph: {
       title: "Milestone Celebration Photography — Paul Dal Studio",
       description:
@@ -29,6 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Paul Dal Studio",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Milestone celebration photography by Paul Dal Studio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Milestone Celebration Photography — Paul Dal Studio",
+      description:
+        "Quinceañeras, Sweet 16s, milestone birthdays. Documentary-style coverage. San Diego based.",
+      images: [ogImage],
     },
   };
 }

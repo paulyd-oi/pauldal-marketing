@@ -23,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Engagement Photography San Diego — Paul Dal Studio",
     description:
       "Engagement photography by Paul Dal Studio. Coast, vineyard, or somewhere meaningful — find a setting that feels true to you. San Diego based, available worldwide.",
+    alternates: { canonical: "https://pauldalstudios.com/engagements" },
     openGraph: {
       title: "Engagement Photography San Diego — Paul Dal Studio",
       description:
@@ -31,6 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Paul Dal Studio",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Engagement photography by Paul Dal Studio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Engagement Photography San Diego — Paul Dal Studio",
+      description:
+        "Engagement sessions in settings that feel true to you. San Diego based, available worldwide.",
+      images: [ogImage],
     },
   };
 }

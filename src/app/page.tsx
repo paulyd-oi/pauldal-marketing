@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Paul Dal Studio — Photography is how I pay attention",
   description:
     "Paul Dal Studio — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
+  alternates: { canonical: "https://pauldalstudios.com" },
   openGraph: {
     title: "Paul Dal Studio — Photography is how I pay attention",
     description:

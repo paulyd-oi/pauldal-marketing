@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Book",
   description:
     "Tell Paul about your project — weddings, events, business, editorial photography in San Diego and worldwide. Response within 24 hours.",
+  alternates: { canonical: "https://pauldalstudios.com/book" },
   openGraph: {
     title: "Book — Paul Dal Studio",
     description:

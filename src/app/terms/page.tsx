@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Terms",
   description:
     "Plain-language terms for Paul Dal Studio. Booking, deposits, deliverables, copyright.",
+  alternates: { canonical: "https://pauldalstudios.com/terms" },
   openGraph: {
     title: "Terms — Paul Dal Studio",
     description:
@@ -16,6 +17,13 @@ export const metadata: Metadata = {
     siteName: "Paul Dal Studio",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms — Paul Dal Studio",
+    description:
+      "Plain-language terms for Paul Dal Studio. Booking, deposits, deliverables, copyright.",
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
 };

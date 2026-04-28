@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description:
     "Selected work by Paul Dal Studio — weddings, events, business, and editorial photography in San Diego and beyond. Full archive on request.",
+  alternates: { canonical: "https://pauldalstudios.com/portfolio" },
   openGraph: {
     title: "Portfolio — Paul Dal Studio",
     description:

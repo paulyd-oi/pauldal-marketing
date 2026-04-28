@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, 200+ events documented, editorial eye. Available worldwide.",
+  alternates: { canonical: "https://pauldalstudios.com/about" },
   openGraph: {
     title: "About — Paul Dal Studio",
     description:

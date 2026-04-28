@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Live Performance Photography San Diego — Paul Dal Studio",
     description:
       "Concert, worship night, tour photography by Paul Dal Studio. Comfortable in low-light venues, fast-paced sets, behind-the-scenes moments. San Diego based.",
+    alternates: { canonical: "https://pauldalstudios.com/performances" },
     openGraph: {
       title: "Live Performance Photography — Paul Dal Studio",
       description:
@@ -29,6 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Paul Dal Studio",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Performance photography by Paul Dal Studio" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Live Performance Photography — Paul Dal Studio",
+      description:
+        "Concerts, worship nights, tours. Comfortable in low-light venues. San Diego based.",
+      images: [ogImage],
     },
   };
 }

@@ -76,7 +76,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-                I&apos;m Paul — a hybrid photographer and videographer based in
+                I&apos;m Paul, a hybrid photographer and videographer based in
                 San Diego, available anywhere in the world you need me.
               </p>
             </Reveal>
@@ -110,7 +110,7 @@ export default function AboutPage() {
                 <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
                   I was born in the Philippines and moved to the United States
                   when I was five. Growing up between two cultures taught me to
-                  notice details — how light fills a room differently depending
+                  notice details: how light fills a room differently depending
                   on where you are, how people carry themselves when they feel at
                   home.
                 </p>
@@ -119,7 +119,7 @@ export default function AboutPage() {
                 <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
                   I picked up a camera in 2019 and never put it down. What
                   started as documenting moments for friends turned into a
-                  discipline — learning to read light, anticipate movement, and
+                  discipline: learning to read light, anticipate movement, and
                   stay present when it matters.
                 </p>
               </Reveal>
@@ -148,14 +148,14 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <p className="mb-6 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
               For the last four years I&apos;ve served as the creative director
-              and videographer at my church — a community of ten thousand
+              and videographer at my church, a community of ten thousand
               members. I&apos;ve documented over two hundred events: services,
               conferences, worship nights, baptisms, outreach.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-              That work sharpened everything — speed, instinct, storytelling
+              That work sharpened everything: speed, instinct, storytelling
               under pressure. It also grounded me. My faith is central to how I
               see the world and the people in it. I bring that same attention to
               every project, whether it&apos;s a wedding, a brand shoot, or an
@@ -182,7 +182,7 @@ export default function AboutPage() {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="mb-8 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-                  Weddings, events, business, editorial — each category has its
+                  Weddings, events, business, editorial. Each category has its
                   own rhythm. I adapt my approach to fit the project, not the
                   other way around.
                 </p>

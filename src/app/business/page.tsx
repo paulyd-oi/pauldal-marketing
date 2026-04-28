@@ -73,7 +73,7 @@ const content: LandingPageContent = {
     eyebrow: "About this work",
     headline: "Brand photography is about consistency and speed.",
     paragraphs: [
-      "Founders, agencies, creator brands — modern business photography needs to keep up with how you actually work. I deliver polished imagery that reflects who you really are, not who a stock library thinks you should be.",
+      "Founders, agencies, creator brands. Modern business photography needs to keep up with how you actually work. I deliver polished imagery that reflects who you really are, not who a stock library thinks you should be.",
       "I shoot photo and video natively, on the same shoot, for one unified deliverable. Edited in 5–7 days. Optimized for web, social, press, and product launch.",
     ],
     photoCfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000",
@@ -129,7 +129,7 @@ const content: LandingPageContent = {
       {
         title: "On-location or in-studio",
         description:
-          "I'll shoot wherever the brand lives — your office, on-location, or in studio if you have access.",
+          "I'll shoot wherever the brand lives: your office, on-location, or in studio if you have access.",
       },
       {
         title: "Photo + video on the same shoot",
@@ -149,12 +149,12 @@ const content: LandingPageContent = {
       {
         title: "Full commercial usage rights",
         description:
-          "Use the work for marketing, ads, press, web, social — no licensing restrictions.",
+          "Use the work for marketing, ads, press, web, social. No licensing restrictions.",
       },
       {
         title: "Content subscription packages",
         description:
-          "For brands that need ongoing content — quarterly or monthly retainers available. Inquire for pricing.",
+          "For brands that need ongoing content. Quarterly or monthly retainers available. Inquire for pricing.",
       },
     ],
   },
@@ -190,7 +190,7 @@ const content: LandingPageContent = {
     {
       question: "Do you provide a commercial license?",
       answer:
-        "Yes. All business work includes a commercial usage license for owned channels — website, social, email, decks. Paid media usage is quoted separately.",
+        "Yes. All business work includes a commercial usage license for owned channels (website, social, email, decks). Paid media usage is quoted separately.",
     },
     {
       question: "Can you work from a brief or moodboard?",

@@ -37,7 +37,7 @@ export function AboutTeaser() {
             </Reveal>
             <Reveal delay={0.3}>
               <p className="mb-8 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-                I started shooting in 2019 — a kid from the Philippines who
+                I started shooting in 2019. A kid from the Philippines who
                 moved to the US at five, learned to see through a viewfinder
                 somewhere along the way. I serve as creative director at my
                 church, where I&apos;ve documented over 200 events for a

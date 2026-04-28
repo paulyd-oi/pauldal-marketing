@@ -34,7 +34,7 @@ const SERVICES = [
     id: "weddings",
     headline: "The day you'll want to remember in detail.",
     prose: [
-      "Weddings demand presence. I shoot in pairs when timeline allows — one photographer with you, one capturing the moments you're not in. The edit favors story over symmetry. You get the candid laughs and the quiet seconds, not just the posed lineups.",
+      "Weddings demand presence. I shoot in pairs when timeline allows. One photographer with you, one capturing the moments you're not in. The edit favors story over symmetry. You get the candid laughs and the quiet seconds, not just the posed lineups.",
     ],
     included: [
       "8–10 hours coverage",
@@ -87,7 +87,7 @@ const SERVICES = [
     id: "business",
     headline: "Brand work that doesn't look like stock.",
     prose: [
-      "Headshots, team portraits, product, content packs — business photography is about consistency and speed. I work with founders, agencies, and creator brands who need polished imagery that reflects how they actually look in real life.",
+      "Headshots, team portraits, product, content packs. Business photography is about consistency and speed. I work with founders, agencies, and creator brands who need polished imagery that reflects how they actually look in real life.",
     ],
     included: [
       "Half-day or full-day shoots",
@@ -130,7 +130,7 @@ const SERVICES = [
       "Post + delivery on agreed timeline",
     ],
     investment: [
-      "Project-based pricing — inquire with your brief for a tailored quote.",
+      "Project-based pricing. Inquire with your brief for a tailored quote.",
       "Half-day editorial from $1,800.",
       "Full-day editorial from $4,500+.",
     ],
@@ -183,7 +183,7 @@ export default function ServicesPage() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="max-w-xl font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-                Each project starts the same — listen, plan, shoot, deliver.
+                Each project starts the same: listen, plan, shoot, deliver.
                 Below is what&apos;s available.
               </p>
             </Reveal>
@@ -288,7 +288,7 @@ export default function ServicesPage() {
               {
                 num: "1",
                 title: "Reach out",
-                desc: "Tell me about your project — date, location, vision. I read every inquiry personally and respond within 24 hours.",
+                desc: "Tell me about your project: date, location, vision. I read every inquiry personally and respond within 24 hours.",
               },
               {
                 num: "2",

@@ -17,7 +17,7 @@ export const DEFAULT_ACCORDION_ITEMS: AccordionItem[] = [
   {
     title: "On-location coverage",
     description:
-      "I shoot in pairs when timeline allows — one with you, one capturing the moments you're not in. Backup gear always on hand.",
+      "I shoot in pairs when timeline allows. One with you, one capturing the moments you're not in. Backup gear always on hand.",
   },
   {
     title: "Editorial editing",
@@ -42,7 +42,7 @@ export const DEFAULT_ACCORDION_ITEMS: AccordionItem[] = [
   {
     title: "Print release",
     description:
-      "Full personal print release on all delivered images. Print, frame, share — no restrictions.",
+      "Full personal print release on all delivered images. Print, frame, share. No restrictions.",
   },
   {
     title: "Video options available",

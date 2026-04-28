@@ -73,7 +73,7 @@ const content: LandingPageContent = {
     eyebrow: "About this work",
     headline: "Event coverage means working fast and reading the energy.",
     paragraphs: [
-      "Whether it's a product launch, a milestone birthday, a non-profit gala, or a corporate offsite — event coverage is about being present without being seen. I deliver same-day teasers for social, full edits within a week.",
+      "Whether it's a product launch, a milestone birthday, a non-profit gala, or a corporate offsite, event coverage is about being present without being seen. I deliver same-day teasers for social, full edits within a week.",
       "I've documented over 200 events. I know how to find the moment, work fast, and not get in the way. Your event runs on its own energy. My job is to capture it without disrupting it.",
     ],
     photoCfImageId: "572fc2e5-5737-4841-7c9b-a717b6413500",
@@ -166,7 +166,7 @@ const content: LandingPageContent = {
   testimonial: {
     // TODO: replace with real testimonial when available
     quote:
-      "Paul was the calmest person at our event. He captured every speaker, every room, every detail — and we didn't see him work. The teaser images hit social the same night.",
+      "Paul was the calmest person at our event. He captured every speaker, every room, every detail, and we didn't see him work. The teaser images hit social the same night.",
     attribution: "A recent client",
     context: "Event organizer, San Diego",
   },

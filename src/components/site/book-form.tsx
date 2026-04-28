@@ -105,7 +105,7 @@ export function BookForm() {
       setState({
         status: "error",
         errorMessage:
-          "Connection issue — please check your internet and try again, or email pauljdal@gmail.com directly.",
+          "Connection issue. Please check your internet and try again, or email pauljdal@gmail.com directly.",
       });
     }
   }
@@ -122,7 +122,7 @@ export function BookForm() {
         <p className="mb-2 max-w-md font-body text-base leading-relaxed text-ink/85 lg:text-lg">
           I&apos;ll be in touch within 24 hours.
         </p>
-        <p className="mb-8 font-body text-base text-ink/70">— Paul</p>
+        <p className="mb-8 font-body text-base text-ink/70">Paul</p>
         <button
           onClick={() => {
             setProjectType("");
@@ -288,7 +288,7 @@ export function BookForm() {
           name="message"
           required
           rows={6}
-          placeholder="What are you planning? Dates, venues, vibe — anything you want to share."
+          placeholder="What are you planning? Dates, venues, vibe. Anything you want to share."
           className="w-full resize-y border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood focus:outline-none"
         />
         {state.fieldErrors?.message && (

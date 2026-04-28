@@ -73,7 +73,7 @@ const content: LandingPageContent = {
     eyebrow: "About this work",
     headline: "Weddings demand presence.",
     paragraphs: [
-      "I shoot in pairs when timeline allows — one photographer with you, one capturing the moments you're not in. The edit favors story over symmetry. You get the candid laughs and the quiet seconds, not just the posed lineups.",
+      "I shoot in pairs when timeline allows. One photographer with you, one capturing the moments you're not in. The edit favors story over symmetry. You get the candid laughs and the quiet seconds, not just the posed lineups.",
       "I've documented over 200 events for a community of ten thousand. The same eye that watches a quiet hand-hold during a vow goes into your day. Photography is how I pay attention.",
     ],
     photoCfImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",

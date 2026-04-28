@@ -68,7 +68,7 @@ const PROCESS_STEPS = [
   {
     num: "1",
     title: "Reach out",
-    desc: "Tell me about your project — date, location, vision. I read every inquiry personally and respond within 24 hours.",
+    desc: "Tell me about your project: date, location, vision. I read every inquiry personally and respond within 24 hours.",
   },
   {
     num: "2",
@@ -322,7 +322,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
       {/* FAQ — photo-flanked heading + accordion */}
       <PhotoFlankedHeading
         headline="BEFORE YOU BOOK, A FEW THINGS WORTH KNOWING."
-        body="The questions I get asked most. If yours isn't here, send it through the contact form — happy to walk through anything."
+        body="The questions I get asked most. If yours isn't here, send it through the contact form. Happy to walk through anything."
         imageId={content.faqHeadlineImageId}
         imageAlt="Paul Dal Studio behind the scenes"
         photoSide="right"

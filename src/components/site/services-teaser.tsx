@@ -43,7 +43,7 @@ export function ServicesTeaser() {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mb-8 font-body text-base leading-relaxed text-ink/85 lg:text-lg">
-                Each project starts the same — listen, plan, shoot, deliver.
+                Each project starts the same: listen, plan, shoot, deliver.
                 Below is what I&apos;m available for.
               </p>
             </Reveal>

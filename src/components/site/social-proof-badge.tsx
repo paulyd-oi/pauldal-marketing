@@ -6,9 +6,6 @@ export function SocialProofBadge() {
       <p className="font-body text-[11px] font-medium leading-tight text-ink lg:text-xs">
         200+ events documented
       </p>
-      <p className="font-body text-[11px] leading-tight text-ink/50 lg:text-xs">
-        since 2019
-      </p>
     </div>
   );
 }

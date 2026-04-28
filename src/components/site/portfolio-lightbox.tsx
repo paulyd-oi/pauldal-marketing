@@ -1,45 +1,29 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-
-interface Project {
-  title: string;
-  category: string;
-  cfImageId: string;
-}
-
-const CATEGORY_TO_SERVICE: Record<string, string> = {
-  Weddings: "weddings",
-  Events: "events",
-  Business: "business",
-  Editorial: "editorial",
-};
-
-function inquireHref(category: string) {
-  const service = CATEGORY_TO_SERVICE[category];
-  return service ? `/book?service=${service}` : "/book";
-}
+import type { PortfolioGallery } from "@/lib/portfolio-public";
 
 interface PortfolioLightboxProps {
-  projects: Project[];
-  selectedIndex: number | null;
+  gallery: PortfolioGallery | null;
+  photoIndex: number;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
 }
 
 export function PortfolioLightbox({
-  projects,
-  selectedIndex,
+  gallery,
+  photoIndex,
   onClose,
   onPrev,
   onNext,
 }: PortfolioLightboxProps) {
   const reduced = useReducedMotion();
+  const isOpen = gallery !== null;
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -51,7 +35,7 @@ export function PortfolioLightbox({
   );
 
   useEffect(() => {
-    if (selectedIndex !== null) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleKeyDown);
       return () => {
@@ -59,13 +43,14 @@ export function PortfolioLightbox({
         document.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, [selectedIndex, handleKeyDown]);
+  }, [isOpen, handleKeyDown]);
 
-  const project = selectedIndex !== null ? projects[selectedIndex] : null;
+  const photo = gallery ? gallery.photos[photoIndex] : null;
+  const totalPhotos = gallery?.photos.length ?? 0;
 
   return (
     <AnimatePresence>
-      {project && (
+      {gallery && photo && (
         <motion.div
           className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/95"
           initial={reduced ? false : { opacity: 0 }}
@@ -82,7 +67,7 @@ export function PortfolioLightbox({
             <X className="h-6 w-6" />
           </button>
 
-          {projects.length > 1 && (
+          {totalPhotos > 1 && (
             <>
               <button
                 onClick={(e) => {
@@ -108,13 +93,14 @@ export function PortfolioLightbox({
           )}
 
           <div
-            className="relative mx-16 max-h-[85vh] w-full max-w-5xl"
+            className="relative mx-16 flex max-h-[85vh] w-full max-w-5xl flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-[4/5] w-full">
+            <div className="relative h-[70vh] w-full">
               <Image
-                src={`https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/${project.cfImageId}/public`}
-                alt={project.title}
+                key={photo.id}
+                src={photo.url}
+                alt={photo.alt}
                 fill
                 sizes="90vw"
                 className="object-contain"
@@ -123,13 +109,13 @@ export function PortfolioLightbox({
             </div>
             <div className="mt-4 text-center">
               <p className="font-body text-xs uppercase tracking-widest text-paper/50">
-                {project.category}
+                {photoIndex + 1} / {totalPhotos}
               </p>
               <h3 className="mt-1 font-display text-xl text-paper">
-                {project.title}
+                {gallery.name}
               </h3>
               <Link
-                href={inquireHref(project.category)}
+                href="/book"
                 onClick={onClose}
                 className="focus-ring group mt-4 inline-flex items-center gap-2 font-body text-xs uppercase tracking-widest text-paper/70 transition-colors hover:text-oxblood"
               >

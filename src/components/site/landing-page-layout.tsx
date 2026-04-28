@@ -141,28 +141,35 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* Pricing summary */}
+      {/* Pricing summary — editorial list */}
       <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="grid grid-cols-1 gap-px bg-hairline md:grid-cols-3">
-            {content.pricingSummary.cards.map((card, i) => (
-              <Reveal key={card.label} delay={i * 0.08}>
-                <div className="bg-paper p-10 lg:p-12">
-                  <p className="mb-4 font-body text-xs uppercase tracking-widest text-ink/60">
-                    {card.label}
-                  </p>
-                  <p className="font-display text-4xl tracking-tight text-ink lg:text-5xl">
-                    {card.value}
-                  </p>
-                </div>
+          <div className="border-y border-hairline py-12 lg:py-16">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+              <Reveal>
+                <p className="font-body text-xs uppercase tracking-widest text-ink/60">
+                  Investment
+                </p>
               </Reveal>
-            ))}
+              <div className="max-w-2xl">
+                <ul className="space-y-3 lg:space-y-4">
+                  {content.pricingSummary.cards.map((card, i) => (
+                    <Reveal key={card.label} delay={i * 0.08}>
+                      <li className="flex flex-wrap items-baseline gap-x-4 font-display text-2xl leading-snug tracking-tight text-ink lg:text-3xl">
+                        <span className="text-ink/55">{card.label}</span>
+                        <span>{card.value}</span>
+                      </li>
+                    </Reveal>
+                  ))}
+                </ul>
+                <Reveal delay={0.3}>
+                  <p className="mt-8 font-body text-sm text-ink/60 lg:text-base">
+                    {content.pricingSummary.note}
+                  </p>
+                </Reveal>
+              </div>
+            </div>
           </div>
-          <Reveal delay={0.3}>
-            <p className="mt-10 font-body text-sm text-ink/60">
-              {content.pricingSummary.note}
-            </p>
-          </Reveal>
         </div>
       </section>
 

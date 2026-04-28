@@ -328,7 +328,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
 
       {/* FAQ — photo-flanked heading + accordion */}
       <PhotoFlankedHeading
-        headline="BEFORE YOU BOOK, A FEW THINGS WORTH KNOWING."
+        headline="Before you book, a few things worth knowing."
         body="The questions I get asked most. If yours isn't here, send it through the contact form. Happy to walk through anything."
         imageId={content.faqHeadlineImageId}
         imageAlt="Paul Dal Studio behind the scenes"

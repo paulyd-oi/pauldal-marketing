@@ -21,7 +21,7 @@ export function PhotoFlankedHeading({
 
   const textCol = (
     <div className="flex flex-col gap-y-8">
-      <h2 className="font-display text-4xl uppercase leading-[1.05] tracking-tight text-ink lg:text-6xl xl:text-7xl">
+      <h2 className="font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl xl:text-7xl">
         {headline}
       </h2>
       <p className="max-w-md font-body text-base text-ink/70">{body}</p>

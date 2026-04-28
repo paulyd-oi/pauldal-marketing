@@ -2,11 +2,13 @@
 
 export function SocialProofBadge() {
   return (
-    <div className="fixed bottom-6 left-6 z-40 hidden border border-hairline bg-paper px-4 py-3 transition-colors duration-200 hover:bg-cream-hover motion-reduce:transition-none lg:block">
-      <p className="font-body text-xs font-medium text-ink">
+    <div className="fixed bottom-4 left-4 z-40 border border-hairline bg-paper px-3 py-2 shadow-sm transition-colors duration-200 hover:bg-cream-hover motion-reduce:transition-none lg:bottom-6 lg:left-6 lg:px-4 lg:py-3 lg:shadow-none">
+      <p className="font-body text-[11px] font-medium leading-tight text-ink lg:text-xs">
         200+ events documented
       </p>
-      <p className="font-body text-xs text-ink/60">since 2019</p>
+      <p className="font-body text-[11px] leading-tight text-ink/60 lg:text-xs">
+        since 2019
+      </p>
     </div>
   );
 }

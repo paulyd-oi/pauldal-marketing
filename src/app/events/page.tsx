@@ -4,41 +4,22 @@ import {
   type LandingPageContent,
 } from "@/components/site/landing-page-layout";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
+import { buildCategoryPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const HERO_CF_ID = "54e26ae7-85be-4ca8-09f6-9953ab48bb00";
-const OG_IMAGE = `${CF}/${HERO_CF_ID}/public`;
 
-export const metadata: Metadata = {
-  title: "Event Photography San Diego — Paul Dal Studio",
-  description:
-    "Live event photography by Paul Dal Studio. Corporate events, milestone birthdays, non-profit galas, brand activations. Same-day teasers, editorial edit. San Diego.",
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  return buildCategoryPageMetadata({
+    category: "EVENT",
     title: "Event Photography San Diego — Paul Dal Studio",
     description:
-      "Live event photography. Corporate, milestone, non-profit, brand. Same-day teasers, editorial edit. San Diego based, available worldwide.",
-    url: "https://pauldalstudios.com/events",
-    siteName: "Paul Dal Studio",
-    type: "website",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Event photography by Paul Dal Studio in San Diego",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Event Photography San Diego — Paul Dal Studio",
-    description:
-      "Live event photography. Corporate, milestone, non-profit, brand. Same-day teasers, editorial edit.",
-    images: [OG_IMAGE],
-  },
-};
+      "Live event photography by Paul Dal Studio. Corporate events, milestone birthdays, non-profit galas, brand activations. Same-day teasers, editorial edit. San Diego.",
+    path: "/events",
+    ogImageAlt: "Event photography by Paul Dal Studio in San Diego",
+  });
+}
 
 const serviceJsonLd = {
   "@context": "https://schema.org",

@@ -4,41 +4,22 @@ import {
   type LandingPageContent,
 } from "@/components/site/landing-page-layout";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
+import { buildCategoryPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
-const OG_IMAGE = `${CF}/${HERO_CF_ID}/public`;
 
-export const metadata: Metadata = {
-  title: "Wedding Photography San Diego — Paul Dal Studio",
-  description:
-    "Editorial wedding photography and film by Paul Dal Studio. San Diego based, available worldwide. Two-shooter coverage, hand-edited galleries, story-first approach.",
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  return buildCategoryPageMetadata({
+    category: "WEDDING",
     title: "Wedding Photography San Diego — Paul Dal Studio",
     description:
-      "Editorial wedding photography and film. Two-shooter coverage, hand-edited galleries, story-first. San Diego based, available worldwide.",
-    url: "https://pauldalstudios.com/weddings",
-    siteName: "Paul Dal Studio",
-    type: "website",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Wedding photography by Paul Dal Studio in San Diego",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Wedding Photography San Diego — Paul Dal Studio",
-    description:
-      "Editorial wedding photography and film. Two-shooter coverage, hand-edited galleries, story-first.",
-    images: [OG_IMAGE],
-  },
-};
+      "Editorial wedding photography and film by Paul Dal Studio. San Diego based, available worldwide. Two-shooter coverage, hand-edited galleries, story-first approach.",
+    path: "/weddings",
+    ogImageAlt: "Wedding photography by Paul Dal Studio in San Diego",
+  });
+}
 
 const serviceJsonLd = {
   "@context": "https://schema.org",

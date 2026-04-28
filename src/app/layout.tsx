@@ -54,7 +54,7 @@ const jsonLd = {
   "@id": "https://pauldalstudios.com/#business",
   name: "Paul Dal Studios",
   description:
-    "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented since 2019. Available worldwide.",
+    "San Diego hybrid photographer and videographer. Weddings, events, brand content, editorial. 200+ events documented since 2019. Available worldwide.",
   url: "https://pauldalstudios.com",
   address: {
     "@type": "PostalAddress",
@@ -72,7 +72,7 @@ const jsonLd = {
     longitude: -117.1611,
   },
   sameAs: [
-    "https://instagram.com/pauldal",
+    "https://instagram.com/pauldalstudio",
     "https://www.linkedin.com/in/paul-dal-4571443b7/",
   ],
   founder: {

@@ -295,7 +295,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             headline="Before you book, a few things worth knowing."
             body="The questions I get asked most. If yours isn't here, send it through the contact form. Happy to walk through anything."
             imageId={content.faqHeadlineImageId}
-            imageAlt="Paul Dal Studio behind the scenes"
+            imageAlt="Paul Dal Studios behind the scenes"
             photoSide="right"
           />
           <FAQAccordion items={content.faqItems} />

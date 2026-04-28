@@ -7,22 +7,22 @@ const OG_IMAGE =
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "How Paul Dal Studio handles inquiry data. Plain language, no dark patterns.",
+    "How Paul Dal Studios handles inquiry data. Plain language, no dark patterns.",
   alternates: { canonical: "https://pauldalstudios.com/privacy" },
   openGraph: {
-    title: "Privacy — Paul Dal Studio",
+    title: "Privacy — Paul Dal Studios",
     description:
-      "How Paul Dal Studio handles inquiry data. Plain language, no dark patterns.",
+      "How Paul Dal Studios handles inquiry data. Plain language, no dark patterns.",
     url: "https://pauldalstudios.com/privacy",
-    siteName: "Paul Dal Studio",
+    siteName: "Paul Dal Studios",
     type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy — Paul Dal Studio",
+    title: "Privacy — Paul Dal Studios",
     description:
-      "How Paul Dal Studio handles inquiry data. Plain language, no dark patterns.",
+      "How Paul Dal Studios handles inquiry data. Plain language, no dark patterns.",
     images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },

@@ -7,22 +7,22 @@ const OG_IMAGE =
 export const metadata: Metadata = {
   title: "Terms",
   description:
-    "Plain-language terms for Paul Dal Studio. Booking, deposits, deliverables, copyright.",
+    "Plain-language terms for Paul Dal Studios. Booking, deposits, deliverables, copyright.",
   alternates: { canonical: "https://pauldalstudios.com/terms" },
   openGraph: {
-    title: "Terms — Paul Dal Studio",
+    title: "Terms — Paul Dal Studios",
     description:
-      "Plain-language terms for Paul Dal Studio. Booking, deposits, deliverables, copyright.",
+      "Plain-language terms for Paul Dal Studios. Booking, deposits, deliverables, copyright.",
     url: "https://pauldalstudios.com/terms",
-    siteName: "Paul Dal Studio",
+    siteName: "Paul Dal Studios",
     type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms — Paul Dal Studio",
+    title: "Terms — Paul Dal Studios",
     description:
-      "Plain-language terms for Paul Dal Studio. Booking, deposits, deliverables, copyright.",
+      "Plain-language terms for Paul Dal Studios. Booking, deposits, deliverables, copyright.",
     images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
@@ -66,7 +66,7 @@ export default function TermsPage() {
                   Scope of services
                 </h2>
                 <p>
-                  Paul Dal Studio offers photography and videography across
+                  Paul Dal Studios offers photography and videography across
                   weddings, events, business and editorial work. Hybrid photo
                   and video coverage is available on every package. Any project
                   outside these categories needs a custom scope agreed in
@@ -140,7 +140,7 @@ export default function TermsPage() {
                   Copyright and use
                 </h2>
                 <p>
-                  Paul Dal Studio retains the copyright to all images and video.
+                  Paul Dal Studios retains the copyright to all images and video.
                   Personal-use clients receive a personal print release covering
                   printing, sharing and posting. Business clients receive a
                   commercial usage license for owned channels. Paid media usage

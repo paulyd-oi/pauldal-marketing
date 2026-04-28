@@ -13,11 +13,11 @@ const HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
 export async function generateMetadata(): Promise<Metadata> {
   return buildCategoryPageMetadata({
     category: "WEDDING",
-    title: "Wedding Photography San Diego — Paul Dal Studio",
+    title: "Wedding Photography San Diego — Paul Dal Studios",
     description:
-      "Editorial wedding photography and film by Paul Dal Studio. San Diego based, available worldwide. Two-shooter coverage, hand-edited galleries, story-first approach.",
+      "Editorial wedding photography and film by Paul Dal Studios. San Diego based, available worldwide. Two-shooter coverage, hand-edited galleries, story-first approach.",
     path: "/weddings",
-    ogImageAlt: "Wedding photography by Paul Dal Studio in San Diego",
+    ogImageAlt: "Wedding photography by Paul Dal Studios in San Diego",
   });
 }
 
@@ -25,7 +25,7 @@ const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Wedding Photography",
-  provider: { "@type": "Organization", name: "Paul Dal Studio" },
+  provider: { "@type": "Organization", name: "Paul Dal Studios" },
   areaServed: "San Diego, CA + Worldwide",
   offers: {
     "@type": "Offer",
@@ -43,7 +43,7 @@ const content: LandingPageContent = {
     cta: { label: "Start your wedding inquiry", href: "/book?service=weddings" },
     photoCfImageId: HERO_CF_ID,
     photoAlt:
-      "Wedding photography by Paul Dal Studio — celebration captured in golden light, San Diego",
+      "Wedding photography by Paul Dal Studios — celebration captured in golden light, San Diego",
   },
   pricingSummary: {
     cards: [
@@ -61,7 +61,7 @@ const content: LandingPageContent = {
       "I've documented over 200 events for a community of ten thousand. The same eye that watches a quiet hand-hold during a vow goes into your day. Photography is how I pay attention.",
     ],
     photoCfImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
-    photoAlt: "Wedding portrait by Paul Dal Studio — Encinitas, San Diego",
+    photoAlt: "Wedding portrait by Paul Dal Studios — Encinitas, San Diego",
   },
   gallery: {
     eyebrow: "Selected work",
@@ -69,15 +69,15 @@ const content: LandingPageContent = {
     photos: [
       {
         cfImageId: "6c0df0fa-2eda-4511-b622-a532ab1ee000",
-        alt: "Wedding photography by Paul Dal Studio — La Jolla, San Diego",
+        alt: "Wedding photography by Paul Dal Studios — La Jolla, San Diego",
       },
       {
         cfImageId: "54e26ae7-85be-4ca8-09f6-9953ab48bb00",
-        alt: "Wedding ceremony coverage by Paul Dal Studio — San Diego",
+        alt: "Wedding ceremony coverage by Paul Dal Studios — San Diego",
       },
       {
         cfImageId: "9dab2548-7334-4c7a-5724-8b711931dd00",
-        alt: "Wedding moment captured by Paul Dal Studio — San Diego",
+        alt: "Wedding moment captured by Paul Dal Studios — San Diego",
       },
       {
         cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00",
@@ -85,11 +85,11 @@ const content: LandingPageContent = {
       },
       {
         cfImageId: "09079dde-3a23-4762-83e7-31fd9aab2600",
-        alt: "Wedding celebration by Paul Dal Studio — San Diego",
+        alt: "Wedding celebration by Paul Dal Studios — San Diego",
       },
       {
         cfImageId: "c677437a-cb68-4084-39f7-84ca10557700",
-        alt: "Wedding portrait session by Paul Dal Studio — San Diego",
+        alt: "Wedding portrait session by Paul Dal Studios — San Diego",
       },
     ],
     caption: "Sample work — replace with curated wedding portfolio",

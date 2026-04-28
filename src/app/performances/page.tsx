@@ -18,22 +18,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
   const ogImage = `${CF}/${heroCfId}/public`;
   return {
-    title: "Live Performance Photography San Diego — Paul Dal Studio",
+    title: "Live Performance Photography San Diego — Paul Dal Studios",
     description:
-      "Concert, worship night, tour photography by Paul Dal Studio. Comfortable in low-light venues, fast-paced sets, behind-the-scenes moments. San Diego based.",
+      "Concert, worship night, tour photography by Paul Dal Studios. Comfortable in low-light venues, fast-paced sets, behind-the-scenes moments. San Diego based.",
     alternates: { canonical: "https://pauldalstudios.com/performances" },
     openGraph: {
-      title: "Live Performance Photography — Paul Dal Studio",
+      title: "Live Performance Photography — Paul Dal Studios",
       description:
         "Concerts, worship nights, tours. Comfortable in low-light venues. San Diego based.",
       url: "https://pauldalstudios.com/performances",
-      siteName: "Paul Dal Studio",
+      siteName: "Paul Dal Studios",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: "Performance photography by Paul Dal Studio" }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "Performance photography by Paul Dal Studios" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Live Performance Photography — Paul Dal Studio",
+      title: "Live Performance Photography — Paul Dal Studios",
       description:
         "Concerts, worship nights, tours. Comfortable in low-light venues. San Diego based.",
       images: [ogImage],
@@ -48,7 +48,7 @@ export default async function PerformancesPage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
-  const heroAlt = latest?.coverAlt ?? "Paul Dal Studio";
+  const heroAlt = latest?.coverAlt ?? "Paul Dal Studios";
   const galleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,

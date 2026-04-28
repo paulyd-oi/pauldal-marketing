@@ -25,11 +25,11 @@ const NAV_ITEMS = [
 // the mosaic auto-rotates through real production galleries with
 // deterministic daily selection.
 const FALLBACK_PHOTOS = [
-  { id: "09079dde-3a23-4762-83e7-31fd9aab2600", alt: "Event coverage by Paul Dal Studio — Stone Brewery, San Diego" },
+  { id: "09079dde-3a23-4762-83e7-31fd9aab2600", alt: "Event coverage by Paul Dal Studios — Stone Brewery, San Diego" },
   { id: "271ed8b4-2732-4272-1a92-2a4b31f42b00", alt: "Wedding photography — Encinitas, San Diego" },
-  { id: "c677437a-cb68-4084-39f7-84ca10557700", alt: "Editorial studio session — Paul Dal Studio" },
+  { id: "c677437a-cb68-4084-39f7-84ca10557700", alt: "Editorial studio session — Paul Dal Studios" },
   { id: "572fc2e5-5737-4841-7c9b-a717b6413500", alt: "Corporate gala photography — Del Mar, San Diego" },
-  { id: "e491bf5a-ef22-4627-d5bf-450844197b00", alt: "Brand portraits — Founders Series, Paul Dal Studio" },
+  { id: "e491bf5a-ef22-4627-d5bf-450844197b00", alt: "Brand portraits — Founders Series, Paul Dal Studios" },
   { id: "6c0df0fa-2eda-4511-b622-a532ab1ee000", alt: "Wedding photography — La Jolla, San Diego" },
 ];
 
@@ -162,7 +162,7 @@ export async function Footer() {
       <div className="border-t border-paper/20 bg-ink px-6 py-4 text-paper/50">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-y-2 md:flex-row md:justify-between">
           <p className="text-xs">
-            &copy; 2026 Paul Dal Studio. All rights reserved.
+            &copy; 2026 Paul Dal Studios. All rights reserved.
           </p>
           <p className="text-xs uppercase tracking-widest">
             <Link

@@ -20,22 +20,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
   const ogImage = `${CF}/${heroCfId}/public`;
   return {
-    title: "Engagement Photography San Diego — Paul Dal Studio",
+    title: "Engagement Photography San Diego — Paul Dal Studios",
     description:
-      "Engagement photography by Paul Dal Studio. Coast, vineyard, or somewhere meaningful — find a setting that feels true to you. San Diego based, available worldwide.",
+      "Engagement photography by Paul Dal Studios. Coast, vineyard, or somewhere meaningful — find a setting that feels true to you. San Diego based, available worldwide.",
     alternates: { canonical: "https://pauldalstudios.com/engagements" },
     openGraph: {
-      title: "Engagement Photography San Diego — Paul Dal Studio",
+      title: "Engagement Photography San Diego — Paul Dal Studios",
       description:
         "Engagement sessions in settings that feel true to you. San Diego based, available worldwide.",
       url: "https://pauldalstudios.com/engagements",
-      siteName: "Paul Dal Studio",
+      siteName: "Paul Dal Studios",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: "Engagement photography by Paul Dal Studio" }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "Engagement photography by Paul Dal Studios" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Engagement Photography San Diego — Paul Dal Studio",
+      title: "Engagement Photography San Diego — Paul Dal Studios",
       description:
         "Engagement sessions in settings that feel true to you. San Diego based, available worldwide.",
       images: [ogImage],
@@ -50,7 +50,7 @@ export default async function EngagementsPage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
-  const heroAlt = latest?.coverAlt ?? "Paul Dal Studio";
+  const heroAlt = latest?.coverAlt ?? "Paul Dal Studios";
   const galleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,

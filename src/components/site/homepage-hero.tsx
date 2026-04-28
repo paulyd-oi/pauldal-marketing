@@ -48,7 +48,7 @@ export function HomepageHero({ heroGallery, gridGalleries }: Props) {
         >
           <div className="mx-auto w-full max-w-screen-2xl">
             <p className="mb-4 font-body text-xs uppercase tracking-widest text-paper/70 lg:text-sm">
-              Paul Dal Studio
+              Paul Dal Studios
             </p>
             <h1 className="max-w-4xl font-display text-5xl leading-[0.95] tracking-tight text-paper sm:text-6xl lg:text-8xl">
               Photography for the moments that matter.

@@ -24,12 +24,12 @@ const FALLBACK_HERO_CF_ID = "e491bf5a-ef22-4627-d5bf-450844197b00";
 // Curated fallback photo IDs preserved from the prior /business page —
 // used only if zero BRAND_CONTENT galleries are tagged on FRAME.
 const FALLBACK_GALLERY_PHOTOS = [
-  { cfImageId: "c677437a-cb68-4084-39f7-84ca10557700", alt: "Editorial brand portrait by Paul Dal Studio — studio session, San Diego" },
-  { cfImageId: "00a26873-4171-4b0c-f991-867f2f1c6700", alt: "Founder portrait by Paul Dal Studio — San Diego" },
-  { cfImageId: "e491bf5a-ef22-4627-d5bf-450844197b00", alt: "Brand portraits by Paul Dal Studio — Founders Series" },
-  { cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00", alt: "Editorial brand story by Paul Dal Studio — Pacific coast" },
-  { cfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000", alt: "Brand session by Paul Dal Studio — creative agency, San Diego" },
-  { cfImageId: "9dab2548-7334-4c7a-5724-8b711931dd00", alt: "Brand event coverage by Paul Dal Studio — San Diego" },
+  { cfImageId: "c677437a-cb68-4084-39f7-84ca10557700", alt: "Editorial brand portrait by Paul Dal Studios — studio session, San Diego" },
+  { cfImageId: "00a26873-4171-4b0c-f991-867f2f1c6700", alt: "Founder portrait by Paul Dal Studios — San Diego" },
+  { cfImageId: "e491bf5a-ef22-4627-d5bf-450844197b00", alt: "Brand portraits by Paul Dal Studios — Founders Series" },
+  { cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00", alt: "Editorial brand story by Paul Dal Studios — Pacific coast" },
+  { cfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000", alt: "Brand session by Paul Dal Studios — creative agency, San Diego" },
+  { cfImageId: "9dab2548-7334-4c7a-5724-8b711931dd00", alt: "Brand event coverage by Paul Dal Studios — San Diego" },
 ];
 
 export const revalidate = 60;
@@ -39,22 +39,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const heroCfId = latest?.coverCfImageId ?? FALLBACK_HERO_CF_ID;
   const ogImage = `${CF}/${heroCfId}/public`;
   return {
-    title: "Brand Photography San Diego — Paul Dal Studio",
+    title: "Brand Photography San Diego — Paul Dal Studios",
     description:
-      "Brand photography and video by Paul Dal Studio. Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands. San Diego based.",
+      "Brand photography and video by Paul Dal Studios. Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands. San Diego based.",
     alternates: { canonical: "https://pauldalstudios.com/brand-content" },
     openGraph: {
-      title: "Brand Photography San Diego — Paul Dal Studio",
+      title: "Brand Photography San Diego — Paul Dal Studios",
       description:
         "Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands. San Diego based.",
       url: "https://pauldalstudios.com/brand-content",
-      siteName: "Paul Dal Studio",
+      siteName: "Paul Dal Studios",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: "Brand photography by Paul Dal Studio in San Diego" }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "Brand photography by Paul Dal Studios in San Diego" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Brand Photography San Diego — Paul Dal Studio",
+      title: "Brand Photography San Diego — Paul Dal Studios",
       description:
         "Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands.",
       images: [ogImage],
@@ -66,7 +66,7 @@ const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Brand Photography",
-  provider: { "@type": "Organization", name: "Paul Dal Studio" },
+  provider: { "@type": "Organization", name: "Paul Dal Studios" },
   areaServed: "San Diego, CA + Worldwide",
   offers: {
     "@type": "Offer",
@@ -81,10 +81,10 @@ export default async function BrandContentPage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? FALLBACK_HERO_CF_ID;
-  const heroAlt = latest?.coverAlt ?? "Brand portrait photography by Paul Dal Studio — Founders Series, San Diego";
+  const heroAlt = latest?.coverAlt ?? "Brand portrait photography by Paul Dal Studios — Founders Series, San Diego";
   const second = all[1];
   const introCfId = second?.coverCfImageId ?? "20a2e733-d9c0-4341-ab70-37e68448b000";
-  const introAlt = second?.coverAlt ?? "Brand session by Paul Dal Studio — Creative agency, San Diego";
+  const introAlt = second?.coverAlt ?? "Brand session by Paul Dal Studios — Creative agency, San Diego";
   const faqCfId = latest?.coverCfImageId ?? "271ed8b4-2732-4272-1a92-2a4b31f42b00";
   const dynamicGalleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,

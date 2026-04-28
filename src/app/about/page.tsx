@@ -29,17 +29,17 @@ export const metadata: Metadata = {
     "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, 200+ events documented, editorial eye. Available worldwide.",
   alternates: { canonical: "https://pauldalstudios.com/about" },
   openGraph: {
-    title: "About — Paul Dal Studio",
+    title: "About — Paul Dal Studios",
     description:
       "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
     url: "https://pauldalstudios.com/about",
-    siteName: "Paul Dal Studio",
+    siteName: "Paul Dal Studios",
     type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About — Paul Dal Studio",
+    title: "About — Paul Dal Studios",
     description:
       "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
     images: [OG_IMAGE],
@@ -53,7 +53,7 @@ const personJsonLd = {
   jobTitle: "Photographer and Videographer",
   worksFor: {
     "@type": "Organization",
-    name: "Paul Dal Studio",
+    name: "Paul Dal Studios",
   },
   address: {
     "@type": "PostalAddress",

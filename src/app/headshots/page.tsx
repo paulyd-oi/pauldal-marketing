@@ -18,22 +18,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
   const ogImage = `${CF}/${heroCfId}/public`;
   return {
-    title: "Headshots & Personal Branding San Diego — Paul Dal Studio",
+    title: "Headshots & Personal Branding San Diego — Paul Dal Studios",
     description:
       "Professional headshots that look like you on your best day. LinkedIn portraits, personal branding shoots, polished web-ready files. San Diego based.",
     alternates: { canonical: "https://pauldalstudios.com/headshots" },
     openGraph: {
-      title: "Headshots & Personal Branding — Paul Dal Studio",
+      title: "Headshots & Personal Branding — Paul Dal Studios",
       description:
         "Professional headshots that look like you on your best day. San Diego based.",
       url: "https://pauldalstudios.com/headshots",
-      siteName: "Paul Dal Studio",
+      siteName: "Paul Dal Studios",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: "Headshot photography by Paul Dal Studio" }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "Headshot photography by Paul Dal Studios" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Headshots & Personal Branding — Paul Dal Studio",
+      title: "Headshots & Personal Branding — Paul Dal Studios",
       description:
         "Professional headshots that look like you on your best day. San Diego based.",
       images: [ogImage],
@@ -48,7 +48,7 @@ export default async function HeadshotsPage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
-  const heroAlt = latest?.coverAlt ?? "Paul Dal Studio";
+  const heroAlt = latest?.coverAlt ?? "Paul Dal Studios";
   const galleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,
@@ -57,7 +57,7 @@ export default async function HeadshotsPage() {
   const galleryDisplayPhotos =
     galleryPhotos.length > 0
       ? galleryPhotos
-      : [{ cfImageId: PLACEHOLDER_HERO_CF_ID, alt: "Paul Dal Studio" }];
+      : [{ cfImageId: PLACEHOLDER_HERO_CF_ID, alt: "Paul Dal Studios" }];
 
   const content: LandingPageContent = {
     hero: {

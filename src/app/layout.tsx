@@ -29,15 +29,15 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pauldalstudios.com"),
   title: {
-    default: "Paul Dal Studio — Photography is how I pay attention",
-    template: "%s — Paul Dal Studio",
+    default: "Paul Dal Studios — Photography is how I pay attention",
+    template: "%s — Paul Dal Studios",
   },
   description:
-    "Paul Dal Studio — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
+    "Paul Dal Studios — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Paul Dal Studio",
+    siteName: "Paul Dal Studios",
   },
   twitter: {
     card: "summary_large_image",
@@ -52,7 +52,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "PhotographyBusiness",
   "@id": "https://pauldalstudios.com/#business",
-  name: "Paul Dal Studio",
+  name: "Paul Dal Studios",
   description:
     "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented since 2019. Available worldwide.",
   url: "https://pauldalstudios.com",

@@ -72,7 +72,7 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
             href="/"
             className="focus-ring font-display text-lg tracking-tight text-ink lg:text-xl"
           >
-            Paul Dal Studio
+            Paul Dal Studios
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">

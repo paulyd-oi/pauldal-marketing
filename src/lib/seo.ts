@@ -4,14 +4,14 @@ import {
   type GalleryCategory,
 } from "./portfolio-public";
 
-const SITE_NAME = "Paul Dal Studio";
+const SITE_NAME = "Paul Dal Studios";
 const SITE_URL = "https://pauldalstudios.com";
 const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 
 type SeoArgs = {
   // Full display title — passed through verbatim. Existing operator copy
-  // already includes " — Paul Dal Studio" where wanted; don't double-append.
+  // already includes " — Paul Dal Studios" where wanted; don't double-append.
   title: string;
   description: string;
   // Page path, leading slash, no trailing slash for non-root: "/about"

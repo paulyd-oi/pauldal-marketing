@@ -19,22 +19,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
   const ogImage = `${CF}/${heroCfId}/public`;
   return {
-    title: "Family & Lifestyle Photography San Diego — Paul Dal Studio",
+    title: "Family & Lifestyle Photography San Diego — Paul Dal Studios",
     description:
       "Family sessions, lifestyle shoots, candid moments at home or in your favorite outdoor spots. Photography that captures who your family is right now.",
     alternates: { canonical: "https://pauldalstudios.com/family-lifestyle" },
     openGraph: {
-      title: "Family & Lifestyle Photography — Paul Dal Studio",
+      title: "Family & Lifestyle Photography — Paul Dal Studios",
       description:
         "Family sessions and lifestyle shoots that capture who your family is right now. San Diego based.",
       url: "https://pauldalstudios.com/family-lifestyle",
-      siteName: "Paul Dal Studio",
+      siteName: "Paul Dal Studios",
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: "Family & lifestyle photography by Paul Dal Studio" }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "Family & lifestyle photography by Paul Dal Studios" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Family & Lifestyle Photography — Paul Dal Studio",
+      title: "Family & Lifestyle Photography — Paul Dal Studios",
       description:
         "Family sessions and lifestyle shoots that capture who your family is right now. San Diego based.",
       images: [ogImage],
@@ -49,7 +49,7 @@ export default async function FamilyLifestylePage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
-  const heroAlt = latest?.coverAlt ?? "Paul Dal Studio";
+  const heroAlt = latest?.coverAlt ?? "Paul Dal Studios";
   const galleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,
@@ -61,7 +61,7 @@ export default async function FamilyLifestylePage() {
   const galleryDisplayPhotos =
     galleryPhotos.length > 0
       ? galleryPhotos
-      : [{ cfImageId: PLACEHOLDER_HERO_CF_ID, alt: "Paul Dal Studio" }];
+      : [{ cfImageId: PLACEHOLDER_HERO_CF_ID, alt: "Paul Dal Studios" }];
 
   const content: LandingPageContent = {
     hero: {

@@ -18,22 +18,22 @@ const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
 
 export const metadata: Metadata = {
-  title: "Paul Dal Studio — Photography is how I pay attention",
+  title: "Paul Dal Studios — Photography is how I pay attention",
   description:
-    "Paul Dal Studio — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
+    "Paul Dal Studios — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
   alternates: { canonical: "https://pauldalstudios.com" },
   openGraph: {
-    title: "Paul Dal Studio — Photography is how I pay attention",
+    title: "Paul Dal Studios — Photography is how I pay attention",
     description:
       "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
     url: "https://pauldalstudios.com",
-    siteName: "Paul Dal Studio",
+    siteName: "Paul Dal Studios",
     type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studio — San Diego hybrid photographer and videographer" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios — San Diego hybrid photographer and videographer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paul Dal Studio — Photography is how I pay attention",
+    title: "Paul Dal Studios — Photography is how I pay attention",
     description:
       "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
     images: [OG_IMAGE],
@@ -80,7 +80,7 @@ export default async function Home() {
         ctaLabel="See more work"
         ctaHref="/portfolio"
         imageId="09079dde-3a23-4762-83e7-31fd9aab2600"
-        imageAlt="Featured wedding documentary work by Paul Dal Studio"
+        imageAlt="Featured wedding documentary work by Paul Dal Studios"
         photoSide="right"
         panelVariant="ink"
       />

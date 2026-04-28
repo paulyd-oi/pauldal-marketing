@@ -13,11 +13,11 @@ const HERO_CF_ID = "54e26ae7-85be-4ca8-09f6-9953ab48bb00";
 export async function generateMetadata(): Promise<Metadata> {
   return buildCategoryPageMetadata({
     category: "EVENT",
-    title: "Event Photography San Diego — Paul Dal Studio",
+    title: "Event Photography San Diego — Paul Dal Studios",
     description:
-      "Live event photography by Paul Dal Studio. Corporate events, milestone birthdays, non-profit galas, brand activations. Same-day teasers, editorial edit. San Diego.",
+      "Live event photography by Paul Dal Studios. Corporate events, milestone birthdays, non-profit galas, brand activations. Same-day teasers, editorial edit. San Diego.",
     path: "/events",
-    ogImageAlt: "Event photography by Paul Dal Studio in San Diego",
+    ogImageAlt: "Event photography by Paul Dal Studios in San Diego",
   });
 }
 
@@ -25,7 +25,7 @@ const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Event Photography",
-  provider: { "@type": "Organization", name: "Paul Dal Studio" },
+  provider: { "@type": "Organization", name: "Paul Dal Studios" },
   areaServed: "San Diego, CA + Worldwide",
   offers: {
     "@type": "Offer",
@@ -43,7 +43,7 @@ const content: LandingPageContent = {
     cta: { label: "Start your event inquiry", href: "/book?service=events" },
     photoCfImageId: HERO_CF_ID,
     photoAlt:
-      "Event photography by Paul Dal Studio — live coverage in San Diego",
+      "Event photography by Paul Dal Studios — live coverage in San Diego",
   },
   pricingSummary: {
     cards: [
@@ -61,7 +61,7 @@ const content: LandingPageContent = {
       "I've documented over 200 events. I know how to find the moment, work fast, and not get in the way. Your event runs on its own energy. My job is to capture it without disrupting it.",
     ],
     photoCfImageId: "572fc2e5-5737-4841-7c9b-a717b6413500",
-    photoAlt: "Corporate gala photography by Paul Dal Studio — Del Mar, San Diego",
+    photoAlt: "Corporate gala photography by Paul Dal Studios — Del Mar, San Diego",
   },
   gallery: {
     eyebrow: "Selected work",
@@ -69,7 +69,7 @@ const content: LandingPageContent = {
     photos: [
       {
         cfImageId: "09079dde-3a23-4762-83e7-31fd9aab2600",
-        alt: "Event celebration photography by Paul Dal Studio — Stone Brewery, San Diego",
+        alt: "Event celebration photography by Paul Dal Studios — Stone Brewery, San Diego",
       },
       {
         cfImageId: "9dab2548-7334-4c7a-5724-8b711931dd00",
@@ -77,7 +77,7 @@ const content: LandingPageContent = {
       },
       {
         cfImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
-        alt: "Live event coverage by Paul Dal Studio — Encinitas, San Diego",
+        alt: "Live event coverage by Paul Dal Studios — Encinitas, San Diego",
       },
       {
         cfImageId: "6227ea99-0217-4ef4-35bc-247a9ee7cd00",
@@ -85,7 +85,7 @@ const content: LandingPageContent = {
       },
       {
         cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00",
-        alt: "Editorial event coverage by Paul Dal Studio — California",
+        alt: "Editorial event coverage by Paul Dal Studios — California",
       },
       {
         cfImageId: "572fc2e5-5737-4841-7c9b-a717b6413500",

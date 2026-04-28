@@ -35,7 +35,7 @@ export function Hero() {
         >
           <Image
             src={HERO_IMAGE_URL}
-            alt="Event photography by Paul Dal Studio — celebration at Stone Brewery, San Diego"
+            alt="Event photography by Paul Dal Studios — celebration at Stone Brewery, San Diego"
             fill
             priority
             sizes="100vw"
@@ -51,7 +51,7 @@ export function Hero() {
           className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70"
           {...(prefersReduced ? {} : fadeIn(0.2))}
         >
-          Paul Dal Studio
+          Paul Dal Studios
         </motion.p>
 
         <motion.h1

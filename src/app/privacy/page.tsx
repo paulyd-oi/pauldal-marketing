@@ -24,7 +24,7 @@ export default function PrivacyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-paper py-32 lg:py-48">
+      <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           <div className="max-w-3xl">
             <Reveal>

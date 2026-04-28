@@ -4,7 +4,7 @@ import { Reveal } from "./reveal";
 
 export function ClosingCTA() {
   return (
-    <section className="bg-ink py-32 lg:py-48">
+    <section className="bg-ink py-24 lg:py-32">
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
         <Reveal>
           <p className="mb-8 font-body text-xs uppercase tracking-widest text-paper/50">

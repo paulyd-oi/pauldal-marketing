@@ -42,7 +42,7 @@ export default function BookPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
-                <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-ink lg:text-7xl">
+                <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-ink lg:text-8xl">
                   Let&apos;s work together.
                 </h1>
               </Reveal>

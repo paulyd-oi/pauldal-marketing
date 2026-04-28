@@ -86,7 +86,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="max-w-4xl font-display text-5xl leading-[1.0] tracking-tight text-paper sm:text-6xl lg:text-8xl">
+            <h1 className="max-w-4xl font-display text-5xl leading-[0.95] tracking-tight text-paper sm:text-6xl lg:text-8xl">
               {content.hero.headline}
             </h1>
           </Reveal>
@@ -305,7 +305,7 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
       )}
 
       {/* Final CTA */}
-      <section className="bg-ink py-32 lg:py-48">
+      <section className="bg-ink py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
           <Reveal>
             <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-paper lg:text-6xl">

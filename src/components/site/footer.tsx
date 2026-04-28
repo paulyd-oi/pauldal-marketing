@@ -74,7 +74,7 @@ export function Footer() {
   return (
     <footer>
       {/* Section A — Photo + Wordmark Block */}
-      <div className="bg-ink px-6 py-16 text-paper lg:px-12 lg:py-20">
+      <div className="bg-ink px-6 py-16 text-paper lg:px-12 lg:py-24">
         <div className="mx-auto max-w-7xl">
           {/* Mobile: stack wordmark on top, then 6-photo grid */}
           <div className="md:hidden">

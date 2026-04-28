@@ -24,7 +24,7 @@ export function EditorialTestimonial({
   const subTextClass = isDark ? "text-paper/70" : "text-ink/70";
 
   return (
-    <section className={`${BG_CLASSES[bgVariant]} py-24 lg:py-40`}>
+    <section className={`${BG_CLASSES[bgVariant]} py-24 lg:py-32`}>
       <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
         <Reveal>
           <p

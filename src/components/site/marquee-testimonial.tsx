@@ -30,7 +30,7 @@ export function MarqueeTestimonial({
 
   return (
     <section
-      className={`relative overflow-hidden py-32 lg:py-48 ${BG_CLASSES[bgVariant]}`}
+      className={`relative overflow-hidden py-24 lg:py-32 ${BG_CLASSES[bgVariant]}`}
     >
       <style dangerouslySetInnerHTML={{ __html: MARQUEE_KEYFRAMES }} />
 

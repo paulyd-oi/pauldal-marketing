@@ -12,6 +12,12 @@ import { ProcessSteps } from "./process-steps";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
+// Required sections: hero, intro, gallery, finalCta — render on every
+// service page. Optional sections (marked ?:) are gated by `&&` guards in
+// the JSX below; pass undefined to hide them. Lets new categories ship
+// with curated depth that grows over time, while existing pages
+// (/weddings, /events, /business→/brand-content) pass every field and
+// render unchanged.
 export interface LandingPageContent {
   hero: {
     eyebrow: string;
@@ -21,7 +27,7 @@ export interface LandingPageContent {
     photoCfImageId: string;
     photoAlt: string;
   };
-  pricingSummary: {
+  pricingSummary?: {
     cards: { label: string; value: string }[];
     note: string;
   };
@@ -38,26 +44,26 @@ export interface LandingPageContent {
     photos: { cfImageId: string; alt: string }[];
     caption: string;
   };
-  accordion: {
+  accordion?: {
     eyebrow: string;
     headline: string;
     subhead: string;
     items: AccordionItem[];
   };
-  process: {
+  process?: {
     eyebrow: string;
     headline: string;
     subhead: string;
   };
-  testimonial: {
+  testimonial?: {
     quote: string;
     attribution: string;
     context?: string;
     bgVariant?: "paper" | "cream" | "ink";
   };
   testimonialVariant?: "editorial" | "marquee";
-  faqHeadlineImageId: string;
-  faqItems: { question: string; answer: string }[];
+  faqHeadlineImageId?: string;
+  faqItems?: { question: string; answer: string }[];
   finalCta: {
     headline: string;
     subhead: string;
@@ -109,37 +115,39 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* Pricing summary — editorial list */}
-      <section className="bg-paper py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="border-y border-hairline py-12 lg:py-16">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-              <Reveal>
-                <p className="font-body text-xs uppercase tracking-widest text-ink/50">
-                  Investment
-                </p>
-              </Reveal>
-              <div className="max-w-2xl">
-                <ul className="space-y-3 lg:space-y-4">
-                  {content.pricingSummary.cards.map((card, i) => (
-                    <Reveal key={card.label} delay={i * 0.08}>
-                      <li className="flex flex-wrap items-baseline gap-x-4 font-display text-2xl leading-snug tracking-tight text-ink lg:text-3xl">
-                        <span className="text-ink/50">{card.label}</span>
-                        <span>{card.value}</span>
-                      </li>
-                    </Reveal>
-                  ))}
-                </ul>
-                <Reveal delay={0.3}>
-                  <p className="mt-8 font-body text-sm text-ink/50 lg:text-base">
-                    {content.pricingSummary.note}
+      {/* Pricing summary — editorial list (optional) */}
+      {content.pricingSummary && (
+        <section className="bg-paper py-24 lg:py-32">
+          <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+            <div className="border-y border-hairline py-12 lg:py-16">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+                <Reveal>
+                  <p className="font-body text-xs uppercase tracking-widest text-ink/50">
+                    Investment
                   </p>
                 </Reveal>
+                <div className="max-w-2xl">
+                  <ul className="space-y-3 lg:space-y-4">
+                    {content.pricingSummary.cards.map((card, i) => (
+                      <Reveal key={card.label} delay={i * 0.08}>
+                        <li className="flex flex-wrap items-baseline gap-x-4 font-display text-2xl leading-snug tracking-tight text-ink lg:text-3xl">
+                          <span className="text-ink/50">{card.label}</span>
+                          <span>{card.value}</span>
+                        </li>
+                      </Reveal>
+                    ))}
+                  </ul>
+                  <Reveal delay={0.3}>
+                    <p className="mt-8 font-body text-sm text-ink/50 lg:text-base">
+                      {content.pricingSummary.note}
+                    </p>
+                  </Reveal>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Brand mark divider */}
       <SectionDivider />
@@ -225,84 +233,93 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* What's included accordion */}
-      <section className="bg-cream-hover py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="mb-16 max-w-2xl lg:mb-20">
-            <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
-                {content.accordion.eyebrow}
-              </p>
-            </Reveal>
+      {/* What's included accordion (optional) */}
+      {content.accordion && (
+        <section className="bg-cream-hover py-24 lg:py-32">
+          <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+            <div className="mb-16 max-w-2xl lg:mb-20">
+              <Reveal>
+                <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                  {content.accordion.eyebrow}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
+                  {content.accordion.headline}
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="font-body text-sm leading-relaxed text-ink/70">
+                  {content.accordion.subhead}
+                </p>
+              </Reveal>
+            </div>
             <Reveal delay={0.1}>
-              <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
-                {content.accordion.headline}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="font-body text-sm leading-relaxed text-ink/70">
-                {content.accordion.subhead}
-              </p>
+              <ServicesAccordion items={content.accordion.items} />
             </Reveal>
           </div>
-          <Reveal delay={0.1}>
-            <ServicesAccordion items={content.accordion.items} />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="bg-paper py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="mb-16 max-w-2xl lg:mb-20">
-            <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
-                {content.process.eyebrow}
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
-                {content.process.headline}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="font-body text-base leading-relaxed text-ink/70 lg:text-lg">
-                {content.process.subhead}
-              </p>
-            </Reveal>
-          </div>
-
-          <ProcessSteps />
-        </div>
-      </section>
-
-      {/* FAQ — photo-flanked heading + accordion */}
-      <PhotoFlankedHeading
-        headline="Before you book, a few things worth knowing."
-        body="The questions I get asked most. If yours isn't here, send it through the contact form. Happy to walk through anything."
-        imageId={content.faqHeadlineImageId}
-        imageAlt="Paul Dal Studio behind the scenes"
-        photoSide="right"
-      />
-      <FAQAccordion items={content.faqItems} />
-
-      {/* Testimonial — editorial pull-quote OR marquee variant */}
-      {content.testimonialVariant === "marquee" ? (
-        <MarqueeTestimonial
-          eyebrow={content.testimonial.attribution}
-          quote={content.testimonial.quote}
-          attribution={content.testimonial.context}
-          marqueeText="CLIENT LOVE"
-          bgVariant="ink"
-        />
-      ) : (
-        <EditorialTestimonial
-          quote={content.testimonial.quote}
-          attribution={content.testimonial.attribution}
-          context={content.testimonial.context}
-          bgVariant={content.testimonial.bgVariant ?? "cream"}
-        />
+        </section>
       )}
+
+      {/* How it works (optional) */}
+      {content.process && (
+        <section className="bg-paper py-24 lg:py-32">
+          <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+            <div className="mb-16 max-w-2xl lg:mb-20">
+              <Reveal>
+                <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/50">
+                  {content.process.eyebrow}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="mb-6 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
+                  {content.process.headline}
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="font-body text-base leading-relaxed text-ink/70 lg:text-lg">
+                  {content.process.subhead}
+                </p>
+              </Reveal>
+            </div>
+
+            <ProcessSteps />
+          </div>
+        </section>
+      )}
+
+      {/* FAQ — photo-flanked heading + accordion (optional, both must be set) */}
+      {content.faqHeadlineImageId && content.faqItems && (
+        <>
+          <PhotoFlankedHeading
+            headline="Before you book, a few things worth knowing."
+            body="The questions I get asked most. If yours isn't here, send it through the contact form. Happy to walk through anything."
+            imageId={content.faqHeadlineImageId}
+            imageAlt="Paul Dal Studio behind the scenes"
+            photoSide="right"
+          />
+          <FAQAccordion items={content.faqItems} />
+        </>
+      )}
+
+      {/* Testimonial — editorial pull-quote OR marquee variant (optional) */}
+      {content.testimonial &&
+        (content.testimonialVariant === "marquee" ? (
+          <MarqueeTestimonial
+            eyebrow={content.testimonial.attribution}
+            quote={content.testimonial.quote}
+            attribution={content.testimonial.context}
+            marqueeText="CLIENT LOVE"
+            bgVariant="ink"
+          />
+        ) : (
+          <EditorialTestimonial
+            quote={content.testimonial.quote}
+            attribution={content.testimonial.attribution}
+            context={content.testimonial.context}
+            bgVariant={content.testimonial.bgVariant ?? "cream"}
+          />
+        ))}
 
       {/* Final CTA */}
       <section className="bg-ink py-24 lg:py-32">

@@ -83,7 +83,7 @@ const PROCESS_STEPS = [
   {
     num: "4",
     title: "Lock the date",
-    desc: "Sign the contract, send a 30% deposit. Your date is yours.",
+    desc: "Sign the contract, send a 25% deposit. Your date is yours.",
   },
   {
     num: "5",

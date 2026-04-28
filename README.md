@@ -1,4 +1,4 @@
-# Paul Dal Studio — Marketing Site
+# Paul Dal Studios — Marketing Site
 
 Public-facing marketing site for [pauldalstudios.com](https://pauldalstudios.com). Built with the same design language as the FRAME admin app (app.pauldalstudios.com) — Fraunces + IBM Plex Sans typography, oxblood accent, editorial paper aesthetic.
 

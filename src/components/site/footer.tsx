@@ -102,7 +102,7 @@ export async function Footer() {
             <div className="flex flex-col items-center text-center">
               <BrandMark size="md" />
               <p className="mt-3 font-display text-3xl tracking-tight">
-                PAUL DAL STUDIO
+                PAUL DAL STUDIOS
               </p>
               <p className="mt-3 text-xs uppercase tracking-widest text-paper/70">
                 SAN DIEGO + BEYOND
@@ -132,7 +132,7 @@ export async function Footer() {
             <div className="flex flex-col items-center text-center">
               <BrandMark size="md" />
               <p className="mt-3 font-display text-3xl tracking-tight lg:text-4xl">
-                PAUL DAL STUDIO
+                PAUL DAL STUDIOS
               </p>
               <p className="mt-3 text-xs uppercase tracking-widest text-paper/70">
                 SAN DIEGO + BEYOND

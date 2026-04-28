@@ -50,7 +50,8 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "PhotographyBusiness",
+  "@id": "https://pauldalstudios.com/#business",
   name: "Paul Dal Studio",
   description:
     "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented since 2019. Available worldwide.",
@@ -65,6 +66,17 @@ const jsonLd = {
   priceRange: "$$",
   image:
     "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 32.7157,
+    longitude: -117.1611,
+  },
+  // TODO: operator follow-up — add LinkedIn URL once confirmed
+  // (uncomment the line below and replace <handle>):
+  // "https://www.linkedin.com/in/<paul-handle>/",
+  sameAs: [
+    "https://instagram.com/pauldal",
+  ],
   founder: {
     "@type": "Person",
     name: "Paul Dal",

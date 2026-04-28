@@ -1,8 +1,14 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function todayISODate() {
+  return new Date().toISOString().split("T")[0];
+}
 
 const API_BASE =
   process.env.NEXT_PUBLIC_FRAME_API_URL ?? "https://app.pauldalstudios.com";
@@ -36,15 +42,42 @@ export function BookForm() {
   const [state, setState] = useState<FormState>({ status: "idle" });
   const [projectType, setProjectType] = useState<string>(initialProjectType);
 
+  useEffect(() => {
+    if (state.status === "success" && typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [state.status]);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setState({ status: "submitting" });
 
     const fd = new FormData(e.currentTarget);
+    const clientErrors: Record<string, string> = {};
+
+    const email = (fd.get("email") as string)?.trim() ?? "";
+    if (!EMAIL_PATTERN.test(email)) {
+      clientErrors.email = "That doesn't look like a valid email.";
+    }
+
+    const eventDate = fd.get("eventDate") as string;
+    if (eventDate && eventDate < todayISODate()) {
+      clientErrors.eventDate = "Pick a date in the future.";
+    }
+
+    if (Object.keys(clientErrors).length > 0) {
+      setState({
+        status: "error",
+        errorMessage: "Please fix the highlighted fields.",
+        fieldErrors: clientErrors,
+      });
+      return;
+    }
+
+    setState({ status: "submitting" });
 
     const payload: Record<string, unknown> = {
       name: fd.get("name"),
-      email: fd.get("email"),
+      email,
       message: fd.get("message"),
     };
 
@@ -53,7 +86,6 @@ export function BookForm() {
 
     if (projectType) payload.projectType = projectType.toLowerCase();
 
-    const eventDate = fd.get("eventDate") as string;
     if (eventDate) payload.eventDate = new Date(eventDate).toISOString();
 
     const location = fd.get("location") as string;
@@ -176,10 +208,12 @@ export function BookForm() {
           name="email"
           type="email"
           required
+          aria-invalid={!!state.fieldErrors?.email}
+          aria-describedby={state.fieldErrors?.email ? "email-error" : undefined}
           className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
         {state.fieldErrors?.email && (
-          <p className="mt-2 font-body text-sm text-oxblood">
+          <p id="email-error" className="mt-2 font-body text-sm text-oxblood">
             {state.fieldErrors.email}
           </p>
         )}
@@ -262,8 +296,21 @@ export function BookForm() {
         <input
           name="eventDate"
           type="date"
+          min={todayISODate()}
+          aria-invalid={!!state.fieldErrors?.eventDate}
+          aria-describedby={
+            state.fieldErrors?.eventDate ? "eventDate-error" : undefined
+          }
           className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         />
+        {state.fieldErrors?.eventDate && (
+          <p
+            id="eventDate-error"
+            className="mt-2 font-body text-sm text-oxblood"
+          >
+            {state.fieldErrors.eventDate}
+          </p>
+        )}
       </label>
 
       {/* Location */}

@@ -306,23 +306,35 @@ export function BookForm() {
       )}
 
       {/* Submit */}
-      <button
-        type="submit"
-        disabled={state.status === "submitting"}
-        className="inline-flex w-full items-center justify-center bg-oxblood px-8 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
-      >
-        {state.status === "submitting" ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Sending...
-          </>
-        ) : (
-          <>
-            Send
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </>
-        )}
-      </button>
+      <div>
+        <button
+          type="submit"
+          disabled={state.status === "submitting"}
+          className="inline-flex w-full items-center justify-center bg-oxblood px-8 py-3.5 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
+        >
+          {state.status === "submitting" ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Sending...
+            </>
+          ) : (
+            <>
+              Send
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </>
+          )}
+        </button>
+        <p className="mt-3 font-body text-xs text-ink/50">
+          I&apos;ll only use these to reply to you. No newsletters.{" "}
+          <a
+            href="/privacy"
+            className="underline underline-offset-2 hover:text-oxblood"
+          >
+            Privacy
+          </a>
+          .
+        </p>
+      </div>
     </form>
   );
 }

@@ -37,7 +37,7 @@ export function AboutHeroCarousel({ covers }: Props) {
     <section className="bg-ink">
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex">
-          {covers.map((cover) => (
+          {covers.map((cover, i) => (
             <div
               key={cover.id}
               className="relative aspect-[16/9] flex-[0_0_100%] lg:aspect-[21/9]"
@@ -46,7 +46,9 @@ export function AboutHeroCarousel({ covers }: Props) {
                 src={cover.coverImageUrl}
                 alt={cover.coverAlt}
                 fill
-                priority
+                // Only the first slide gets priority — preloading every slide
+                // competes for bandwidth and pushes LCP past 2.5s on mobile.
+                priority={i === 0}
                 sizes="100vw"
                 className="object-cover"
               />

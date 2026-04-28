@@ -239,11 +239,14 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             ))}
           </div>
 
-          <Reveal delay={0.5}>
-            <p className="mt-8 font-body text-xs uppercase tracking-widest text-ink/40">
-              {content.gallery.caption}
-            </p>
-          </Reveal>
+          {content.gallery.caption &&
+            !/sample work|replace with curated/i.test(content.gallery.caption) && (
+              <Reveal delay={0.5}>
+                <p className="mt-8 font-body text-xs uppercase tracking-widest text-ink/40">
+                  {content.gallery.caption}
+                </p>
+              </Reveal>
+            )}
         </div>
       </section>
 

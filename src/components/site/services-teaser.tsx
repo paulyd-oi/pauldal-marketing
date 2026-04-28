@@ -7,7 +7,7 @@ import {
   CATEGORY_SLUGS,
   getCategoriesWithGalleries,
   getLatestGalleryByCategory,
-  type GalleryCategory,
+  type PublicGalleryCategory,
 } from "@/lib/portfolio-public";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
@@ -15,7 +15,7 @@ const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 // Per-category one-line descriptions. Render alongside the auto-pulled
 // cover photo. Fallback descriptions for categories that haven't been
 // curated yet (won't surface until those categories have galleries).
-const DESCRIPTIONS: Record<GalleryCategory, string> = {
+const DESCRIPTIONS: Record<PublicGalleryCategory, string> = {
   WEDDING: "Two-shooter coverage, day-of timeline, story-driven edit.",
   ENGAGEMENT: "Pre-wedding portraits in the places you already love.",
   MILESTONE_CELEBRATION:
@@ -41,8 +41,9 @@ export async function ServicesTeaser() {
         return { cat, latest };
       }),
     )
-  ).filter((d): d is { cat: GalleryCategory; latest: NonNullable<typeof d.latest> } =>
-    d.latest !== null,
+  ).filter(
+    (d): d is { cat: PublicGalleryCategory; latest: NonNullable<typeof d.latest> } =>
+      d.latest !== null,
   );
 
   if (cardData.length === 0) return null;

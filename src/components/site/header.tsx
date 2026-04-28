@@ -11,13 +11,13 @@ import {
   CATEGORY_LABELS,
   CATEGORY_SLUGS,
   getCategoriesWithGalleries,
-  type GalleryCategory,
+  type PublicGalleryCategory,
 } from "@/lib/portfolio-public";
 import { HeaderClient, type ServicesSublink } from "./header-client";
 import type { MobileMenuLink } from "./mobile-menu";
 
 export async function Header() {
-  const visibleCategories: GalleryCategory[] = await getCategoriesWithGalleries();
+  const visibleCategories: PublicGalleryCategory[] = await getCategoriesWithGalleries();
 
   const servicesSublinks: ServicesSublink[] = [
     { href: "/services", label: "Services overview" },

@@ -48,9 +48,10 @@ export async function PortfolioTeaser() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {projects.map((project, i) => {
-            const categoryLabel = project.category
-              ? CATEGORY_LABELS[project.category]
-              : "Recent work";
+            const categoryLabel =
+              project.category && project.category !== "PERSONAL"
+                ? CATEGORY_LABELS[project.category]
+                : "Recent work";
             const imageUrl = `${CF}/${project.coverCfImageId}/public`;
 
             return (

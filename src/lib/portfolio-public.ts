@@ -9,6 +9,13 @@ const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 // Vertical taxonomy. Mirrors FRAME's GalleryCategory enum exactly.
 // Adding values without matching FRAME enum changes produces orphan
 // labels; removing requires the FRAME-side rename-swap pattern.
+//
+// PERSONAL is intentionally NOT in CATEGORY_LABELS or CATEGORY_SLUGS.
+// PERSONAL galleries surface only on /about (hero + parallax beats) +
+// brand-content founder portrait + Schema.org Person.image. They must
+// never appear in the Services dropdown, sitemap, /portfolio, or footer
+// mosaic. The label/slug omission enforces this — getCategoriesWithGalleries()
+// returns CATEGORY_ORDER values only, and CATEGORY_ORDER does not include PERSONAL.
 export type GalleryCategory =
   | "WEDDING"
   | "ENGAGEMENT"
@@ -17,9 +24,16 @@ export type GalleryCategory =
   | "BRAND_CONTENT"
   | "EVENT"
   | "FAMILY_LIFESTYLE"
-  | "HEADSHOTS";
+  | "HEADSHOTS"
+  | "PERSONAL";
 
-export const CATEGORY_LABELS: Record<GalleryCategory, string> = {
+// Categories that surface on public marketing pages. PERSONAL is excluded
+// at the type level so any code path indexing CATEGORY_LABELS / CATEGORY_SLUGS
+// with PERSONAL fails tsc — enforces the "PERSONAL never on dropdown / sitemap
+// / portfolio / footer" invariant.
+export type PublicGalleryCategory = Exclude<GalleryCategory, "PERSONAL">;
+
+export const CATEGORY_LABELS: Record<PublicGalleryCategory, string> = {
   WEDDING: "Weddings",
   ENGAGEMENT: "Engagements",
   MILESTONE_CELEBRATION: "Milestone Celebrations",
@@ -30,7 +44,7 @@ export const CATEGORY_LABELS: Record<GalleryCategory, string> = {
   HEADSHOTS: "Headshots",
 };
 
-export const CATEGORY_SLUGS: Record<GalleryCategory, string> = {
+export const CATEGORY_SLUGS: Record<PublicGalleryCategory, string> = {
   WEDDING: "weddings",
   ENGAGEMENT: "engagements",
   MILESTONE_CELEBRATION: "milestones",
@@ -119,7 +133,13 @@ export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
     return [];
   }
 
-  const withCovers = data.galleries.filter((g) => g.coverPhoto !== null);
+  // Defensive: PERSONAL galleries are served from a separate endpoint
+  // (/api/public/personal-assets). If one ever leaks through the portfolio
+  // endpoint, drop it here so it never reaches /portfolio, sitemap, dropdown,
+  // or footer mosaic.
+  const withCovers = data.galleries.filter(
+    (g) => g.coverPhoto !== null && g.category !== "PERSONAL",
+  );
 
   withCovers.sort((a, b) => {
     if (a.publishedAt === null && b.publishedAt === null) return 0;
@@ -183,8 +203,9 @@ export async function getFeaturedHomepageGalleries(): Promise<PortfolioGallery[]
 // Distinct categories that currently have at least one gallery — used
 // for dynamic header dropdown visibility (Option C: hide empty
 // categories until first gallery is tagged). Order matches the canonical
-// taxonomy (not data order).
-const CATEGORY_ORDER: GalleryCategory[] = [
+// taxonomy (not data order). PERSONAL is intentionally absent — see the
+// type comment above.
+const CATEGORY_ORDER: PublicGalleryCategory[] = [
   "WEDDING",
   "ENGAGEMENT",
   "MILESTONE_CELEBRATION",
@@ -195,11 +216,11 @@ const CATEGORY_ORDER: GalleryCategory[] = [
   "HEADSHOTS",
 ];
 
-export async function getCategoriesWithGalleries(): Promise<GalleryCategory[]> {
+export async function getCategoriesWithGalleries(): Promise<PublicGalleryCategory[]> {
   const all = await getPortfolioGalleries();
-  const present = new Set<GalleryCategory>();
+  const present = new Set<PublicGalleryCategory>();
   for (const g of all) {
-    if (g.category) present.add(g.category);
+    if (g.category && g.category !== "PERSONAL") present.add(g.category);
   }
   return CATEGORY_ORDER.filter((c) => present.has(c));
 }

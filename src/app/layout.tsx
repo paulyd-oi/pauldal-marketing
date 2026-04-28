@@ -71,11 +71,9 @@ const jsonLd = {
     latitude: 32.7157,
     longitude: -117.1611,
   },
-  // TODO: operator follow-up — add LinkedIn URL once confirmed
-  // (uncomment the line below and replace <handle>):
-  // "https://www.linkedin.com/in/<paul-handle>/",
   sameAs: [
     "https://instagram.com/pauldal",
+    "https://www.linkedin.com/in/paul-dal-4571443b7/",
   ],
   founder: {
     "@type": "Person",

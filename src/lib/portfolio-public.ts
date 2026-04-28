@@ -6,6 +6,41 @@ const FRAME_API_BASE =
   process.env.NEXT_PUBLIC_FRAME_API_BASE ?? "https://app.pauldalstudios.com";
 const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
+// Vertical taxonomy. Mirrors FRAME's GalleryCategory enum exactly.
+// Adding values without matching FRAME enum changes produces orphan
+// labels; removing requires the FRAME-side rename-swap pattern.
+export type GalleryCategory =
+  | "WEDDING"
+  | "ENGAGEMENT"
+  | "MILESTONE_CELEBRATION"
+  | "PERFORMANCE"
+  | "BRAND_CONTENT"
+  | "EVENT"
+  | "FAMILY_LIFESTYLE"
+  | "HEADSHOTS";
+
+export const CATEGORY_LABELS: Record<GalleryCategory, string> = {
+  WEDDING: "Weddings",
+  ENGAGEMENT: "Engagements",
+  MILESTONE_CELEBRATION: "Milestone Celebrations",
+  PERFORMANCE: "Performances",
+  BRAND_CONTENT: "Brand Content",
+  EVENT: "Events",
+  FAMILY_LIFESTYLE: "Family / Lifestyle",
+  HEADSHOTS: "Headshots",
+};
+
+export const CATEGORY_SLUGS: Record<GalleryCategory, string> = {
+  WEDDING: "weddings",
+  ENGAGEMENT: "engagements",
+  MILESTONE_CELEBRATION: "milestones",
+  PERFORMANCE: "performances",
+  BRAND_CONTENT: "brand-content",
+  EVENT: "events",
+  FAMILY_LIFESTYLE: "family-lifestyle",
+  HEADSHOTS: "headshots",
+};
+
 // Response shape from FRAME (verified via curl 2026-04-28).
 type FramePortfolioPhoto = {
   id: string;
@@ -19,6 +54,8 @@ type FramePortfolioGallery = {
   id: string;
   name: string;
   publishedAt: string | null;
+  category: GalleryCategory | null;
+  featuredOnHomepage: boolean;
   coverPhoto: FramePortfolioPhoto | null;
   photos: FramePortfolioPhoto[];
   photoCount: number;
@@ -41,6 +78,8 @@ export type PortfolioGallery = {
   id: string;
   name: string;
   publishedAt: string | null;
+  category: GalleryCategory | null;
+  featuredOnHomepage: boolean;
   coverImageUrl: string;
   coverAlt: string;
   coverWidth: number;
@@ -94,6 +133,8 @@ export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
     id: g.id,
     name: g.name,
     publishedAt: g.publishedAt,
+    category: g.category ?? null,
+    featuredOnHomepage: g.featuredOnHomepage ?? false,
     coverImageUrl: cfUrl(g.coverPhoto!.cloudflareImageId),
     coverAlt: g.name,
     coverWidth: g.coverPhoto!.width,
@@ -107,4 +148,68 @@ export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
     })),
     photoCount: g.photoCount,
   }));
+}
+
+// Filter all galleries by category (preserves the createdAt-desc sort
+// from getPortfolioGalleries).
+export async function getGalleriesByCategory(
+  category: GalleryCategory,
+): Promise<PortfolioGallery[]> {
+  const all = await getPortfolioGalleries();
+  return all.filter((g) => g.category === category);
+}
+
+// Returns the most-recently-published gallery in a category, or null if
+// the category has zero galleries (e.g., FAMILY_LIFESTYLE / HEADSHOTS
+// before first tag).
+export async function getLatestGalleryByCategory(
+  category: GalleryCategory,
+): Promise<PortfolioGallery | null> {
+  const filtered = await getGalleriesByCategory(category);
+  return filtered[0] ?? null;
+}
+
+// Galleries flagged as homepage-hero candidates by the operator.
+// Falls back to all galleries when zero are flagged so the homepage
+// hero always has content (never blank).
+export async function getFeaturedHomepageGalleries(): Promise<PortfolioGallery[]> {
+  const all = await getPortfolioGalleries();
+  const featured = all.filter((g) => g.featuredOnHomepage);
+  return featured.length > 0 ? featured : all;
+}
+
+// Distinct categories that currently have at least one gallery — used
+// for dynamic header dropdown visibility (Option C: hide empty
+// categories until first gallery is tagged). Order matches the canonical
+// taxonomy (not data order).
+const CATEGORY_ORDER: GalleryCategory[] = [
+  "WEDDING",
+  "ENGAGEMENT",
+  "MILESTONE_CELEBRATION",
+  "PERFORMANCE",
+  "BRAND_CONTENT",
+  "EVENT",
+  "FAMILY_LIFESTYLE",
+  "HEADSHOTS",
+];
+
+export async function getCategoriesWithGalleries(): Promise<GalleryCategory[]> {
+  const all = await getPortfolioGalleries();
+  const present = new Set<GalleryCategory>();
+  for (const g of all) {
+    if (g.category) present.add(g.category);
+  }
+  return CATEGORY_ORDER.filter((c) => present.has(c));
+}
+
+// Deterministic daily rotation. dayOfYear is monotone-increasing within a
+// year and wraps at year boundary (Dec 31 → Jan 1 produces a different
+// index for non-empty arrays). Same input on the same UTC day always
+// returns the same item — caches and ISR play nicely.
+export function pickByDate<T>(items: T[]): T | null {
+  if (items.length === 0) return null;
+  const today = new Date();
+  const start = new Date(Date.UTC(today.getUTCFullYear(), 0, 0));
+  const dayOfYear = Math.floor((today.getTime() - start.getTime()) / 86_400_000);
+  return items[dayOfYear % items.length];
 }

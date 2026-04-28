@@ -13,59 +13,57 @@ import {
   CATEGORY_LABELS,
   getCategoriesWithGalleries,
   getLatestGalleryByCategory,
+  getPersonalPhotoByCfId,
 } from "@/lib/portfolio-public";
+import { ABOUT_PHOTO_IDS } from "@/lib/about-photos";
+import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const OG_IMAGE =
-  "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
-
-const PORTRAIT =
+// Static fallback used when the PERSONAL gallery is unreachable or the
+// expected CF ID isn't in the gallery.
+const FALLBACK_PORTRAIT_URL =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/00a26873-4171-4b0c-f991-867f2f1c6700/public";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, 200+ events documented, editorial eye. Available worldwide.",
-  alternates: { canonical: "https://pauldalstudios.com/about" },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
+  return buildMetadata({
     title: "About — Paul Dal Studios",
     description:
-      "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
-    url: "https://pauldalstudios.com/about",
-    siteName: "Paul Dal Studios",
-    type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About — Paul Dal Studios",
-    description:
-      "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, editorial eye. Available worldwide.",
-    images: [OG_IMAGE],
-  },
-};
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Paul Dal",
-  jobTitle: "Photographer and Videographer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Paul Dal Studios",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "San Diego",
-    addressRegion: "CA",
-    addressCountry: "US",
-  },
-  url: "https://pauldalstudios.com/about",
-  sameAs: ["https://instagram.com/pauldalstudio"],
-};
+      "Meet Paul Dal — San Diego hybrid photographer and videographer. Born in the Philippines, 200+ events documented, editorial eye. Available worldwide.",
+    path: "/about",
+    ogImage: heroPhoto?.url,
+    ogImageAlt: heroPhoto?.alt ?? "Paul Dal Studios — About",
+  });
+}
 
 export default async function AboutPage() {
+  const heroPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero);
+  const personPhoto = await getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage);
+  const portraitUrl = heroPhoto?.url ?? FALLBACK_PORTRAIT_URL;
+  const portraitAlt =
+    heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer";
+
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Paul Dal",
+    jobTitle: "Photographer and Videographer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Paul Dal Studios",
+    },
+    image: personPhoto?.url ?? undefined,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "San Diego",
+      addressRegion: "CA",
+      addressCountry: "US",
+    },
+    url: "https://pauldalstudios.com/about",
+    sameAs: ["https://instagram.com/pauldalstudio"],
+  };
+
   // Auto-rotating carousel of one cover per category. Categories with
   // zero galleries are filtered out (so empty FAMILY_LIFESTYLE /
   // HEADSHOTS don't surface placeholder slides). Renders nothing if
@@ -127,8 +125,8 @@ export default async function AboutPage() {
               <ParallaxPhoto>
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
                   <Image
-                    src={PORTRAIT}
-                    alt="Paul Dal — San Diego hybrid photographer and videographer"
+                    src={portraitUrl}
+                    alt={portraitAlt}
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"

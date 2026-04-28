@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
 
 const API_BASE =
@@ -14,6 +15,13 @@ const PROJECT_TYPES = [
   "Other",
 ] as const;
 
+const SERVICE_PARAM_TO_PROJECT_TYPE: Record<string, (typeof PROJECT_TYPES)[number]> = {
+  weddings: "Weddings",
+  events: "Events",
+  business: "Business",
+  editorial: "Editorial",
+};
+
 type FormState = {
   status: "idle" | "submitting" | "success" | "error";
   errorMessage?: string;
@@ -21,8 +29,12 @@ type FormState = {
 };
 
 export function BookForm() {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams?.get("service")?.toLowerCase() ?? "";
+  const initialProjectType = SERVICE_PARAM_TO_PROJECT_TYPE[serviceParam] ?? "";
+
   const [state, setState] = useState<FormState>({ status: "idle" });
-  const [projectType, setProjectType] = useState<string>("");
+  const [projectType, setProjectType] = useState<string>(initialProjectType);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

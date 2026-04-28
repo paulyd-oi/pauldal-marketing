@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Reveal } from "@/components/site/reveal";
 import { BookForm } from "@/components/site/book-form";
 
@@ -63,7 +64,9 @@ export default function BookPage() {
           {/* Right — form */}
           <div className="max-w-lg">
             <Reveal delay={0.2}>
-              <BookForm />
+              <Suspense fallback={null}>
+                <BookForm />
+              </Suspense>
             </Reveal>
           </div>
         </div>

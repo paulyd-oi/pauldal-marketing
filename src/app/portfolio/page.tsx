@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
+import { getPortfolioGalleries } from "@/lib/portfolio-public";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const OG_IMAGE = `${CF}/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public`;
@@ -29,56 +30,9 @@ export const metadata: Metadata = {
   },
 };
 
-// TODO: replace with curated portfolio entries — these are placeholders sourced from Haritha's gallery
-const PROJECTS = [
-  {
-    title: "Haritha's 40th — Stone Brewery",
-    category: "Events",
-    cfImageId: "09079dde-3a23-4762-83e7-31fd9aab2600",
-  },
-  {
-    title: "Anna & David — Encinitas",
-    category: "Weddings",
-    cfImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
-  },
-  {
-    title: "Studio sessions — Q1 2026",
-    category: "Editorial",
-    cfImageId: "c677437a-cb68-4084-39f7-84ca10557700",
-  },
-  {
-    title: "Corporate gala — Del Mar",
-    category: "Events",
-    cfImageId: "572fc2e5-5737-4841-7c9b-a717b6413500",
-  },
-  {
-    title: "Brand portraits — Founders Series",
-    category: "Business",
-    cfImageId: "e491bf5a-ef22-4627-d5bf-450844197b00",
-  },
-  {
-    title: "Wedding sample — La Jolla",
-    category: "Weddings",
-    cfImageId: "6c0df0fa-2eda-4511-b622-a532ab1ee000",
-  },
-  {
-    title: "Worship night — Spring 2026",
-    category: "Events",
-    cfImageId: "9dab2548-7334-4c7a-5724-8b711931dd00",
-  },
-  {
-    title: "Editorial story — Pacific coast",
-    category: "Editorial",
-    cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00",
-  },
-  {
-    title: "Brand session — Creative agency",
-    category: "Business",
-    cfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000",
-  },
-];
+export default async function PortfolioPage() {
+  const galleries = await getPortfolioGalleries();
 
-export default function PortfolioPage() {
   return (
     <>
       {/* Hero */}
@@ -105,10 +59,18 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Grid */}
+      {/* Grid or empty state */}
       <section className="bg-paper pb-24 lg:pb-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <PortfolioGrid projects={PROJECTS} />
+          {galleries.length === 0 ? (
+            <Reveal>
+              <p className="font-body text-base text-ink/70 lg:text-lg">
+                Recent work coming soon.
+              </p>
+            </Reveal>
+          ) : (
+            <PortfolioGrid galleries={galleries} />
+          )}
         </div>
       </section>
 

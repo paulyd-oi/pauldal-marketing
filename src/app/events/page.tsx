@@ -3,6 +3,9 @@ import {
   LandingPageLayout,
   type LandingPageContent,
 } from "@/components/site/landing-page-layout";
+import { getGalleriesByCategory } from "@/lib/portfolio-public";
+
+export const revalidate = 60;
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const HERO_CF_ID = "54e26ae7-85be-4ca8-09f6-9953ab48bb00";
@@ -210,14 +213,29 @@ const content: LandingPageContent = {
   },
 };
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  // Auto-pull gallery section from FRAME's EVENT category. Falls back to
+  // the curated hardcoded photos if zero event galleries are tagged.
+  const dynamicGalleries = await getGalleriesByCategory("EVENT");
+  const dynamicPhotos = dynamicGalleries.slice(0, 6).map((g) => ({
+    cfImageId: g.coverCfImageId,
+    alt: g.coverAlt,
+  }));
+  const finalContent: LandingPageContent = {
+    ...content,
+    gallery: {
+      ...content.gallery,
+      photos: dynamicPhotos.length > 0 ? dynamicPhotos : content.gallery.photos,
+    },
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <LandingPageLayout content={content} />
+      <LandingPageLayout content={finalContent} />
     </>
   );
 }

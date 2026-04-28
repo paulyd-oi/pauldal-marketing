@@ -80,6 +80,7 @@ export type PortfolioGallery = {
   publishedAt: string | null;
   category: GalleryCategory | null;
   featuredOnHomepage: boolean;
+  coverCfImageId: string;
   coverImageUrl: string;
   coverAlt: string;
   coverWidth: number;
@@ -135,6 +136,7 @@ export async function getPortfolioGalleries(): Promise<PortfolioGallery[]> {
     publishedAt: g.publishedAt,
     category: g.category ?? null,
     featuredOnHomepage: g.featuredOnHomepage ?? false,
+    coverCfImageId: g.coverPhoto!.cloudflareImageId,
     coverImageUrl: cfUrl(g.coverPhoto!.cloudflareImageId),
     coverAlt: g.name,
     coverWidth: g.coverPhoto!.width,

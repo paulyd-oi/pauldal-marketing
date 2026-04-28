@@ -3,6 +3,9 @@ import {
   LandingPageLayout,
   type LandingPageContent,
 } from "@/components/site/landing-page-layout";
+import { getGalleriesByCategory } from "@/lib/portfolio-public";
+
+export const revalidate = 60;
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
@@ -211,14 +214,31 @@ const content: LandingPageContent = {
   },
 };
 
-export default function WeddingsPage() {
+export default async function WeddingsPage() {
+  // Auto-pull gallery section from FRAME's WEDDING category. Falls back
+  // to the curated hardcoded photos in `content.gallery.photos` if zero
+  // wedding galleries are tagged on FRAME (preserves the page's prior
+  // visual fidelity).
+  const dynamicGalleries = await getGalleriesByCategory("WEDDING");
+  const dynamicPhotos = dynamicGalleries.slice(0, 6).map((g) => ({
+    cfImageId: g.coverCfImageId,
+    alt: g.coverAlt,
+  }));
+  const finalContent: LandingPageContent = {
+    ...content,
+    gallery: {
+      ...content.gallery,
+      photos: dynamicPhotos.length > 0 ? dynamicPhotos : content.gallery.photos,
+    },
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <LandingPageLayout content={content} />
+      <LandingPageLayout content={finalContent} />
     </>
   );
 }

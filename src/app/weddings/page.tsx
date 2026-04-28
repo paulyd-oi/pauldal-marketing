@@ -215,17 +215,33 @@ const content: LandingPageContent = {
 };
 
 export default async function WeddingsPage() {
-  // Auto-pull gallery section from FRAME's WEDDING category. Falls back
-  // to the curated hardcoded photos in `content.gallery.photos` if zero
-  // wedding galleries are tagged on FRAME (preserves the page's prior
-  // visual fidelity).
+  // Auto-pull hero, intro, FAQ headline and gallery photos from FRAME's
+  // WEDDING category. Each section uses a different gallery so visitors
+  // see varied work. Falls back to the curated hardcoded ids if zero
+  // wedding galleries are tagged on FRAME.
   const dynamicGalleries = await getGalleriesByCategory("WEDDING");
+  const latestGallery = dynamicGalleries[0];
+  const secondGallery = dynamicGalleries[1];
   const dynamicPhotos = dynamicGalleries.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,
   }));
+
   const finalContent: LandingPageContent = {
     ...content,
+    hero: {
+      ...content.hero,
+      photoCfImageId: latestGallery?.coverCfImageId ?? content.hero.photoCfImageId,
+      photoAlt: latestGallery?.coverAlt ?? content.hero.photoAlt,
+    },
+    intro: {
+      ...content.intro,
+      photoCfImageId:
+        secondGallery?.coverCfImageId ?? content.intro.photoCfImageId,
+      photoAlt: secondGallery?.coverAlt ?? content.intro.photoAlt,
+    },
+    faqHeadlineImageId:
+      latestGallery?.coverCfImageId ?? content.faqHeadlineImageId,
     gallery: {
       ...content.gallery,
       photos: dynamicPhotos.length > 0 ? dynamicPhotos : content.gallery.photos,

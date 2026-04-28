@@ -80,6 +80,11 @@ export default async function BrandContentPage() {
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? FALLBACK_HERO_CF_ID;
+  const heroAlt = latest?.coverAlt ?? "Brand portrait photography by Paul Dal Studio — Founders Series, San Diego";
+  const second = all[1];
+  const introCfId = second?.coverCfImageId ?? "20a2e733-d9c0-4341-ab70-37e68448b000";
+  const introAlt = second?.coverAlt ?? "Brand session by Paul Dal Studio — Creative agency, San Diego";
+  const faqCfId = latest?.coverCfImageId ?? "271ed8b4-2732-4272-1a92-2a4b31f42b00";
   const dynamicGalleryPhotos = all.slice(0, 6).map((g) => ({
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,
@@ -95,7 +100,7 @@ export default async function BrandContentPage() {
         "Headshots, brand sessions, content packs, hybrid photo + video. For founders, agencies, and creator brands.",
       cta: { label: "Start your brand inquiry", href: "/book?service=brand-content" },
       photoCfImageId: heroCfId,
-      photoAlt: latest?.coverAlt ?? "Brand portrait photography by Paul Dal Studio — Founders Series, San Diego",
+      photoAlt: heroAlt,
     },
     pricingSummary: {
       cards: [
@@ -112,8 +117,8 @@ export default async function BrandContentPage() {
         "Founders, agencies, creator brands. Modern business photography needs to keep up with how you actually work. I deliver polished imagery that reflects who you really are, not who a stock library thinks you should be.",
         "I shoot photo and video natively, on the same shoot, for one unified deliverable. Edited in 5–7 days. Optimized for web, social, press, and product launch.",
       ],
-      photoCfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000",
-      photoAlt: "Brand session by Paul Dal Studio — Creative agency, San Diego",
+      photoCfImageId: introCfId,
+      photoAlt: introAlt,
     },
     gallery: {
       eyebrow: "Selected work",
@@ -148,7 +153,7 @@ export default async function BrandContentPage() {
       attribution: "A recent client",
       context: "Founder, San Diego SaaS company",
     },
-    faqHeadlineImageId: "271ed8b4-2732-4272-1a92-2a4b31f42b00",
+    faqHeadlineImageId: faqCfId,
     faqItems: [
       { question: "What's included in a brand shoot?", answer: "On-location coverage, art-directed setups based on the brief, full editorial editing, online gallery delivery, and a commercial usage license for your owned channels." },
       { question: "How long until we get the deliverables?", answer: "Edited photo galleries deliver in two to three weeks. Brand video edits deliver in four to six weeks. Quick-turn social cuts available as an add-on." },

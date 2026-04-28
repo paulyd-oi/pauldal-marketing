@@ -3,26 +3,29 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
 
-// TODO: replace with curated portfolio entries — these are placeholders sourced from Haritha's gallery
+// TODO: replace with curated portfolio entries — these are placeholders.
+// Category labels match the vertical taxonomy (sync'd with FRAME's
+// GalleryCategory enum). Future sprint: pull dynamically from FRAME's
+// /api/public/portfolio so categories stay in lockstep automatically.
 const PROJECTS = [
   {
     slug: "haritha-40th",
     title: "Haritha’s 40th — Stone Brewery",
-    category: "Events",
+    category: "Milestone Celebration",
     imageUrl:
       "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/09079dde-3a23-4762-83e7-31fd9aab2600/public",
   },
   {
     slug: "anna-david",
     title: "Anna & David — Encinitas",
-    category: "Weddings",
+    category: "Wedding",
     imageUrl:
       "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/271ed8b4-2732-4272-1a92-2a4b31f42b00/public",
   },
   {
     slug: "studio-q1-2026",
     title: "Studio sessions — Q1 2026",
-    category: "Editorial",
+    category: "Brand Content",
     imageUrl:
       "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/c677437a-cb68-4084-39f7-84ca10557700/public",
   },

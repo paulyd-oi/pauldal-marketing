@@ -8,11 +8,19 @@ import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./mobile-menu";
 
+// Services taxonomy synced with FRAME's GalleryCategory enum
+// (vertical taxonomy sprint, April 2026). Adding/removing here should
+// be paired with the matching enum change in FRAME's prisma/schema.prisma.
+// Service detail pages (/weddings, /engagements, etc.) are built in a
+// separate sprint — links may 404 until then.
 const SERVICES_SUBLINKS = [
   { href: "/services", label: "Services overview" },
   { href: "/weddings", label: "Weddings" },
+  { href: "/engagements", label: "Engagements" },
+  { href: "/milestones", label: "Milestone Celebrations" },
+  { href: "/performances", label: "Performances" },
+  { href: "/brand-content", label: "Brand Content" },
   { href: "/events", label: "Events" },
-  { href: "/business", label: "Business" },
 ];
 
 const SERVICES_PATHS = SERVICES_SUBLINKS.map((s) => s.href);

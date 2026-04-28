@@ -2,6 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
 
+// Synced with FRAME GalleryCategory taxonomy + header services dropdown.
+// Six verticals; descriptions are placeholder copy refined per service
+// detail page in the follow-up sprint.
 const SERVICES = [
   {
     slug: "weddings",
@@ -9,19 +12,29 @@ const SERVICES = [
     description: "Two-shooter coverage, day-of timeline, story-driven edit.",
   },
   {
-    slug: "events",
-    name: "Events",
-    description: "Live coverage with same-day teaser delivery for social.",
+    slug: "engagements",
+    name: "Engagements",
+    description: "Pre-wedding portraits in the places you already love.",
   },
   {
-    slug: "business",
-    name: "Business",
+    slug: "milestones",
+    name: "Milestone Celebrations",
+    description: "Quinceañeras, birthdays, anniversaries — once-in-a-lifetime moments.",
+  },
+  {
+    slug: "performances",
+    name: "Performances",
+    description: "Worship nights, concerts, tours — high-energy live coverage.",
+  },
+  {
+    slug: "brand-content",
+    name: "Brand Content",
     description: "Brand portraits, product, and content packs for teams.",
   },
   {
-    slug: "editorial",
-    name: "Editorial",
-    description: "Creative direction and crafted imagery for stories.",
+    slug: "events",
+    name: "Events",
+    description: "Live coverage with same-day teaser delivery for social.",
   },
 ];
 
@@ -38,7 +51,7 @@ export function ServicesTeaser() {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="mb-8 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
-                Four ways I work.
+                Six ways I work.
               </h2>
             </Reveal>
             <Reveal delay={0.2}>

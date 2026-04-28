@@ -7,12 +7,17 @@ import { useEffect, useCallback, useRef } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Mirrors SERVICES_SUBLINKS in header.tsx — indented entries are the
+// vertical taxonomy categories (synced with FRAME GalleryCategory).
 const MENU_LINKS = [
   { href: "/about", label: "About", indent: false },
   { href: "/services", label: "Services", indent: false },
   { href: "/weddings", label: "Weddings", indent: true },
+  { href: "/engagements", label: "Engagements", indent: true },
+  { href: "/milestones", label: "Milestone Celebrations", indent: true },
+  { href: "/performances", label: "Performances", indent: true },
+  { href: "/brand-content", label: "Brand Content", indent: true },
   { href: "/events", label: "Events", indent: true },
-  { href: "/business", label: "Business", indent: true },
   { href: "/portfolio", label: "Portfolio", indent: false },
   { href: "/book", label: "Book", indent: false },
 ];

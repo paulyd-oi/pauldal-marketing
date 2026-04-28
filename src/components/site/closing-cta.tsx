@@ -1,25 +1,8 @@
-"use client";
-
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
 
-const SERVICES = ["weddings", "events", "business", "editorial"];
-
 export function ClosingCTA() {
-  const [index, setIndex] = useState(0);
-  const reduced = useReducedMotion();
-
-  useEffect(() => {
-    if (reduced) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SERVICES.length);
-    }, 2400);
-    return () => clearInterval(id);
-  }, [reduced]);
-
   return (
     <section className="bg-ink py-32 lg:py-48">
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
@@ -35,23 +18,11 @@ export function ClosingCTA() {
           </h2>
         </Reveal>
 
-        <div className="mb-12 flex h-7 items-center justify-center font-body text-base text-paper/70 lg:mb-16 lg:h-8 lg:text-lg">
-          {reduced ? (
-            <span>weddings · events · business · editorial</span>
-          ) : (
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={SERVICES[index]}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {SERVICES[index]}
-              </motion.span>
-            </AnimatePresence>
-          )}
-        </div>
+        <Reveal delay={0.2}>
+          <p className="mb-12 font-body text-base text-paper/70 lg:mb-16 lg:text-lg">
+            weddings · events · business · editorial
+          </p>
+        </Reveal>
 
         <Reveal delay={0.3}>
           <Link

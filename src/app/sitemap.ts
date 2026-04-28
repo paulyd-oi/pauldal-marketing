@@ -1,22 +1,36 @@
 import type { MetadataRoute } from "next";
+import {
+  getCategoriesWithGalleries,
+  CATEGORY_SLUGS,
+} from "@/lib/portfolio-public";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://pauldalstudios.com";
-  const now = new Date();
+const BASE_URL = "https://pauldalstudios.com";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const lastModified = new Date();
+
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/about`, priority: 0.7, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/portfolio`, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/services`, priority: 0.7, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/book`, priority: 0.8, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/privacy`, priority: 0.3, changeFrequency: "yearly" },
+    { url: `${BASE_URL}/terms`, priority: 0.3, changeFrequency: "yearly" },
+  ];
+
+  // Dynamic service pages — match dropdown visibility logic so categories
+  // without any tagged galleries (FAMILY_LIFESTYLE, HEADSHOTS pre-launch)
+  // stay out of the sitemap until they have content.
+  const visibleCategories = await getCategoriesWithGalleries();
+  const servicePages: MetadataRoute.Sitemap = visibleCategories.map((cat) => ({
+    url: `${BASE_URL}/${CATEGORY_SLUGS[cat]}`,
+    priority: 0.8,
+    changeFrequency: "weekly",
+  }));
 
   return [
-    { url: base, lastModified: now, priority: 1.0 },
-    { url: `${base}/about`, lastModified: now, priority: 0.8 },
-    { url: `${base}/services`, lastModified: now, priority: 0.8 },
-    { url: `${base}/weddings`, lastModified: now, priority: 0.9 },
-    { url: `${base}/engagements`, lastModified: now, priority: 0.85 },
-    { url: `${base}/milestones`, lastModified: now, priority: 0.85 },
-    { url: `${base}/performances`, lastModified: now, priority: 0.85 },
-    { url: `${base}/brand-content`, lastModified: now, priority: 0.85 },
-    { url: `${base}/events`, lastModified: now, priority: 0.85 },
-    { url: `${base}/family-lifestyle`, lastModified: now, priority: 0.8 },
-    { url: `${base}/headshots`, lastModified: now, priority: 0.8 },
-    { url: `${base}/portfolio`, lastModified: now, priority: 0.7 },
-    { url: `${base}/book`, lastModified: now, priority: 0.9 },
+    ...staticPages.map((p) => ({ ...p, lastModified })),
+    ...servicePages.map((p) => ({ ...p, lastModified })),
   ];
 }

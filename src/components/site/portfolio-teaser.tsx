@@ -2,36 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./reveal";
+import {
+  getPortfolioGalleries,
+  CATEGORY_LABELS,
+} from "@/lib/portfolio-public";
 
-// TODO: replace with curated portfolio entries — these are placeholders.
-// Category labels match the vertical taxonomy (sync'd with FRAME's
-// GalleryCategory enum). Future sprint: pull dynamically from FRAME's
-// /api/public/portfolio so categories stay in lockstep automatically.
-const PROJECTS = [
-  {
-    slug: "haritha-40th",
-    title: "Haritha’s 40th — Stone Brewery",
-    category: "Milestone Celebration",
-    imageUrl:
-      "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/09079dde-3a23-4762-83e7-31fd9aab2600/public",
-  },
-  {
-    slug: "anna-david",
-    title: "Anna & David — Encinitas",
-    category: "Wedding",
-    imageUrl:
-      "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/271ed8b4-2732-4272-1a92-2a4b31f42b00/public",
-  },
-  {
-    slug: "studio-q1-2026",
-    title: "Studio sessions — Q1 2026",
-    category: "Brand Content",
-    imageUrl:
-      "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/c677437a-cb68-4084-39f7-84ca10557700/public",
-  },
-];
+const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
-export function PortfolioTeaser() {
+export async function PortfolioTeaser() {
+  const all = await getPortfolioGalleries();
+  const projects = all.slice(0, 3);
+
+  if (projects.length === 0) {
+    return null;
+  }
+
   return (
     <section className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
@@ -62,38 +47,45 @@ export function PortfolioTeaser() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-          {PROJECTS.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 0.1}>
-              <Link href="/portfolio" className="focus-ring group block">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 hidden bg-gradient-to-t from-ink/70 via-ink/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:block" />
-                  <div className="absolute bottom-0 left-0 right-0 hidden p-6 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100 lg:block">
-                    <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/70">
-                      {project.category}
+          {projects.map((project, i) => {
+            const categoryLabel = project.category
+              ? CATEGORY_LABELS[project.category]
+              : "Recent work";
+            const imageUrl = `${CF}/${project.coverCfImageId}/public`;
+
+            return (
+              <Reveal key={project.id} delay={i * 0.1}>
+                <Link href="/portfolio" className="focus-ring group block">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
+                    <Image
+                      src={imageUrl}
+                      alt={project.coverAlt || project.name}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 hidden bg-gradient-to-t from-ink/70 via-ink/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:block" />
+                    <div className="absolute bottom-0 left-0 right-0 hidden p-6 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100 lg:block">
+                      <p className="mb-2 font-body text-xs uppercase tracking-widest text-paper/70">
+                        {categoryLabel}
+                      </p>
+                      <h3 className="font-display text-2xl leading-tight text-paper">
+                        {project.name}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="mt-4 lg:hidden">
+                    <p className="mb-2 font-body text-xs uppercase tracking-widest text-muted-foreground">
+                      {categoryLabel}
                     </p>
-                    <h3 className="font-display text-2xl leading-tight text-paper">
-                      {project.title}
+                    <h3 className="font-display text-2xl leading-tight text-ink">
+                      {project.name}
                     </h3>
                   </div>
-                </div>
-                <div className="mt-4 lg:hidden">
-                  <p className="mb-2 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                    {project.category}
-                  </p>
-                  <h3 className="font-display text-2xl leading-tight text-ink">
-                    {project.title}
-                  </h3>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+                </Link>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -16,16 +16,26 @@ import {
 import {
   getGalleriesByCategory,
   getLatestGalleryByCategory,
+  getPersonalPhotoByCfId,
 } from "@/lib/portfolio-public";
+import { ABOUT_PHOTO_IDS } from "@/lib/about-photos";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const FALLBACK_HERO_CF_ID = "e491bf5a-ef22-4627-d5bf-450844197b00";
 
 // Curated fallback photo IDs preserved from the prior /business page —
-// used only if zero BRAND_CONTENT galleries are tagged on FRAME.
-const FALLBACK_GALLERY_PHOTOS = [
+// used only if zero BRAND_CONTENT galleries are tagged on FRAME. The
+// founder portrait entry (index 1) is sourced from the PERSONAL gallery
+// at render time; this hardcoded entry is the ultimate fallback when
+// the PERSONAL endpoint is also unreachable.
+const FALLBACK_FOUNDER_PORTRAIT = {
+  cfImageId: "00a26873-4171-4b0c-f991-867f2f1c6700",
+  alt: "Founder portrait by Paul Dal Studios — San Diego",
+};
+
+const FALLBACK_GALLERY_PHOTOS_BASE = [
   { cfImageId: "c677437a-cb68-4084-39f7-84ca10557700", alt: "Editorial brand portrait by Paul Dal Studios — studio session, San Diego" },
-  { cfImageId: "00a26873-4171-4b0c-f991-867f2f1c6700", alt: "Founder portrait by Paul Dal Studios — San Diego" },
+  FALLBACK_FOUNDER_PORTRAIT,
   { cfImageId: "e491bf5a-ef22-4627-d5bf-450844197b00", alt: "Brand portraits by Paul Dal Studios — Founders Series" },
   { cfImageId: "a18c37a2-5557-486f-c169-db88f53e4d00", alt: "Editorial brand story by Paul Dal Studios — Pacific coast" },
   { cfImageId: "20a2e733-d9c0-4341-ab70-37e68448b000", alt: "Brand session by Paul Dal Studios — creative agency, San Diego" },
@@ -75,9 +85,10 @@ const serviceJsonLd = {
 };
 
 export default async function BrandContentPage() {
-  const [latest, all] = await Promise.all([
+  const [latest, all, founderPortrait] = await Promise.all([
     getLatestGalleryByCategory("BRAND_CONTENT"),
     getGalleriesByCategory("BRAND_CONTENT"),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage),
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? FALLBACK_HERO_CF_ID;
@@ -90,8 +101,20 @@ export default async function BrandContentPage() {
     cfImageId: g.coverCfImageId,
     alt: g.coverAlt,
   }));
+  // Substitute the founder-portrait fallback entry (index 1) with the
+  // PERSONAL gallery's portrait so the brand-content fallback grid
+  // shows the same on-brand portrait surfaced on /about. Keeps the
+  // hardcoded entry as ultimate fallback when PERSONAL is unreachable.
+  const fallbackGalleryPhotos = FALLBACK_GALLERY_PHOTOS_BASE.map((p, i) =>
+    i === 1 && founderPortrait
+      ? {
+          cfImageId: ABOUT_PHOTO_IDS.personImage,
+          alt: founderPortrait.alt,
+        }
+      : p,
+  );
   const galleryPhotos =
-    dynamicGalleryPhotos.length > 0 ? dynamicGalleryPhotos : FALLBACK_GALLERY_PHOTOS;
+    dynamicGalleryPhotos.length > 0 ? dynamicGalleryPhotos : fallbackGalleryPhotos;
 
   const content: LandingPageContent = {
     hero: {

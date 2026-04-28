@@ -5,6 +5,17 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { ParallaxPhoto, FadingQuote } from "@/components/site/about-scroll-effects";
 import { SectionDivider } from "@/components/site/section-divider";
+import {
+  AboutHeroCarousel,
+  type AboutCarouselCover,
+} from "@/components/site/about-hero-carousel";
+import {
+  CATEGORY_LABELS,
+  getCategoriesWithGalleries,
+  getLatestGalleryByCategory,
+} from "@/lib/portfolio-public";
+
+export const revalidate = 60;
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -53,13 +64,34 @@ const personJsonLd = {
   sameAs: ["https://instagram.com/pauldalstudio"],
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  // Auto-rotating carousel of one cover per category. Categories with
+  // zero galleries are filtered out (so empty FAMILY_LIFESTYLE /
+  // HEADSHOTS don't surface placeholder slides). Renders nothing if
+  // somehow zero categories have galleries.
+  const categories = await getCategoriesWithGalleries();
+  const heroCovers = (
+    await Promise.all(categories.map((c) => getLatestGalleryByCategory(c)))
+  )
+    .map((g, i) => {
+      if (!g) return null;
+      const cover: AboutCarouselCover = {
+        id: g.id,
+        coverImageUrl: g.coverImageUrl,
+        coverAlt: g.coverAlt,
+        categoryLabel: CATEGORY_LABELS[categories[i]],
+      };
+      return cover;
+    })
+    .filter((c): c is AboutCarouselCover => c !== null);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
+      <AboutHeroCarousel covers={heroCovers} />
       {/* Hero */}
       <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">

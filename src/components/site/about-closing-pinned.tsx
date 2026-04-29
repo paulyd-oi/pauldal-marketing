@@ -64,18 +64,29 @@ export function AboutClosingPinned({ cfId, alt }: AboutClosingPinnedProps) {
         // Pin the inner sticky-style frame for the section's full height.
         // The bg plate translates upward (0 → -10% of plate height) across
         // the same scroll range so the photo subtly drifts.
-        gsap.to(plate, {
-          yPercent: -10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-            pin: pin,
-            pinSpacing: false,
+        //
+        // Explicit fromTo with starting yPercent: 0 — guarantees integer
+        // pixel transform at pin entry and avoids any sub-pixel rendering
+        // that could read as blur. force3D: true keeps the plate on its
+        // own GPU layer so the photo's pixel grid stays aligned across
+        // the transform range.
+        gsap.fromTo(
+          plate,
+          { yPercent: 0, force3D: true },
+          {
+            yPercent: -10,
+            ease: "none",
+            force3D: true,
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+              pin: pin,
+              pinSpacing: false,
+            },
           },
-        });
+        );
       }, section);
 
       resizeHandler = () => ScrollTrigger.refresh();
@@ -103,7 +114,8 @@ export function AboutClosingPinned({ cfId, alt }: AboutClosingPinnedProps) {
             alt={alt}
             fill
             sizes="100vw"
-            quality={85}
+            quality={95}
+            priority
             className="object-cover"
           />
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutHeroPinned } from "@/components/site/about-hero-pinned";
+import { AboutTitleCard } from "@/components/site/about-title-card";
 import { AboutBeatSection } from "@/components/site/about-beat-section";
 import { AboutClosingPinned } from "@/components/site/about-closing-pinned";
 import { TrustStrip } from "@/components/site/trust-strip";
@@ -89,15 +90,16 @@ export default async function AboutPage() {
         caption="Called to serve."
       />
 
+      <AboutTitleCard />
+
       <AboutBeatSection
-        side="right"
-        number="01"
-        eyebrow="THE BEGINNING"
+        variant="photoPlate"
+        textPosition="bottomLeft"
+        eyebrow="01 — THE BEGINNING"
         headline="It started with a camera."
         body={BEAT_1_BODY}
         cfId={ABOUT_PHOTO_IDS.beat1}
         alt={beat1Photo?.alt ?? "Paul Dal — early work"}
-        aspect={1.5}
       />
 
       <AboutBeatSection
@@ -123,17 +125,6 @@ export default async function AboutPage() {
       />
 
       <TrustStrip />
-
-      {/* Deliberate pause before the closing moment — fixed py instead of
-          viewport-height so it reads as breath, not as broken layout on
-          tall monitors. */}
-      <div className="flex items-center justify-center bg-paper py-24 lg:py-32">
-        <div className="flex w-32 items-center gap-4">
-          <span className="h-px flex-1 bg-hairline" />
-          <span className="font-display text-2xl text-oxblood/40">✱</span>
-          <span className="h-px flex-1 bg-hairline" />
-        </div>
-      </div>
 
       <AboutClosingPinned
         cfId={ABOUT_PHOTO_IDS.beat4}

@@ -99,7 +99,7 @@ export async function Footer() {
         <div className="mx-auto max-w-7xl">
           {/* Mobile: stack wordmark on top, then 6-photo grid */}
           <div className="md:hidden">
-            <div className="flex flex-col items-center text-center">
+            <div className="flex min-h-[136px] flex-col items-center justify-center text-center">
               <BrandMark size="md" />
               <p className="mt-3 font-display text-3xl tracking-tight">
                 PAUL DAL STUDIOS
@@ -126,10 +126,13 @@ export async function Footer() {
             </div>
           </div>
 
-          {/* Desktop: 3-col with photos flanking wordmark */}
-          <div className="hidden grid-cols-3 items-center gap-8 md:grid">
+          {/* Desktop: 3-col with photos flanking wordmark.
+              min-height locks the row so font-load reflow on the wordmark
+              column doesn't resize the row and shift the photo strips
+              (items-center re-centers them when the row grows). */}
+          <div className="hidden grid-cols-3 items-center gap-8 md:grid md:min-h-[140px] lg:min-h-[160px]">
             <PhotoStrip photos={leftPhotos} />
-            <div className="flex flex-col items-center text-center">
+            <div className="flex min-h-[140px] flex-col items-center justify-center text-center lg:min-h-[160px]">
               <BrandMark size="md" />
               <p className="mt-3 font-display text-3xl tracking-tight lg:text-4xl">
                 PAUL DAL STUDIOS

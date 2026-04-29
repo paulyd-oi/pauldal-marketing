@@ -121,11 +121,11 @@ export function AboutClosingPinned({ cfId, alt }: AboutClosingPinnedProps) {
         </div>
         <div className="absolute inset-0 bg-ink/40" />
         <div className="relative z-10 flex h-full items-center justify-center px-6">
-          <div className="mx-auto max-w-5xl text-center">
+          <div className="mx-auto max-w-6xl text-center">
             <p className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70 lg:mb-8">
               Ready to work together?
             </p>
-            <h2 className="mb-10 font-display text-6xl leading-[0.9] tracking-tight text-paper lg:mb-12 lg:text-8xl xl:text-9xl">
+            <h2 className="mb-10 text-balance font-display text-6xl leading-[0.9] tracking-tight text-paper lg:mb-12 lg:text-8xl xl:text-9xl">
               Let&apos;s make something true.
             </h2>
             <Link

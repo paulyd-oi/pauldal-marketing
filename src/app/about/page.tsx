@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AboutHeroPinned } from "@/components/site/about-hero-pinned";
 import { AboutTitleCard } from "@/components/site/about-title-card";
 import { AboutBeatSection } from "@/components/site/about-beat-section";
+import { AboutMarquee } from "@/components/site/about-marquee";
 import { AboutClosingPinned } from "@/components/site/about-closing-pinned";
 import { TrustStrip } from "@/components/site/trust-strip";
 import { getPersonalPhotoByCfId } from "@/lib/portfolio-public";
@@ -120,6 +121,8 @@ export default async function AboutPage() {
         cfId={ABOUT_PHOTO_IDS.beat3}
         alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
       />
+
+      <AboutMarquee />
 
       <TrustStrip />
 

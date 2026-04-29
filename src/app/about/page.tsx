@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-import {
-  AboutHeroCarousel,
-  type AboutCarouselCover,
-} from "@/components/site/about-hero-carousel";
 import { AboutHeroPinned } from "@/components/site/about-hero-pinned";
 import { AboutBeatSection } from "@/components/site/about-beat-section";
 import { AboutClosingPinned } from "@/components/site/about-closing-pinned";
 import { TrustStrip } from "@/components/site/trust-strip";
-import {
-  CATEGORY_LABELS,
-  getCategoriesWithGalleries,
-  getLatestGalleryByCategory,
-  getPersonalPhotoByCfId,
-} from "@/lib/portfolio-public";
+import { getPersonalPhotoByCfId } from "@/lib/portfolio-public";
 import { ABOUT_PHOTO_IDS } from "@/lib/about-photos";
 import { buildMetadata } from "@/lib/seo";
 
@@ -80,25 +71,6 @@ export default async function AboutPage() {
     ],
   };
 
-  // Auto-rotating carousel of one cover per category. Categories with zero
-  // galleries are filtered out (so empty FAMILY_LIFESTYLE / HEADSHOTS don't
-  // surface placeholder slides). Renders nothing if zero categories qualify.
-  const categories = await getCategoriesWithGalleries();
-  const heroCovers = (
-    await Promise.all(categories.map((c) => getLatestGalleryByCategory(c)))
-  )
-    .map((g, i) => {
-      if (!g) return null;
-      const cover: AboutCarouselCover = {
-        id: g.id,
-        coverImageUrl: g.coverImageUrl,
-        coverAlt: g.coverAlt,
-        categoryLabel: CATEGORY_LABELS[categories[i]],
-      };
-      return cover;
-    })
-    .filter((c): c is AboutCarouselCover => c !== null);
-
   return (
     <>
       <script
@@ -111,8 +83,6 @@ export default async function AboutPage() {
           fade reads cinematically. The full title lives here for crawlers
           and screen readers. */}
       <h1 className="sr-only">Born in Manila. Sharpened in San Diego.</h1>
-
-      <AboutHeroCarousel covers={heroCovers} />
 
       <AboutHeroPinned
         cfId={ABOUT_PHOTO_IDS.hero}

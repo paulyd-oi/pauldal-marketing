@@ -78,20 +78,15 @@ export default async function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
 
-      {/* Visually-hidden H1 for SEO. The visible page title splits across
-          captions 1 + 2 of AboutHeroPinned (rendered as h2s) so the cross-
-          fade reads cinematically. The full title lives here for crawlers
-          and screen readers. */}
-      <h1 className="sr-only">Born in Manila. Sharpened in San Diego.</h1>
+      {/* Visually-hidden H1 for SEO. The visible page title is rendered as
+          a single h2 caption inside AboutHeroPinned. The h1 lives here for
+          crawlers and screen readers. */}
+      <h1 className="sr-only">Called to serve.</h1>
 
       <AboutHeroPinned
         cfId={ABOUT_PHOTO_IDS.hero}
         alt={heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer"}
-        captions={[
-          "Born in Manila.",
-          "Sharpened in San Diego.",
-          "Photography is how I pay attention.",
-        ]}
+        caption="Called to serve."
       />
 
       <AboutBeatSection

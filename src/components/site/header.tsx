@@ -28,7 +28,6 @@ export async function Header() {
   ];
 
   const mobileMenuLinks: MobileMenuLink[] = [
-    { href: "/about", label: "About", indent: false },
     { href: "/services", label: "Services", indent: false },
     ...visibleCategories.map((cat) => ({
       href: `/${CATEGORY_SLUGS[cat]}`,
@@ -36,6 +35,7 @@ export async function Header() {
       indent: true,
     })),
     { href: "/portfolio", label: "Portfolio", indent: false },
+    { href: "/about", label: "About Me", indent: false },
     { href: "/book", label: "Book", indent: false },
   ];
 

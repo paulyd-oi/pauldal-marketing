@@ -90,23 +90,6 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            <Link
-              href="/about"
-              className={cn(
-                "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
-                isAboutRoute && "drop-shadow-md",
-                pathname === "/about"
-                  ? isAboutRoute
-                    ? "text-paper underline decoration-1 underline-offset-4"
-                    : "text-oxblood underline decoration-1 underline-offset-4"
-                  : isAboutRoute
-                  ? "text-paper/80 hover:text-paper"
-                  : "text-foreground/70 hover:text-oxblood"
-              )}
-            >
-              About
-            </Link>
-
             {/* Services dropdown */}
             <div
               ref={servicesRef}
@@ -200,6 +183,23 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
               )}
             >
               Portfolio
+            </Link>
+
+            <Link
+              href="/about"
+              className={cn(
+                "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                isAboutRoute && "drop-shadow-md",
+                pathname === "/about"
+                  ? isAboutRoute
+                    ? "text-paper underline decoration-1 underline-offset-4"
+                    : "text-oxblood underline decoration-1 underline-offset-4"
+                  : isAboutRoute
+                  ? "text-paper/80 hover:text-paper"
+                  : "text-foreground/70 hover:text-oxblood"
+              )}
+            >
+              About Me
             </Link>
           </nav>
 

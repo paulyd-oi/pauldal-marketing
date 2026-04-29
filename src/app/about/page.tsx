@@ -58,7 +58,11 @@ export default async function AboutPage() {
       addressCountry: "US",
     },
     url: "https://pauldalstudios.com/about",
-    sameAs: ["https://instagram.com/pauldalstudio"],
+    sameAs: [
+      "https://instagram.com/pauldalstudio",
+      "https://www.linkedin.com/in/paul-dal-4571443b7/",
+      "https://completewedo.com/san-diego/videographers/paul-dal/",
+    ],
   };
 
   // Auto-rotating carousel of one cover per category. Categories with

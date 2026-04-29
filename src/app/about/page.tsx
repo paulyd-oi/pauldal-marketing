@@ -8,6 +8,7 @@ import {
   type AboutCarouselCover,
 } from "@/components/site/about-hero-carousel";
 import { ParallaxPhoto } from "@/components/site/parallax-photo";
+import { TrustStrip } from "@/components/site/trust-strip";
 import {
   CATEGORY_LABELS,
   getCategoriesWithGalleries,
@@ -214,6 +215,8 @@ export default async function AboutPage() {
           alt={beat4Photo?.alt ?? "Paul Dal — at work"}
         />
       </div>
+
+      <TrustStrip />
 
       {/* Closing CTA */}
       <section className="bg-ink py-24 lg:py-32">

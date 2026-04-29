@@ -42,17 +42,16 @@ export async function AboutTeaser() {
             </Reveal>
             <Reveal delay={0.2}>
               <h2 className="mb-8 font-display text-4xl leading-[1.05] tracking-tight text-ink lg:text-6xl">
-                Born in Manila. Sharpened in San Diego.
+                A hobby became a calling. A craft became a way to serve.
               </h2>
             </Reveal>
             <Reveal delay={0.3}>
               <p className="mb-8 font-body text-base leading-relaxed text-ink lg:text-lg">
-                I started shooting in 2019. A kid from the Philippines who
-                moved to the US at five, learned to see through a viewfinder
-                somewhere along the way. I serve as creative director at my
-                church, where I&apos;ve documented over 200 events for a
-                community of ten thousand. The same eye now goes into weddings,
-                brands, and editorial work. Photography is how I pay attention.
+                In 2021, I began serving at my church with a camera in my
+                hands. What started as something I loved became a craft I
+                felt called to steward — capturing services, baptisms,
+                worship nights, weddings, brands, and stories that bless
+                people beyond the moment itself.
               </p>
             </Reveal>
             <Reveal delay={0.4}>

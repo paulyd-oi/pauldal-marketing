@@ -34,6 +34,14 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
     setScrolled(latest > 0);
   });
 
+  // /about is the cinematic surface — pinned full-bleed photo sections at
+  // top (AboutHeroPinned) and bottom (AboutClosingPinned). The cream header
+  // bar over those moments breaks the full-bleed immersion. On /about we
+  // render the header as transparent with light-on-dark text + light
+  // backdrop-blur. drop-shadow-sm keeps the text legible against the
+  // paper-colored bio middle. Other routes are unchanged.
+  const isAboutRoute = pathname === "/about" || pathname.startsWith("/about/");
+
   useEffect(() => {
     if (!servicesOpen) return;
     function handleClickOutside(event: MouseEvent) {
@@ -63,14 +71,20 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b bg-paper transition-[border-color] duration-200",
+          "sticky top-0 z-50 border-b transition-[background-color,border-color] duration-200",
+          isAboutRoute
+            ? "bg-transparent backdrop-blur-sm"
+            : "bg-paper",
           scrolled ? "border-hairline" : "border-transparent"
         )}
       >
         <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-6 lg:h-20 lg:px-12">
           <Link
             href="/"
-            className="focus-ring font-display text-lg tracking-tight text-ink lg:text-xl"
+            className={cn(
+              "focus-ring font-display text-lg tracking-tight lg:text-xl",
+              isAboutRoute ? "text-paper drop-shadow-md" : "text-ink"
+            )}
           >
             Paul Dal Studios
           </Link>
@@ -80,8 +94,13 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
               href="/about"
               className={cn(
                 "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                isAboutRoute && "drop-shadow-md",
                 pathname === "/about"
-                  ? "text-oxblood underline decoration-1 underline-offset-4"
+                  ? isAboutRoute
+                    ? "text-paper underline decoration-1 underline-offset-4"
+                    : "text-oxblood underline decoration-1 underline-offset-4"
+                  : isAboutRoute
+                  ? "text-paper/80 hover:text-paper"
                   : "text-foreground/70 hover:text-oxblood"
               )}
             >
@@ -115,8 +134,13 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
                 }}
                 className={cn(
                   "focus-ring inline-flex items-center gap-1 font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                  isAboutRoute && "drop-shadow-md",
                   SERVICES_PATHS.includes(pathname)
-                    ? "text-oxblood underline decoration-1 underline-offset-4"
+                    ? isAboutRoute
+                      ? "text-paper underline decoration-1 underline-offset-4"
+                      : "text-oxblood underline decoration-1 underline-offset-4"
+                    : isAboutRoute
+                    ? "text-paper/80 hover:text-paper"
                     : "text-foreground/70 hover:text-oxblood"
                 )}
               >
@@ -165,8 +189,13 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
               href="/portfolio"
               className={cn(
                 "focus-ring font-body text-sm tracking-wide [font-variant:small-caps] transition-colors duration-[180ms]",
+                isAboutRoute && "drop-shadow-md",
                 pathname === "/portfolio"
-                  ? "text-oxblood underline decoration-1 underline-offset-4"
+                  ? isAboutRoute
+                    ? "text-paper underline decoration-1 underline-offset-4"
+                    : "text-oxblood underline decoration-1 underline-offset-4"
+                  : isAboutRoute
+                  ? "text-paper/80 hover:text-paper"
                   : "text-foreground/70 hover:text-oxblood"
               )}
             >
@@ -177,7 +206,10 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMenuOpen(true)}
-              className="focus-ring -mr-2 flex min-h-11 min-w-11 items-center gap-1.5 p-3 text-ink lg:hidden"
+              className={cn(
+                "focus-ring -mr-2 flex min-h-11 min-w-11 items-center gap-1.5 p-3 lg:hidden",
+                isAboutRoute ? "text-paper drop-shadow-md" : "text-ink"
+              )}
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />

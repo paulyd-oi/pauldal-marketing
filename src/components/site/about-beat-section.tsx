@@ -37,13 +37,13 @@ interface AboutBeatSectionProps {
 }
 
 const textVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.12,
-      duration: 0.6,
+      delay: i * 0.15,
+      duration: 0.8,
       ease: [0.16, 1, 0.3, 1],
     },
   }),
@@ -110,7 +110,11 @@ export function AboutBeatSection({
   const headlineClass =
     "font-display text-balance text-5xl leading-[0.95] tracking-tight text-ink lg:text-7xl xl:text-[5.5rem]";
   const bodyClass =
-    "max-w-prose font-body text-base leading-relaxed text-ink/80 lg:text-lg lg:leading-[1.7]";
+    "max-w-md font-body text-lg leading-relaxed text-ink/85 lg:text-xl lg:leading-[1.7] " +
+    "first-letter:float-left first-letter:mr-3 first-letter:mt-1 " +
+    "first-letter:font-display first-letter:text-6xl " +
+    "first-letter:leading-[0.85] first-letter:text-ink " +
+    "lg:first-letter:mt-2 lg:first-letter:text-7xl";
 
   const textColumn = reduce ? (
     <div className="flex flex-col gap-6 lg:gap-8">

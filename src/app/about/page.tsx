@@ -124,9 +124,10 @@ export default async function AboutPage() {
 
       <TrustStrip />
 
-      {/* 40vh transition breath — held silence before the moment.
-          Hairline + brand asterisk centered, low opacity. */}
-      <div className="flex h-[40vh] items-center justify-center bg-paper">
+      {/* Deliberate pause before the closing moment — fixed py instead of
+          viewport-height so it reads as breath, not as broken layout on
+          tall monitors. */}
+      <div className="flex items-center justify-center bg-paper py-24 lg:py-32">
         <div className="flex w-32 items-center gap-4">
           <span className="h-px flex-1 bg-hairline" />
           <span className="font-display text-2xl text-oxblood/40">✱</span>

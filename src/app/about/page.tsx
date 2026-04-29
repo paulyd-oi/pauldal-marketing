@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AboutHeroPinned } from "@/components/site/about-hero-pinned";
-import { AboutTitleCard } from "@/components/site/about-title-card";
 import { AboutBeatSection } from "@/components/site/about-beat-section";
 import { AboutMarquee } from "@/components/site/about-marquee";
 import { AboutClosingPinned } from "@/components/site/about-closing-pinned";
@@ -90,8 +89,6 @@ export default async function AboutPage() {
         alt={heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer"}
         caption="Called to serve."
       />
-
-      <AboutTitleCard />
 
       <AboutBeatSection
         variant="photoPlate"

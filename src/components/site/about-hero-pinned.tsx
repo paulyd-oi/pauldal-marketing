@@ -1,7 +1,7 @@
 "use client";
 
 // Pinned hero moment for /about. The hero photo is full-bleed and a single
-// caption holds through the pin (600vh desktop, 300vh mobile). The photo
+// caption holds through the pin (300vh, both desktop and mobile). The photo
 // carries a slow ken-burns scale (1.0 → 1.05) so the page never feels
 // truly static even at the held middle of the caption.
 //
@@ -38,7 +38,7 @@ export function AboutHeroPinned({
     offset: ["start start", "end end"],
   });
 
-  // Ken-burns scale across the full pin. 5% drift over 600vh = imperceptible
+  // Ken-burns scale across the full pin. 5% drift over 300vh = imperceptible
   // unless you're staring at a fixed point — exactly the cinematic intent.
   const heroScale = useTransform(scrollYProgress, [0, 1], [1.0, 1.05]);
 
@@ -70,7 +70,7 @@ export function AboutHeroPinned({
   return (
     <section
       ref={ref}
-      className="relative h-[300vh] w-full bg-ink lg:h-[600vh]"
+      className="relative h-[300vh] w-full bg-ink"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div

@@ -11,9 +11,9 @@
 
 const TOKENS = [
   "200 EVENTS",
-  "70 WEDDINGS",
+  "70+ WEDDINGS",
   "CALLED TO SERVE",
-  "A SAN DIEGO STUDIO",
+  "BASED IN SAN DIEGO",
 ];
 
 function Track() {

@@ -93,6 +93,7 @@ export default async function AboutPage() {
         side="right"
         number="01"
         eyebrow="THE BEGINNING"
+        headline="It started with a camera."
         body={BEAT_1_BODY}
         cfId={ABOUT_PHOTO_IDS.beat1}
         alt={beat1Photo?.alt ?? "Paul Dal — early work"}
@@ -103,6 +104,7 @@ export default async function AboutPage() {
         side="left"
         number="02"
         eyebrow="THE CALLING"
+        headline="Then I started serving."
         body={BEAT_2_BODY}
         cfId={ABOUT_PHOTO_IDS.beat2}
         alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
@@ -113,6 +115,7 @@ export default async function AboutPage() {
         side="right"
         number="03"
         eyebrow="THE CRAFT"
+        headline="Now it's a craft."
         body={BEAT_3_BODY}
         cfId={ABOUT_PHOTO_IDS.beat3}
         alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}

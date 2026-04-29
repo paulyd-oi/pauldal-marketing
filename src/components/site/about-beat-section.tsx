@@ -1,25 +1,33 @@
 "use client";
 
-// One bio beat: text column + photo column, layout mirrored on alternate beats.
-// Photo enters with a scroll-decoupled rise (15% → 0%) + scale (1.05 → 1.0)
-// + fade (0 → 1) as the section approaches viewport center. The transforms
-// land on the photo's wrapper div, not the <Image> itself, so we don't
-// thrash the image's own GPU layer.
+// One bio beat: text column + photo column, layout mirrored on alternate
+// beats. Photo column carries a scroll-decoupled rise (15% → 0%) + scale
+// (1.05 → 1.0) + fade (0 → 1) as the section approaches viewport center.
 //
-// prefers-reduced-motion collapses to a static layout — no useScroll, no
-// transforms.
+// Text column reveals in choreographed stagger when the section enters
+// view: eyebrow → headline → body, each rising 24px while fading in,
+// 0.12s offset between each. Ease is exponential ease-out so the lift
+// feels weightless. Fires once per scroll session.
+//
+// prefers-reduced-motion collapses both photo and text to static layouts.
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion";
 
 const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
 interface AboutBeatSectionProps {
   side: "left" | "right";
-  // Beat number, e.g. "01" — rendered with the eyebrow as "01 — THE BEGINNING"
-  number: string;
+  number: "01" | "02" | "03";
   eyebrow: string;
+  headline: string;
   body: string;
   cfId: string;
   alt: string;
@@ -28,10 +36,24 @@ interface AboutBeatSectionProps {
   aspect: number;
 }
 
+const textVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+};
+
 export function AboutBeatSection({
   side,
   number,
   eyebrow,
+  headline,
   body,
   cfId,
   alt,
@@ -45,23 +67,14 @@ export function AboutBeatSection({
     offset: ["start end", "center center"],
   });
 
-  // Photo enters from below the rest line, slightly oversized, slightly
-  // washed out — and lands at flush, full size, full opacity by the time
-  // its center crosses the viewport center.
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
   const y = useTransform(scrollYProgress, [0, 1], ["15%", "0%"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1.0]);
 
   const photoUrl = `${CF_BASE}/${cfId}/public`;
 
-  // Layout: text and photo columns side-by-side. `side="right"` puts the
-  // photo on the right (text first in source order = better reading order
-  // pre-CSS); `side="left"` reverses with order utilities.
   const photoOrderClass = side === "left" ? "lg:order-first" : "lg:order-last";
 
-  // Static fallback — render the photo at its final state, no scroll
-  // transforms attached. Layout otherwise identical so the bio rhythm
-  // doesn't shift across motion preferences.
   const photoElement = reduce ? (
     <div
       ref={photoRef}
@@ -92,18 +105,45 @@ export function AboutBeatSection({
     </motion.div>
   );
 
+  const eyebrowClass =
+    "font-body text-xs uppercase tracking-widest text-muted-foreground";
+  const headlineClass =
+    "font-display text-balance text-5xl leading-[0.95] tracking-tight text-ink lg:text-7xl xl:text-[5.5rem]";
+  const bodyClass =
+    "max-w-prose font-body text-base leading-relaxed text-ink/80 lg:text-lg lg:leading-[1.7]";
+
+  const textColumn = reduce ? (
+    <div className="flex flex-col gap-6 lg:gap-8">
+      <p className={eyebrowClass}>
+        {number} — {eyebrow}
+      </p>
+      <h2 className={headlineClass}>{headline}</h2>
+      <p className={bodyClass}>{body}</p>
+    </div>
+  ) : (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-15% 0px" }}
+      className="flex flex-col gap-6 lg:gap-8"
+    >
+      <motion.p custom={0} variants={textVariants} className={eyebrowClass}>
+        {number} — {eyebrow}
+      </motion.p>
+      <motion.h2 custom={1} variants={textVariants} className={headlineClass}>
+        {headline}
+      </motion.h2>
+      <motion.p custom={2} variants={textVariants} className={bodyClass}>
+        {body}
+      </motion.p>
+    </motion.div>
+  );
+
   return (
-    <section className="bg-paper py-12 lg:py-24">
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16 lg:px-12">
+    <section className="bg-paper py-16 lg:py-24">
+      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-12">
         {photoElement}
-        <div className="max-w-xl px-2 lg:px-0">
-          <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
-            {number} — {eyebrow}
-          </p>
-          <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-            {body}
-          </p>
-        </div>
+        {textColumn}
       </div>
     </section>
   );

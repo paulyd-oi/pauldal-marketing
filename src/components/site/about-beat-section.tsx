@@ -93,10 +93,10 @@ export function AboutBeatSection({
   );
 
   return (
-    <section className="bg-paper py-16 lg:py-32">
-      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2 lg:gap-24 lg:px-12">
+    <section className="bg-paper py-12 lg:py-24">
+      <div className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16 lg:px-12">
         {photoElement}
-        <div className="max-w-xl">
+        <div className="max-w-xl px-2 lg:px-0">
           <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
             {number} — {eyebrow}
           </p>

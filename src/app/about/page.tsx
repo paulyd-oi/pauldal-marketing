@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Reveal } from "@/components/site/reveal";
-import { SectionDivider } from "@/components/site/section-divider";
 import {
   AboutHeroCarousel,
   type AboutCarouselCover,
 } from "@/components/site/about-hero-carousel";
-import { ParallaxPhoto } from "@/components/site/parallax-photo";
+import { AboutHeroPinned } from "@/components/site/about-hero-pinned";
+import { AboutBeatSection } from "@/components/site/about-beat-section";
+import { AboutClosingPinned } from "@/components/site/about-closing-pinned";
 import { TrustStrip } from "@/components/site/trust-strip";
 import {
   CATEGORY_LABELS,
@@ -32,15 +30,31 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+const BEAT_1_BODY =
+  "Photo and film started as a hobby. I was always drawn to cameras, edits, music, movement, and the way a moment could feel different when it was framed with intention. But it was not until I started serving at my church in 2021 that this became more than a hobby.";
+
+const BEAT_2_BODY =
+  "Serving in church unlocked a real passion for storytelling. I believe creativity, photo, and video are gifts God has given me. Because of that, this work has never really felt like work. I genuinely love what I get to do, especially when it blesses people, preserves meaningful moments, and helps others see the beauty in what they lived through.";
+
+const BEAT_3_BODY =
+  "Since then in San Diego, I have served as creative director, led photo teams, directed and contributed to film projects, helped shoot a pilot episode, captured more than 200 events, and documented over 70 weddings. That same experience now carries into weddings, engagements, events, brands, and editorial work through Paul Dal Studios. I work fluently across both photography and video with a documentary eye, an editorial finish, and a craft I am still actively growing.";
+
 export default async function AboutPage() {
-  const [personPhoto, beat1Photo, beat2Photo, beat3Photo, beat4Photo] =
-    await Promise.all([
-      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage),
-      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat1),
-      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat2),
-      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat3),
-      getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat4),
-    ]);
+  const [
+    heroPhoto,
+    personPhoto,
+    beat1Photo,
+    beat2Photo,
+    beat3Photo,
+    beat4Photo,
+  ] = await Promise.all([
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.hero),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.personImage),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat1),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat2),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat3),
+    getPersonalPhotoByCfId(ABOUT_PHOTO_IDS.beat4),
+  ]);
 
   const personJsonLd = {
     "@context": "https://schema.org",
@@ -66,10 +80,9 @@ export default async function AboutPage() {
     ],
   };
 
-  // Auto-rotating carousel of one cover per category. Categories with
-  // zero galleries are filtered out (so empty FAMILY_LIFESTYLE /
-  // HEADSHOTS don't surface placeholder slides). Renders nothing if
-  // somehow zero categories have galleries.
+  // Auto-rotating carousel of one cover per category. Categories with zero
+  // galleries are filtered out (so empty FAMILY_LIFESTYLE / HEADSHOTS don't
+  // surface placeholder slides). Renders nothing if zero categories qualify.
   const categories = await getCategoriesWithGalleries();
   const heroCovers = (
     await Promise.all(categories.map((c) => getLatestGalleryByCategory(c)))
@@ -92,151 +105,71 @@ export default async function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
+
+      {/* Visually-hidden H1 for SEO. The visible page title splits across
+          captions 1 + 2 of AboutHeroPinned (rendered as h2s) so the cross-
+          fade reads cinematically. The full title lives here for crawlers
+          and screen readers. */}
+      <h1 className="sr-only">Born in Manila. Sharpened in San Diego.</h1>
+
       <AboutHeroCarousel covers={heroCovers} />
-      {/* Hero */}
-      <section className="bg-paper py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                About
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-ink lg:text-8xl">
-                Born in Manila. Sharpened in San&nbsp;Diego.
-              </h1>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
-                I&apos;m Paul, a hybrid photographer and videographer based in
-                San Diego, available anywhere in the world you need me.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
-      <SectionDivider />
+      <AboutHeroPinned
+        cfId={ABOUT_PHOTO_IDS.hero}
+        alt={heroPhoto?.alt ?? "Paul Dal — San Diego hybrid photographer and videographer"}
+        captions={[
+          "Born in Manila.",
+          "Sharpened in San Diego.",
+          "Photography is how I pay attention.",
+        ]}
+      />
 
-      {/* Beat 1 — The beginning */}
-      <section className="bg-paper py-16 lg:py-24">
-        <div className="mx-auto max-w-3xl px-6 lg:px-12">
-          <Reveal>
-            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
-              01 — The beginning
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-              Photo and film started as a hobby. I was always drawn to cameras,
-              edits, music, movement, and the way a moment could feel different
-              when it was framed with intention. But it was not until I started
-              serving at my church in 2021 that this became more than a hobby.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <AboutBeatSection
+        side="right"
+        number="01"
+        eyebrow="THE BEGINNING"
+        body={BEAT_1_BODY}
+        cfId={ABOUT_PHOTO_IDS.beat1}
+        alt={beat1Photo?.alt ?? "Paul Dal — early work"}
+        aspect={1.5}
+      />
 
-      {/* Parallax — beat 1 (post-Beginning, ~3:2 landscape default) */}
-      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
-        <ParallaxPhoto
-          cfId={ABOUT_PHOTO_IDS.beat1}
-          alt={beat1Photo?.alt ?? "Paul Dal — early work"}
-        />
-      </div>
+      <AboutBeatSection
+        side="left"
+        number="02"
+        eyebrow="THE CALLING"
+        body={BEAT_2_BODY}
+        cfId={ABOUT_PHOTO_IDS.beat2}
+        alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
+        aspect={16 / 9}
+      />
 
-      {/* Beat 2 — The calling */}
-      <section className="bg-cream-hover py-16 lg:py-24">
-        <div className="mx-auto max-w-3xl px-6 lg:px-12">
-          <Reveal>
-            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
-              02 — The calling
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-              Serving in church unlocked a real passion for storytelling. I
-              believe creativity, photo, and video are gifts God has given me.
-              Because of that, this work has never really felt like work. I
-              genuinely love what I get to do, especially when it blesses
-              people, preserves meaningful moments, and helps others see the
-              beauty in what they lived through.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Parallax — beat 2 (post-Calling, slightly wider 16:9) */}
-      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
-        <ParallaxPhoto
-          cfId={ABOUT_PHOTO_IDS.beat2}
-          alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
-          aspect={16 / 9}
-        />
-      </div>
-
-      {/* Beat 3 — The craft */}
-      <section className="bg-paper py-16 lg:py-24">
-        <div className="mx-auto max-w-3xl px-6 lg:px-12">
-          <Reveal>
-            <p className="mb-4 font-body text-xs uppercase tracking-widest text-muted-foreground">
-              03 — The craft
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="font-body text-base leading-relaxed text-ink lg:text-lg">
-              Since then in San Diego, I have served as creative director, led
-              photo teams, directed and contributed to film projects, helped
-              shoot a pilot episode, captured more than 200 events, and
-              documented over 70 weddings. That same experience now carries
-              into weddings, engagements, events, brands, and editorial work
-              through Paul Dal Studios. I work fluently across both photography
-              and video with a documentary eye, an editorial finish, and a
-              craft I am still actively growing.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Parallax — beat 3 (post-Craft, clapperboard photo is portrait-orientation) */}
-      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
-        <ParallaxPhoto
-          cfId={ABOUT_PHOTO_IDS.beat3}
-          alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
-          aspect={4 / 5}
-        />
-      </div>
-
-      {/* Parallax — beat 4 (pre-CTA punctuation, default 3:2) */}
-      <div className="mx-auto my-8 max-w-4xl px-6 lg:my-12 lg:px-12">
-        <ParallaxPhoto
-          cfId={ABOUT_PHOTO_IDS.beat4}
-          alt={beat4Photo?.alt ?? "Paul Dal — at work"}
-        />
-      </div>
+      <AboutBeatSection
+        side="right"
+        number="03"
+        eyebrow="THE CRAFT"
+        body={BEAT_3_BODY}
+        cfId={ABOUT_PHOTO_IDS.beat3}
+        alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
+        aspect={4 / 5}
+      />
 
       <TrustStrip />
 
-      {/* Closing CTA */}
-      <section className="bg-ink py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-12">
-          <Reveal>
-            <h2 className="mb-8 font-display text-4xl leading-[1.05] tracking-tight text-paper lg:text-6xl">
-              Ready to work together?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Link
-              href="/book"
-              className="focus-ring group inline-flex items-center bg-oxblood px-10 py-4 font-body text-base tracking-wide text-paper transition-colors duration-200 hover:bg-oxblood-hover lg:text-lg"
-            >
-              Start a project
-              <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Reveal>
+      {/* 40vh transition breath — held silence before the moment.
+          Hairline + brand asterisk centered, low opacity. */}
+      <div className="flex h-[40vh] items-center justify-center bg-paper">
+        <div className="flex w-32 items-center gap-4">
+          <span className="h-px flex-1 bg-hairline" />
+          <span className="font-display text-2xl text-oxblood/40">✱</span>
+          <span className="h-px flex-1 bg-hairline" />
         </div>
-      </section>
+      </div>
+
+      <AboutClosingPinned
+        cfId={ABOUT_PHOTO_IDS.beat4}
+        alt={beat4Photo?.alt ?? "Paul Dal — at work"}
+      />
     </>
   );
 }

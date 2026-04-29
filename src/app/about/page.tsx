@@ -103,25 +103,22 @@ export default async function AboutPage() {
       />
 
       <AboutBeatSection
-        side="left"
-        number="02"
-        eyebrow="THE CALLING"
+        variant="creamInterlude"
+        eyebrow="02 — THE CALLING"
         headline="Then I started serving."
         body={BEAT_2_BODY}
         cfId={ABOUT_PHOTO_IDS.beat2}
         alt={beat2Photo?.alt ?? "Paul Dal — serving in community"}
-        aspect={16 / 9}
       />
 
       <AboutBeatSection
-        side="right"
-        number="03"
-        eyebrow="THE CRAFT"
+        variant="photoPlate"
+        textPosition="bottomRight"
+        eyebrow="03 — THE CRAFT"
         headline="Now it's a craft."
         body={BEAT_3_BODY}
         cfId={ABOUT_PHOTO_IDS.beat3}
         alt={beat3Photo?.alt ?? "Paul Dal — directing on set"}
-        aspect={4 / 5}
       />
 
       <TrustStrip />

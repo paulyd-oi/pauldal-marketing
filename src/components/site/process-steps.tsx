@@ -25,7 +25,7 @@ export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
   {
     num: "4",
     title: "Lock the date",
-    desc: "Sign the contract, send a 25% deposit. Your date is yours.",
+    desc: "Sign the contract, send a 50% non-refundable retainer. Your date is yours.",
   },
   {
     num: "5",
@@ -35,7 +35,7 @@ export const DEFAULT_PROCESS_STEPS: ProcessStep[] = [
   {
     num: "6",
     title: "Deliver the work",
-    desc: "Sneak peeks within 72 hours. Full edited gallery in 2–4 weeks. We celebrate it together.",
+    desc: "Sneak peeks within 48 hours. Full edited gallery in 4–6 weeks. We celebrate it together.",
   },
 ];
 

@@ -35,9 +35,9 @@ export const DEFAULT_ACCORDION_ITEMS: AccordionItem[] = [
       "10–15 hand-picked images delivered within 24 hours so you can share immediately.",
   },
   {
-    title: "Full delivery in 2–4 weeks",
+    title: "Full delivery in 4–6 weeks",
     description:
-      "Most projects deliver in 2–4 weeks. Weddings 4–6 weeks. I'll give you a clear timeline upfront.",
+      "Most projects deliver in 4–6 weeks. Wedding films deliver in 6–8 weeks. I'll give you a clear timeline upfront.",
   },
   {
     title: "Print release",

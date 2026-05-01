@@ -49,7 +49,7 @@ const SERVICES = [
       "Discovery call to understand the day",
       "Engagement or pre-wedding shoot (optional)",
       "Day-of coverage with timeline support",
-      "First-look gallery within 72 hours",
+      "First-look gallery within 48 hours",
       "Full delivery in 4–6 weeks",
     ],
     investment: [

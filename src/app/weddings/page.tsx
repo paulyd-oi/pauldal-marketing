@@ -3,6 +3,11 @@ import {
   LandingPageLayout,
   type LandingPageContent,
 } from "@/components/site/landing-page-layout";
+import {
+  PackageTiers,
+  type PackageTierThumb,
+} from "@/components/weddings/package-tiers";
+import { TrustStrip } from "@/components/site/trust-strip";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 import { buildCategoryPageMetadata } from "@/lib/seo";
 
@@ -13,24 +18,48 @@ const HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
 export async function generateMetadata(): Promise<Metadata> {
   return buildCategoryPageMetadata({
     category: "WEDDING",
-    title: "Wedding Photography San Diego — Paul Dal Studios",
+    title:
+      "San Diego Wedding Videographer + Photographer | Paul Dal Studios",
     description:
-      "Editorial wedding photography and film by Paul Dal Studios. San Diego based, available worldwide. Two-shooter coverage, hand-edited galleries, story-first approach.",
+      "Cinematic wedding films and editorial photography for San Diego couples. Films begin at $4,995. Photo + video bundles from $7,495.",
     path: "/weddings",
-    ogImageAlt: "Wedding photography by Paul Dal Studios in San Diego",
+    ogImageAlt:
+      "San Diego wedding videographer and photographer Paul Dal Studios",
   });
 }
 
 const serviceJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Wedding Photography",
-  provider: { "@type": "Organization", name: "Paul Dal Studios" },
-  areaServed: "San Diego, CA + Worldwide",
-  offers: {
-    "@type": "Offer",
-    priceRange: "$2,500 - $7,500",
-  },
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pauldalstudios.com/#business",
+      name: "Paul Dal Studios",
+      url: "https://pauldalstudios.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "San Diego",
+        addressRegion: "CA",
+        addressCountry: "US",
+      },
+      priceRange: "$$$",
+      areaServed: [
+        { "@type": "City", name: "San Diego" },
+        { "@type": "State", name: "California" },
+      ],
+    },
+    {
+      "@type": "Service",
+      name: "Wedding Videography",
+      provider: { "@id": "https://pauldalstudios.com/#business" },
+      areaServed: "San Diego, California",
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        price: "4995",
+      },
+    },
+  ],
 };
 
 // TODO: replace with curated wedding portfolio entries
@@ -39,19 +68,33 @@ const content: LandingPageContent = {
     eyebrow: "Weddings",
     headline: "The day you'll want to remember in detail.",
     subhead:
-      "Editorial wedding photography and film. San Diego based, available worldwide.",
+      "Cinematic wedding films + editorial photography. San Diego based, available worldwide.",
     cta: { label: "Start your wedding inquiry", href: "/book?service=weddings" },
     photoCfImageId: HERO_CF_ID,
     photoAlt:
       "Wedding photography by Paul Dal Studios — celebration captured in golden light, San Diego",
   },
-  pricingSummary: {
-    cards: [
-      { label: "Starting from", value: "$2,500" },
-      { label: "Most couples invest", value: "$3,500–$5,000" },
-      { label: "Premium up to", value: "$7,500" },
+  investmentBlock: {
+    products: [
+      {
+        eyebrow: "ELOPEMENTS & INTIMATE CEREMONIES",
+        priceLabel: "from $2,000",
+        description:
+          "Up to 4 hours, single camera, 2-3 minute cinematic film. Designed for courthouse ceremonies, micro-weddings, and vow renewals.",
+      },
+      {
+        eyebrow: "WEDDING FILMS",
+        priceLabel: "from $4,995",
+        description:
+          "Most couples invest $6,000–$10,000. Full-day cinematic coverage, multi-camera, highlight film + ceremony cut.",
+      },
+      {
+        eyebrow: "PHOTO + VIDEO BUNDLES",
+        priceLabel: "from $7,495",
+        description:
+          "Hybrid coverage with editorial photography included.",
+      },
     ],
-    note: "Hybrid photo + video bundling available on every package.",
   },
   intro: {
     eyebrow: "About this work",
@@ -160,7 +203,7 @@ const content: LandingPageContent = {
     {
       question: "How long until we get our photos and video?",
       answer:
-        "Photo galleries deliver in two to four weeks. Wedding films deliver in six to eight weeks. You'll get a teaser of ten to fifteen favorite frames within forty-eight hours so you have something to share right away.",
+        "Photo galleries deliver in four to six weeks. Wedding films deliver in six to eight weeks. You'll get a teaser of ten to fifteen favorite frames within forty-eight hours so you have something to share right away.",
     },
     {
       question: "Do you deliver raw files?",
@@ -175,17 +218,37 @@ const content: LandingPageContent = {
     {
       question: "How do payment plans work?",
       answer:
-        "Twenty-five percent retainer locks the date. The balance splits into payments that finish two weeks before the wedding. No fees for splitting. Card or bank transfer.",
+        "A fifty percent non-refundable retainer locks the date. The balance splits into payments that finish two weeks before the wedding. No fees for splitting. Card or bank transfer.",
     },
     {
       question: "Do you travel?",
       answer:
-        "Yes. San Diego is home base. All of Southern California is included with no travel fee. Anywhere outside SoCal, travel is quoted at cost.",
+        "Yes. San Diego is home base.\n\n— 60-mile radius from San Diego: included (covers SD County, Temecula, southern OC)\n— 60–120 miles (LA, Palm Springs): mileage at federal rate\n— 120–180 miles (Santa Barbara, Bakersfield): mileage + 1-night accommodation\n— 180+ miles or fly-required: itemized travel quote\n— International / destination weddings: custom quoted",
     },
     {
       question: "Can we book just photo or just video?",
       answer:
         "Yes. Photo-only and video-only are both available. The hybrid package exists because hiring two separate teams usually means they don't talk to each other and the day suffers. One team that does both keeps things calm.",
+    },
+    {
+      question: "How many cameras run during the ceremony?",
+      answer:
+        "Two to four, depending on the package. Always at least two on the ceremony — one wide on the couple, one tight on faces during vows.",
+    },
+    {
+      question: "What's your audio backup plan?",
+      answer:
+        "Lavalier on the officiant, lavalier on the groom, a feed from the DJ board, and a backup recorder. Most wedding films you've watched online have unusable audio in the second half. Ours don't, because we engineered it that way going in.",
+    },
+    {
+      question: "Do we get the full ceremony, or just a highlight?",
+      answer:
+        "Both. Every wedding package includes a full edited ceremony cut plus a cinematic highlight film. Toasts and full reception edits scale up by tier.",
+    },
+    {
+      question: "Can we add drone coverage?",
+      answer:
+        "Yes. Drone is included in The Covenant and The Legacy tiers, and available as an add-on for The Vow where venue permits flight.",
     },
   ],
   finalCta: {
@@ -229,13 +292,28 @@ export default async function WeddingsPage() {
     },
   };
 
+  // MKT-K: 1 thumbnail per tier card pulled from FRAME WEDDING galleries
+  // (deterministic, indexed). Falls back to text-only cards if FRAME has
+  // fewer than 4 wedding galleries published.
+  const tierThumbs: PackageTierThumb[] | undefined =
+    dynamicGalleries.length >= 4
+      ? dynamicGalleries.slice(0, 4).map((g) => ({
+          cfImageId: g.coverCfImageId,
+          alt: g.coverAlt,
+        }))
+      : undefined;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <LandingPageLayout content={finalContent} />
+      <LandingPageLayout
+        content={finalContent}
+        afterIntro={<PackageTiers thumbs={tierThumbs} />}
+        beforeFinalCta={<TrustStrip />}
+      />
     </>
   );
 }

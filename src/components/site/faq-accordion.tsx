@@ -54,7 +54,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className={`font-body text-base leading-relaxed text-ink/70 ${
+                  <p className={`whitespace-pre-line font-body text-base leading-relaxed text-ink/70 ${
                     isOpen ? "py-4" : ""
                   }`}>
                     {item.answer}

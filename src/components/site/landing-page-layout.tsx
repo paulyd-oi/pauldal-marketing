@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -30,6 +31,16 @@ export interface LandingPageContent {
   pricingSummary?: {
     cards: { label: string; value: string }[];
     note: string;
+  };
+  // Richer investment block — used in place of pricingSummary when a page
+  // has multiple distinct products (e.g. /weddings: elopements vs full
+  // films vs photo+video bundles). When both are set, investmentBlock wins.
+  investmentBlock?: {
+    products: {
+      eyebrow: string;
+      priceLabel: string;
+      description: string;
+    }[];
   };
   intro: {
     eyebrow: string;
@@ -71,7 +82,20 @@ export interface LandingPageContent {
   };
 }
 
-export function LandingPageLayout({ content }: { content: LandingPageContent }) {
+interface LandingPageLayoutProps {
+  content: LandingPageContent;
+  // Optional injection slots — render between sections without forcing
+  // every page to bake in the same shape. /weddings uses these for the
+  // package tier section (afterIntro) and the trust-strip (beforeFinalCta).
+  afterIntro?: ReactNode;
+  beforeFinalCta?: ReactNode;
+}
+
+export function LandingPageLayout({
+  content,
+  afterIntro,
+  beforeFinalCta,
+}: LandingPageLayoutProps) {
   return (
     <>
       {/* Hero — full-bleed photo */}
@@ -115,8 +139,42 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
         </div>
       </section>
 
-      {/* Pricing summary — editorial list (optional) */}
-      {content.pricingSummary && (
+      {/* Investment block — multi-product editorial (optional, takes precedence) */}
+      {content.investmentBlock && (
+        <section className="bg-paper py-24 lg:py-32">
+          <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+            <div className="border-y border-hairline py-12 lg:py-16">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+                <Reveal>
+                  <p className="font-body text-xs uppercase tracking-widest text-ink/50">
+                    Investment
+                  </p>
+                </Reveal>
+                <div className="max-w-2xl space-y-12 lg:space-y-14">
+                  {content.investmentBlock.products.map((product, i) => (
+                    <Reveal key={product.eyebrow} delay={i * 0.1}>
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50">
+                          {product.eyebrow}
+                        </p>
+                        <p className="mt-3 font-display text-3xl leading-snug tracking-tight text-ink lg:text-4xl">
+                          {product.priceLabel}
+                        </p>
+                        <p className="mt-4 font-body text-base leading-relaxed text-ink/70 lg:text-lg">
+                          {product.description}
+                        </p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Pricing summary — editorial list (optional, fallback when no investmentBlock) */}
+      {!content.investmentBlock && content.pricingSummary && (
         <section className="bg-paper py-24 lg:py-32">
           <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
             <div className="border-y border-hairline py-12 lg:py-16">
@@ -189,6 +247,8 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
           </div>
         </div>
       </section>
+
+      {afterIntro}
 
       {/* Gallery */}
       <section className="bg-paper py-24 lg:py-32">
@@ -320,6 +380,8 @@ export function LandingPageLayout({ content }: { content: LandingPageContent }) 
             bgVariant={content.testimonial.bgVariant ?? "cream"}
           />
         ))}
+
+      {beforeFinalCta}
 
       {/* Final CTA */}
       <section className="bg-ink py-24 lg:py-32">

@@ -159,7 +159,7 @@ const content: LandingPageContent = {
     {
       question: "How quickly do we get the photos?",
       answer:
-        "Galleries deliver in two to four weeks depending on coverage length. Same-day teaser frames are available as an add-on if you need something to post that night.",
+        "Galleries deliver in four to six weeks depending on coverage length. Same-day teaser frames are available as an add-on if you need something to post that night.",
     },
     {
       question: "Can you turn around a recap video fast?",

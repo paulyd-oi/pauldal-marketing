@@ -7,6 +7,8 @@ import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
 import { AsymmetricPanel } from "@/components/site/asymmetric-panel";
+import { TrustStrip } from "@/components/site/trust-strip";
+import { AuthorityStrip } from "@/components/home/authority-strip";
 import {
   getFeaturedHomepageGalleries,
   pickByDate,
@@ -60,6 +62,7 @@ export default async function Home() {
           gridGalleries={gridGalleries}
         />
       )}
+      <AuthorityStrip />
       <SectionDivider />
       {/* TODO: replace with real homepage testimonial */}
       <MarqueeTestimonial
@@ -72,6 +75,7 @@ export default async function Home() {
       <AboutTeaser />
       <ServicesTeaser />
       <PortfolioTeaser />
+      <TrustStrip />
       {/* TODO: Swap to real case study when first feature is ready */}
       <AsymmetricPanel
         eyebrow="FEATURED WORK"

@@ -28,6 +28,37 @@ const SERVICE_PARAM_TO_PROJECT_TYPE: Record<string, (typeof PROJECT_TYPES)[numbe
   editorial: "Editorial",
 };
 
+const WEDDING_TIER_LABELS: Record<string, string> = {
+  elopement: "The Elopement Film",
+  vow: "The Vow",
+  covenant: "The Covenant",
+  legacy: "The Legacy",
+};
+
+const WEDDING_BUDGET_OPTIONS = [
+  "Under $4K",
+  "$4–$6K",
+  "$6–$10K",
+  "$10K+",
+  "Not sure yet",
+] as const;
+
+const GENERIC_BUDGET_OPTIONS = [
+  "Under $1,500",
+  "$1,500–$3,000",
+  "$3,000–$5,000",
+  "$5,000–$7,500",
+  "$7,500+",
+] as const;
+
+const GUEST_COUNT_OPTIONS = [
+  "Under 50",
+  "50–100",
+  "100–150",
+  "150–250",
+  "250+",
+] as const;
+
 type FormState = {
   status: "idle" | "submitting" | "success" | "error";
   errorMessage?: string;
@@ -37,10 +68,16 @@ type FormState = {
 export function BookForm() {
   const searchParams = useSearchParams();
   const serviceParam = searchParams?.get("service")?.toLowerCase() ?? "";
+  const tierParam = searchParams?.get("tier")?.toLowerCase() ?? "";
   const initialProjectType = SERVICE_PARAM_TO_PROJECT_TYPE[serviceParam] ?? "";
+  const initialTier =
+    tierParam && WEDDING_TIER_LABELS[tierParam] ? tierParam : "";
 
   const [state, setState] = useState<FormState>({ status: "idle" });
   const [projectType, setProjectType] = useState<string>(initialProjectType);
+  const [dateFlexible, setDateFlexible] = useState<boolean>(false);
+
+  const isWeddingMode = projectType === "Weddings";
 
   useEffect(() => {
     if (state.status === "success" && typeof window !== "undefined") {
@@ -86,13 +123,26 @@ export function BookForm() {
 
     if (projectType) payload.projectType = projectType.toLowerCase();
 
-    if (eventDate) payload.eventDate = new Date(eventDate).toISOString();
+    if (eventDate && !dateFlexible) {
+      payload.eventDate = new Date(eventDate).toISOString();
+    }
+    if (dateFlexible) payload.dateFlexible = true;
 
     const location = fd.get("location") as string;
     if (location) payload.location = location;
 
     const budget = fd.get("budget") as string;
     if (budget) payload.budget = budget;
+
+    if (isWeddingMode) {
+      const partnerName = fd.get("partnerName") as string;
+      if (partnerName) payload.partnerName = partnerName;
+
+      const guestCount = fd.get("guestCount") as string;
+      if (guestCount) payload.guestCount = guestCount;
+
+      if (initialTier) payload.tier = initialTier;
+    }
 
     if (document.referrer) payload.referrer = document.referrer;
 
@@ -181,10 +231,23 @@ export function BookForm() {
         aria-hidden="true"
       />
 
+      {/* Tier banner — surfaces when arriving from a wedding tier card */}
+      {isWeddingMode && initialTier && WEDDING_TIER_LABELS[initialTier] && (
+        <div className="border-l-2 border-oxblood bg-cream-hover px-4 py-3">
+          <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
+            Inquiring about
+          </p>
+          <p className="mt-1 font-display text-lg text-ink">
+            {WEDDING_TIER_LABELS[initialTier]}
+          </p>
+        </div>
+      )}
+
       {/* Name */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Name <span className="text-oxblood">*</span>
+          {isWeddingMode ? "Your name" : "Name"}{" "}
+          <span className="text-oxblood">*</span>
         </span>
         <input
           name="name"
@@ -198,6 +261,21 @@ export function BookForm() {
           </p>
         )}
       </label>
+
+      {/* Partner's name — wedding-only */}
+      {isWeddingMode && (
+        <label className="block">
+          <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
+            Partner&apos;s name <span className="text-oxblood">*</span>
+          </span>
+          <input
+            name="partnerName"
+            type="text"
+            required
+            className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
+          />
+        </label>
+      )}
 
       {/* Email */}
       <label className="block">
@@ -269,59 +347,109 @@ export function BookForm() {
       {/* Budget */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Project budget
+          {isWeddingMode ? "Wedding budget" : "Project budget"}{" "}
+          {isWeddingMode && <span className="text-oxblood">*</span>}
         </span>
         <select
           name="budget"
           defaultValue=""
+          required={isWeddingMode}
           className="focus-ring-tight w-full appearance-none border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
         >
-          <option value="">Discuss with you</option>
-          <option value="Under $1,500">Under $1,500</option>
-          <option value="$1,500–$3,000">$1,500–$3,000</option>
-          <option value="$3,000–$5,000">$3,000–$5,000</option>
-          <option value="$5,000–$7,500">$5,000–$7,500</option>
-          <option value="$7,500+">$7,500+</option>
+          <option value="">
+            {isWeddingMode ? "Select a range" : "Discuss with you"}
+          </option>
+          {(isWeddingMode ? WEDDING_BUDGET_OPTIONS : GENERIC_BUDGET_OPTIONS).map(
+            (b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ),
+          )}
         </select>
         <p className="mt-2 font-body text-xs text-ink/50">
-          Helps me match the right package to your project.
+          {isWeddingMode
+            ? "Helps me match the right film tier to your day."
+            : "Helps me match the right package to your project."}
         </p>
       </label>
 
-      {/* Event date */}
-      <label className="block">
-        <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Event date
-        </span>
-        <input
-          name="eventDate"
-          type="date"
-          min={todayISODate()}
-          aria-invalid={!!state.fieldErrors?.eventDate}
-          aria-describedby={
-            state.fieldErrors?.eventDate ? "eventDate-error" : undefined
-          }
-          className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
-        />
-        {state.fieldErrors?.eventDate && (
-          <p
-            id="eventDate-error"
-            className="mt-2 font-body text-sm text-oxblood"
+      {/* Guest count — wedding-only */}
+      {isWeddingMode && (
+        <label className="block">
+          <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
+            Estimated guest count <span className="text-oxblood">*</span>
+          </span>
+          <select
+            name="guestCount"
+            defaultValue=""
+            required
+            className="focus-ring-tight w-full appearance-none border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood"
           >
-            {state.fieldErrors.eventDate}
-          </p>
-        )}
-      </label>
+            <option value="">Select a range</option>
+            {GUEST_COUNT_OPTIONS.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
-      {/* Location */}
+      {/* Event / wedding date + flexible checkbox */}
+      <div>
+        <label className="block">
+          <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
+            {isWeddingMode ? "Wedding date" : "Event date"}
+          </span>
+          <input
+            name="eventDate"
+            type="date"
+            min={todayISODate()}
+            disabled={dateFlexible}
+            aria-invalid={!!state.fieldErrors?.eventDate}
+            aria-describedby={
+              state.fieldErrors?.eventDate ? "eventDate-error" : undefined
+            }
+            className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors focus:border-oxblood disabled:opacity-50"
+          />
+          {state.fieldErrors?.eventDate && (
+            <p
+              id="eventDate-error"
+              className="mt-2 font-body text-sm text-oxblood"
+            >
+              {state.fieldErrors.eventDate}
+            </p>
+          )}
+        </label>
+        <label className="mt-3 inline-flex cursor-pointer items-center gap-2">
+          <input
+            type="checkbox"
+            checked={dateFlexible}
+            onChange={(e) => setDateFlexible(e.target.checked)}
+            className="h-4 w-4 cursor-pointer accent-oxblood"
+          />
+          <span className="font-body text-sm text-ink/70">
+            Date is still flexible
+          </span>
+        </label>
+      </div>
+
+      {/* Venue / city / location */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Location
+          {isWeddingMode ? "Venue / city" : "Location"}{" "}
+          {isWeddingMode && <span className="text-oxblood">*</span>}
         </span>
         <input
           name="location"
           type="text"
-          placeholder="San Diego, Encinitas, etc."
+          required={isWeddingMode}
+          placeholder={
+            isWeddingMode
+              ? "Venue name, or city if undecided"
+              : "San Diego, Encinitas, etc."
+          }
           className="focus-ring-tight w-full border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood"
         />
       </label>
@@ -329,13 +457,20 @@ export function BookForm() {
       {/* Message */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
-          Message <span className="text-oxblood">*</span>
+          {isWeddingMode
+            ? "What's most important to you about your wedding film?"
+            : "Message"}{" "}
+          {!isWeddingMode && <span className="text-oxblood">*</span>}
         </span>
         <textarea
           name="message"
-          required
+          required={!isWeddingMode}
           rows={6}
-          placeholder="What are you planning? Dates, venues, vibe. Anything you want to share."
+          placeholder={
+            isWeddingMode
+              ? "The moments you can't miss, the feel you're chasing, anything you want me to know."
+              : "What are you planning? Dates, venues, vibe. Anything you want to share."
+          }
           className="focus-ring-tight w-full resize-y border-b border-hairline bg-transparent px-0 py-3 font-body text-base text-ink transition-colors placeholder:text-muted-foreground/50 focus:border-oxblood"
         />
         {state.fieldErrors?.message && (

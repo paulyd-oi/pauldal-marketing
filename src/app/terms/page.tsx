@@ -92,14 +92,14 @@ export default function TermsPage() {
             <Reveal delay={0.1}>
               <div>
                 <h2 className="mb-4 font-display text-2xl text-ink lg:text-3xl">
-                  Deposit
+                  Retainer
                 </h2>
                 <p>
-                  A 25% retainer locks the date. The remaining balance is paid
-                  in instalments that finish two weeks before the shoot for
-                  weddings, or seven days before the event for everything else.
-                  Cards and bank transfer are both accepted. There is no fee
-                  for splitting payments.
+                  A 50% non-refundable retainer locks the date. The remaining
+                  balance is paid in instalments that finish two weeks before
+                  the shoot for weddings, or seven days before the event for
+                  everything else. Cards and bank transfer are both accepted.
+                  There is no fee for splitting payments.
                 </p>
               </div>
             </Reveal>

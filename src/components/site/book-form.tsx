@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { captureUtmData } from "@/lib/utm-capture";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -152,10 +153,28 @@ export function BookForm() {
       if (initialTier) payload.tier = initialTier;
     }
 
-    if (document.referrer) payload.referrer = document.referrer;
+    // Marketing attribution — pulled from sessionStorage if the visitor
+    // landed earlier on /weddings or another page, otherwise from the
+    // current URL. The seed write happens at landing time via the
+    // <AttributionCapture /> component mounted in the root layout.
+    const utm = captureUtmData();
+    if (utm.utmSource) payload.utmSource = utm.utmSource;
+    if (utm.utmMedium) payload.utmMedium = utm.utmMedium;
+    if (utm.utmCampaign) payload.utmCampaign = utm.utmCampaign;
+    if (utm.utmContent) payload.utmContent = utm.utmContent;
+    if (utm.utmTerm) payload.utmTerm = utm.utmTerm;
+    if (utm.gclid) payload.gclid = utm.gclid;
+    if (utm.fbclid) payload.fbclid = utm.fbclid;
+    if (utm.landingPath) payload.landingPath = utm.landingPath;
+    if (utm.referrer) payload.referrer = utm.referrer;
+    else if (document.referrer) payload.referrer = document.referrer;
 
-    const honeypot = fd.get("company_website") as string;
-    if (honeypot) payload.honeypot = true;
+    // Honeypots — both legacy `company_website` (mapped to `honeypot=true`)
+    // and the new contract `website` field. FRAME silent-blocks either.
+    const honeypotLegacy = fd.get("company_website") as string;
+    if (honeypotLegacy) payload.honeypot = true;
+    const honeypotWebsite = fd.get("website") as string;
+    payload.website = honeypotWebsite ?? "";
 
     // Generate event_id for CAPI dedup. The same id is sent client-side
     // via fbq below and server-side via FRAME's CAPI handler — Meta
@@ -176,7 +195,7 @@ export function BookForm() {
         body: JSON.stringify(payload),
       });
 
-      if (res.status === 201 || (res.ok && (await res.json()).ok)) {
+      if (res.status === 201) {
         // Fire client-side Lead pixel with the same event_id — Meta dedupes
         // against the server-side CAPI Lead event in FRAME's /api/leads.
         if (typeof window !== "undefined") {
@@ -196,6 +215,26 @@ export function BookForm() {
           }
         }
         setState({ status: "success" });
+        return;
+      }
+
+      if (res.status === 200) {
+        // Honeypot triggered upstream → FRAME returns 200 with id:"blocked".
+        // Show success to the caller so a bot can't tell it was caught;
+        // do NOT fire the Pixel Lead event for blocked submissions.
+        const body = (await res.json()) as { id?: string };
+        if (body?.id === "blocked") {
+          setState({ status: "success" });
+          return;
+        }
+      }
+
+      if (res.status === 429) {
+        setState({
+          status: "error",
+          errorMessage:
+            "You're submitting too quickly. Please wait a minute and try again.",
+        });
         return;
       }
 
@@ -258,10 +297,19 @@ export function BookForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8" noValidate>
-      {/* Honeypot */}
+      {/* Honeypots — invisible to humans, bots auto-fill any visible text
+          input. Both fields trigger a silent block at /api/leads. */}
       <input
         type="text"
         name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        className="absolute left-[-9999px]"
+        aria-hidden="true"
+      />
+      <input
+        type="text"
+        name="website"
         tabIndex={-1}
         autoComplete="off"
         className="absolute left-[-9999px]"

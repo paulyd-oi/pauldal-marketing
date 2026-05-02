@@ -5,8 +5,9 @@ import { Reveal } from "@/components/site/reveal";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 
-const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
-const OG_IMAGE = `${CF}/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public`;
+// Cache-bust query param — increment when shipping new OG image so iMessage,
+// Slack, Facebook, and Twitter re-fetch instead of serving stale OG cache.
+const OG_IMAGE = "/og-paul-dal.jpg?v=2";
 
 export const metadata: Metadata = {
   title: "Wedding Films Portfolio | Paul Dal Studios",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Paul Dal Studios wedding films portfolio",
+        alt: "Paul Dal — San Diego photographer and videographer",
       },
     ],
   },

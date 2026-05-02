@@ -16,8 +16,9 @@ import {
 
 export const revalidate = 60;
 
-const OG_IMAGE =
-  "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
+// Cache-bust query param — increment when shipping new OG image so iMessage,
+// Slack, Facebook, and Twitter re-fetch instead of serving stale OG cache.
+const OG_IMAGE = "/og-paul-dal.jpg?v=2";
 
 export const metadata: Metadata = {
   title: "Paul Dal Studios — Photography is how I pay attention",
@@ -25,19 +26,24 @@ export const metadata: Metadata = {
     "Paul Dal Studios — San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
   alternates: { canonical: "https://pauldalstudios.com" },
   openGraph: {
-    title: "Paul Dal Studios — Photography is how I pay attention",
-    description:
-      "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
+    title: "San Diego Photographer & Videographer",
+    description: "pauldalstudios.com",
     url: "https://pauldalstudios.com",
     siteName: "Paul Dal Studios",
     type: "website",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios — San Diego hybrid photographer and videographer" }],
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Paul Dal — San Diego photographer and videographer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paul Dal Studios — Photography is how I pay attention",
-    description:
-      "San Diego hybrid photographer and videographer. Weddings, events, business, editorial. 200+ events documented. Available worldwide.",
+    title: "San Diego Photographer & Videographer",
+    description: "pauldalstudios.com",
     images: [OG_IMAGE],
   },
 };

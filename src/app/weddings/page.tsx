@@ -8,6 +8,7 @@ import {
   type PackageTierThumb,
 } from "@/components/weddings/package-tiers";
 import { TrustStrip } from "@/components/site/trust-strip";
+import { WeddingsPageView } from "@/components/analytics/weddings-page-view";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 import { buildCategoryPageMetadata } from "@/lib/seo";
 
@@ -309,6 +310,7 @@ export default async function WeddingsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      <WeddingsPageView />
       <LandingPageLayout
         content={finalContent}
         afterIntro={<PackageTiers thumbs={tierThumbs} />}

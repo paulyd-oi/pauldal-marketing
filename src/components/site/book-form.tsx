@@ -10,6 +10,14 @@ function todayISODate() {
   return new Date().toISOString().split("T")[0];
 }
 
+function readCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.match(
+    new RegExp("(^|; )" + name + "=([^;]+)"),
+  );
+  return match ? match[2] : undefined;
+}
+
 const API_BASE =
   process.env.NEXT_PUBLIC_FRAME_API_URL ?? "https://app.pauldalstudios.com";
 
@@ -149,6 +157,17 @@ export function BookForm() {
     const honeypot = fd.get("company_website") as string;
     if (honeypot) payload.honeypot = true;
 
+    // Generate event_id for CAPI dedup. The same id is sent client-side
+    // via fbq below and server-side via FRAME's CAPI handler — Meta
+    // dedupes within 48hrs based on (event_name, event_id).
+    const eventId = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+    payload.eventId = eventId;
+
+    const fbc = readCookie("_fbc");
+    const fbp = readCookie("_fbp");
+    if (fbc) payload.fbc = fbc;
+    if (fbp) payload.fbp = fbp;
+
     try {
       const res = await fetch(`${API_BASE}/api/leads`, {
         method: "POST",
@@ -158,6 +177,24 @@ export function BookForm() {
       });
 
       if (res.status === 201 || (res.ok && (await res.json()).ok)) {
+        // Fire client-side Lead pixel with the same event_id — Meta dedupes
+        // against the server-side CAPI Lead event in FRAME's /api/leads.
+        if (typeof window !== "undefined") {
+          const fbq = (window as { fbq?: (...args: unknown[]) => void }).fbq;
+          if (typeof fbq === "function") {
+            fbq(
+              "track",
+              "Lead",
+              {
+                content_name: projectType.toLowerCase() || "unspecified",
+                content_category: initialTier || "unspecified",
+                value: 0,
+                currency: "USD",
+              },
+              { eventID: eventId },
+            );
+          }
+        }
         setState({ status: "success" });
         return;
       }

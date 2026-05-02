@@ -4,6 +4,7 @@ import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { SocialProofBadge } from "@/components/site/social-proof-badge";
 import { MetaPixel } from "@/components/analytics/meta-pixel";
+import { AttributionCapture } from "@/components/site/attribution-capture";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -98,6 +99,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <MetaPixel />
+        <AttributionCapture />
         <div className="grain min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">{children}</main>

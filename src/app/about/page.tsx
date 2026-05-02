@@ -29,7 +29,7 @@ const BEAT_2_BODY =
   "Serving in church unlocked a real passion for storytelling. I believe creativity, photo, and video are gifts God has given me. Because of that, this work has never really felt like work. I genuinely love what I get to do, especially when it blesses people, preserves meaningful moments, and helps others see the beauty in what they lived through.";
 
 const BEAT_3_BODY =
-  "Since then in San Diego, I have served as creative director, led photo teams, directed and contributed to film projects, helped shoot a pilot episode, captured more than 200 events, and documented over 70 weddings. That same experience now carries into weddings, engagements, events, brands, and editorial work through Paul Dal Studios. I work fluently across both photography and video with a documentary eye, an editorial finish, and a craft I am still actively growing.";
+  "Since then in San Diego, I have served as creative director, led photo teams, directed and contributed to film projects, helped shoot a pilot episode, captured more than 200 events, and documented over 70 weddings. That same experience now carries into weddings, engagements, events, brands, and editorial work through Paul Dal Studios. I work fluently across both photography and video with a cinematic eye, an editorial finish, and a craft I am still actively growing.";
 
 export default async function AboutPage() {
   const [

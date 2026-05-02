@@ -20,12 +20,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Milestone Celebration Photography San Diego — Paul Dal Studios",
     description:
-      "Quinceañera, Sweet 16, milestone birthday photography by Paul Dal Studios. Documentary-style coverage that captures the joy, the family, the details. San Diego based.",
+      "Quinceañera, Sweet 16, milestone birthday photography by Paul Dal Studios. Cinematic coverage that captures the joy, the family, the details. San Diego based.",
     alternates: { canonical: "https://pauldalstudios.com/milestones" },
     openGraph: {
       title: "Milestone Celebration Photography — Paul Dal Studios",
       description:
-        "Quinceañeras, Sweet 16s, milestone birthdays. Documentary-style coverage. San Diego based.",
+        "Quinceañeras, Sweet 16s, milestone birthdays. Cinematic coverage. San Diego based.",
       url: "https://pauldalstudios.com/milestones",
       siteName: "Paul Dal Studios",
       type: "website",
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Milestone Celebration Photography — Paul Dal Studios",
       description:
-        "Quinceañeras, Sweet 16s, milestone birthdays. Documentary-style coverage. San Diego based.",
+        "Quinceañeras, Sweet 16s, milestone birthdays. Cinematic coverage. San Diego based.",
       images: [ogImage],
     },
   };
@@ -66,7 +66,7 @@ export default async function MilestonesPage() {
     },
     intro: {
       eyebrow: "About this work",
-      headline: "Documentary coverage that captures the joy.",
+      headline: "Cinematic coverage that captures the joy.",
       paragraphs: [
         "Family portraits, candid moments on the dance floor, the small details that took months to plan — milestone celebrations have so many threads, and the goal is to weave them together into a complete story you'll want to revisit.",
         "Four to six hours of coverage typically. Online gallery delivered in three weeks. Full hi-res downloads with a print release for everything in the family. Custom durations available for multi-day celebrations.",

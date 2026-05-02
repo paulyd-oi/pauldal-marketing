@@ -70,7 +70,7 @@ Hybrid coverage with editorial photography included.
 
 ## Locked invariants
 
-- Voice on /weddings: cinematic register. No "documentary" language.
+- Voice on /weddings: cinematic register only. (Site-wide sweep 2026-05-02 retired the deprecated docu-style framing — do not reintroduce.)
 - No "flexible pricing" / "inquire for details" copy anywhere public.
 - Do not mention Bethany Hamilton (no endorsement permission).
 - Lead pipe: form posts to `https://app.pauldalstudios.com/api/leads` (FRAME).

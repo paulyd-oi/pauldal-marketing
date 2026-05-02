@@ -86,11 +86,11 @@ export default async function Home() {
       <AsymmetricPanel
         eyebrow="FEATURED WORK"
         pullQuote="He shows up early, watches everything, then quietly catches the moments nobody asks him to catch."
-        body="Full-day documentary coverage. Photo and video by one team. Delivered in twelve days."
+        body="Full-day cinematic coverage. Photo and video by one team. Delivered in twelve days."
         ctaLabel="See more work"
         ctaHref="/portfolio"
         imageId="09079dde-3a23-4762-83e7-31fd9aab2600"
-        imageAlt="Featured wedding documentary work by Paul Dal Studios"
+        imageAlt="Featured wedding cinematic work by Paul Dal Studios"
         photoSide="right"
         panelVariant="ink"
       />

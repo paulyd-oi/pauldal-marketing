@@ -6,7 +6,6 @@ import { PortfolioTeaser } from "@/components/site/portfolio-teaser";
 import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
-import { AsymmetricPanel } from "@/components/site/asymmetric-panel";
 import { FavoritesMarquee } from "@/components/site/favorites-marquee";
 import { TrustStrip } from "@/components/site/trust-strip";
 import { AuthorityStrip } from "@/components/home/authority-strip";
@@ -84,31 +83,20 @@ export default async function Home() {
       <ServicesTeaser />
       <PortfolioTeaser />
       <TrustStrip />
-      {/* Featured Work — right column is a continuous marquee scroll of all
-          curated favorites pulled from FRAME. Replaces the prior single
-          static image so the section reads as range, not as one tile.
-          imageId/imageAlt remain on the panel as a fallback if photoSlot
-          is ever omitted. */}
-      <AsymmetricPanel
-        eyebrow="FEATURED WORK"
-        pullQuote="He shows up early, watches everything, then quietly catches the moments nobody asks him to catch."
-        body="Full-day cinematic coverage. Photo and video by one team. Delivered in twelve days."
-        ctaLabel="See more work"
-        ctaHref="/portfolio"
-        imageId="09079dde-3a23-4762-83e7-31fd9aab2600"
-        imageAlt="Featured wedding cinematic work by Paul Dal Studios"
-        photoSide="right"
-        panelVariant="ink"
-        photoSlot={
-          <FavoritesMarquee
-            category="ALL"
-            durationSeconds={60}
-            heightPx={500}
-            mobileHeightPx={320}
-            direction="left"
-          />
-        }
-      />
+      {/* Featured Work — full-bleed favorites marquee. The dark left
+          panel ("He shows up early...") was placeholder copy and has
+          been removed; the marquee speaks for itself across the full
+          container width. AsymmetricPanel component is now unused on
+          this page but kept in the codebase for potential future reuse. */}
+      <section className="bg-paper">
+        <FavoritesMarquee
+          category="ALL"
+          durationSeconds={60}
+          heightPx={500}
+          mobileHeightPx={320}
+          direction="left"
+        />
+      </section>
       <SectionDivider />
       <ClosingCTA />
     </>

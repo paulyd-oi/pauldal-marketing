@@ -211,7 +211,7 @@ export function FavoritesMarquee({
             transform: translateX(0);
           }
           to {
-            transform: translateX(calc(-50% - ${gapPx / 2}px));
+            transform: translateX(-50%);
           }
         }
       `}</style>

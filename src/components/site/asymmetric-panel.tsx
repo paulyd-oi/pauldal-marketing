@@ -63,8 +63,14 @@ export function AsymmetricPanel({
 
   const photoEl = (
     <div className="relative h-full min-h-[300px] w-full">
+      {/* /preview is the full-resolution named variant in this CF Images
+          config. Flexible variants (e.g. /w=1200,h=1400,fit=cover) are
+          disabled on the account — they return 403 and Vercel proxies
+          a 502 to the browser. The container's object-cover + min-h
+          handle visible crop, so the named variant is visually
+          equivalent for this tile. */}
       <Image
-        src={`${CF_BASE}/${imageId}/w=1200,h=1400,fit=cover`}
+        src={`${CF_BASE}/${imageId}/preview`}
         alt={imageAlt}
         fill
         sizes="(min-width: 768px) 50vw, 100vw"

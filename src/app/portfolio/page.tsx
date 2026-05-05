@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
+import { AmbientBackplate } from "@/components/site/ambient-backplate";
 import { getPortfolioGalleries } from "@/lib/portfolio-public";
 
 // Cache-bust query param — increment when shipping new OG image so iMessage,
@@ -44,22 +45,24 @@ export default async function PortfolioPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-paper py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+      {/* Hero — ambient cycling reel of public favorites */}
+      <section className="relative h-[70vh] min-h-[600px] w-full overflow-hidden bg-ink">
+        <AmbientBackplate category="ALL" priorityFirst />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
+        <div className="relative z-10 mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/70">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70">
                 Portfolio
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-ink lg:text-8xl">
+              <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-paper lg:text-8xl">
                 Recent work.
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-paper/80 lg:text-lg">
                 A selection of weddings, events, and editorial projects. Full
                 archive available on request.
               </p>
@@ -69,7 +72,7 @@ export default async function PortfolioPage() {
       </section>
 
       {/* Grid or empty state */}
-      <section className="bg-paper pb-24 lg:pb-32">
+      <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           {galleries.length === 0 ? (
             <Reveal>

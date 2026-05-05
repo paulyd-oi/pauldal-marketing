@@ -13,6 +13,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { AmbientBackplate } from "./ambient-backplate";
 
 export type HomepageHeroGallery = {
   id: string;
@@ -24,22 +25,33 @@ export type HomepageHeroGallery = {
 interface Props {
   heroGallery: HomepageHeroGallery;
   gridGalleries: HomepageHeroGallery[];
+  // When true, the static heroGallery cover is replaced with the
+  // AmbientBackplate cycling reel pulled from FRAME's photographer
+  // favorites (category=ALL — mixed wedding/event/etc. for homepage
+  // variety). The bottom-up gradient + motion text stay intact in
+  // both modes. Default false so Storybook + future consumers keep
+  // the static-image behavior.
+  useAmbient?: boolean;
 }
 
-export function HomepageHero({ heroGallery, gridGalleries }: Props) {
+export function HomepageHero({ heroGallery, gridGalleries, useAmbient = false }: Props) {
   return (
     <>
       {/* Full-bleed primary cover */}
       <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden bg-ink">
-        <Image
-          src={heroGallery.coverImageUrl}
-          alt={heroGallery.coverAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
+        {useAmbient ? (
+          <AmbientBackplate category="ALL" priorityFirst />
+        ) : (
+          <Image
+            src={heroGallery.coverImageUrl}
+            alt={heroGallery.coverAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

@@ -8,9 +8,12 @@ import Image from "next/image";
 // AsymmetricPanel — replaces the single static image with a slow drift
 // of all curated work.
 //
-// previewUrl (full-resolution variant) — same choice as AmbientBackplate
-// post-quality-fix PR #12. unoptimized bypasses Vercel re-encoding so the
-// CF Images-tuned JPEG passes through without artifacts.
+// thumbnailUrl (smaller CF Images variant) — marquee cells are
+// decorative-sized (~750px wide desktop, smaller on mobile) so the
+// full-resolution preview variant is overkill and was causing periodic
+// decode hitches as new images entered the viewport during scroll.
+// AmbientBackplate keeps previewUrl since it's a true full-bleed hero.
+// unoptimized bypasses Vercel re-encoding (CF Images already tunes).
 //
 // prefers-reduced-motion subscribed via useSyncExternalStore; reduced-motion
 // path freezes the scroll entirely (static strip).
@@ -111,7 +114,7 @@ export function FavoritesMarquee({
         const data = (await res.json()) as { items?: FavoriteItem[] };
         if (cancelled) return;
         const filtered = filterByCategory(data.items ?? [], category).filter(
-          (i) => !!i.previewUrl,
+          (i) => !!i.thumbnailUrl,
         );
         setItems(shuffle(filtered));
         setLoading(false);
@@ -168,7 +171,7 @@ export function FavoritesMarquee({
         }}
       >
         {doubledItems.map((item, idx) => {
-          const url = item.previewUrl;
+          const url = item.thumbnailUrl;
           if (!url) return null;
           return (
             <div

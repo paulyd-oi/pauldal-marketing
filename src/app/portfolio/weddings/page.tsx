@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
+import { AmbientBackplate } from "@/components/site/ambient-backplate";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 
 // Cache-bust query param — increment when shipping new OG image so iMessage,
@@ -46,13 +47,15 @@ export default async function WeddingsPortfolioPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-paper py-24 lg:py-32">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
+      {/* Hero — ambient cycling reel of wedding favorites */}
+      <section className="relative h-[70vh] min-h-[600px] w-full overflow-hidden bg-ink">
+        <AmbientBackplate category="WEDDING" priorityFirst />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
+        <div className="relative z-10 mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <Reveal>
             <Link
               href="/portfolio"
-              className="focus-ring group mb-8 inline-flex items-center font-body text-xs uppercase tracking-widest text-ink/50 transition-colors hover:text-ink"
+              className="focus-ring group mb-8 inline-flex items-center font-body text-xs uppercase tracking-widest text-paper/60 transition-colors hover:text-paper"
             >
               <ArrowLeft className="mr-2 h-3 w-3 transition-transform group-hover:-translate-x-1" />
               All work
@@ -60,17 +63,17 @@ export default async function WeddingsPortfolioPage() {
           </Reveal>
           <div className="max-w-3xl">
             <Reveal delay={0.05}>
-              <p className="mb-6 font-body text-xs uppercase tracking-widest text-ink/70">
+              <p className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70">
                 Wedding Films
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-ink lg:text-8xl">
+              <h1 className="mb-8 font-display text-5xl leading-[1.05] tracking-tight text-paper lg:text-8xl">
                 Wedding Films — Paul Dal Studios.
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="max-w-xl font-body text-base leading-relaxed text-ink lg:text-lg">
+              <p className="max-w-xl font-body text-base leading-relaxed text-paper/80 lg:text-lg">
                 Selected work from 70+ weddings in San Diego and beyond.
               </p>
             </Reveal>
@@ -79,7 +82,7 @@ export default async function WeddingsPortfolioPage() {
       </section>
 
       {/* Grid or empty state */}
-      <section className="bg-paper pb-24 lg:pb-32">
+      <section className="bg-paper py-24 lg:py-32">
         <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
           {galleries.length === 0 ? (
             <Reveal>

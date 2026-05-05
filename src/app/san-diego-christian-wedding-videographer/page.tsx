@@ -5,13 +5,13 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { FAQAccordion } from "@/components/site/faq-accordion";
 import { TrustStrip } from "@/components/site/trust-strip";
+import { AmbientBackplate } from "@/components/site/ambient-backplate";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 import { buildCategoryPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
 const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
-const HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
 const INTRO_CF_ID = "271ed8b4-2732-4272-1a92-2a4b31f42b00";
 const PRIMARY_CTA_HREF = "/book?service=weddings&source=christian-seo";
 const SECONDARY_CTA_HREF = "/portfolio/weddings";
@@ -188,13 +188,11 @@ const faqItems = [
 
 export default async function ChristianWeddingVideographerPage() {
   const dynamicGalleries = await getGalleriesByCategory("WEDDING");
-  const heroGallery = dynamicGalleries[0];
+  // Hero is now an AmbientBackplate cycling reel — heroGallery is no longer
+  // needed for a static cover photo. introGallery still provides the intro
+  // section's photo.
   const introGallery = dynamicGalleries[1];
 
-  const heroPhotoCfId = heroGallery?.coverCfImageId ?? HERO_CF_ID;
-  const heroPhotoAlt =
-    heroGallery?.coverAlt ??
-    "Christian wedding ceremony coverage by Paul Dal Studios in San Diego";
   const introPhotoCfId = introGallery?.coverCfImageId ?? INTRO_CF_ID;
   const introPhotoAlt =
     introGallery?.coverAlt ??
@@ -209,17 +207,10 @@ export default async function ChristianWeddingVideographerPage() {
         }}
       />
 
-      {/* HERO */}
+      {/* HERO — ambient cycling reel of wedding favorites */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-ink lg:h-[90vh]">
-        <Image
-          src={`${CF_BASE}/${heroPhotoCfId}/public`}
-          alt={heroPhotoAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
+        <AmbientBackplate category="WEDDING" priorityFirst />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
         <div className="relative mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <Reveal>
             <p className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70">

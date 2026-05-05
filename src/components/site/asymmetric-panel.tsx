@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "./reveal";
@@ -14,6 +15,13 @@ type AsymmetricPanelProps = {
   imageAlt: string;
   photoSide?: "left" | "right";
   panelVariant?: "ink" | "oxblood" | "cream";
+  /**
+   * Replace the image side with arbitrary content (e.g. a marquee carousel
+   * of curated favorites). Default omitted → behavior unchanged: the
+   * imageId-based <Image> still renders. When provided, imageId/imageAlt
+   * are ignored.
+   */
+  photoSlot?: ReactNode;
 };
 
 const PANEL_BG_CLASSES = {
@@ -38,6 +46,7 @@ export function AsymmetricPanel({
   imageAlt,
   photoSide = "right",
   panelVariant = "ink",
+  photoSlot,
 }: AsymmetricPanelProps) {
   const photoOnRight = photoSide === "right";
   const panelBg = PANEL_BG_CLASSES[panelVariant];
@@ -61,7 +70,13 @@ export function AsymmetricPanel({
     </div>
   );
 
-  const photoEl = (
+  const photoEl = photoSlot ? (
+    // Caller-supplied content (e.g. a FavoritesMarquee). The slot owns
+    // its own intrinsic height; this wrapper just provides the grid cell
+    // and clips overflow so a marquee's wider-than-cell track doesn't
+    // burst the layout.
+    <div className="relative w-full overflow-hidden">{photoSlot}</div>
+  ) : (
     <div className="relative h-full min-h-[300px] w-full">
       {/* /preview is the full-resolution named variant in this CF Images
           config. Flexible variants (e.g. /w=1200,h=1400,fit=cover) are
@@ -79,10 +94,18 @@ export function AsymmetricPanel({
     </div>
   );
 
+  // When photoSlot is supplied, drop the fixed min-h so the row height is
+  // driven by the slot (e.g. a 500px marquee) instead of leaving dead
+  // space below it. The static-image branch keeps the editorial 600/700
+  // floor so the prior layout doesn't shift.
+  const gridMinH = photoSlot
+    ? "min-h-[400px] md:min-h-[500px]"
+    : "min-h-[600px] lg:min-h-[700px]";
+
   return (
     <Reveal>
       <section className="w-full">
-        <div className="grid min-h-[600px] grid-cols-1 md:grid-cols-2 lg:min-h-[700px]">
+        <div className={`grid ${gridMinH} grid-cols-1 md:grid-cols-2`}>
           {photoOnRight ? (
             <>
               {panelEl}

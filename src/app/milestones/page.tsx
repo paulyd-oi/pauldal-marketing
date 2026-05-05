@@ -87,5 +87,5 @@ export default async function MilestonesPage() {
     },
   };
 
-  return <LandingPageLayout content={content} />;
+  return <LandingPageLayout content={content} ambientCategory="ALL" />;
 }

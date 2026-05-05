@@ -30,8 +30,12 @@ export function PhotoFlankedHeading({
 
   const photoCol = (
     <div className="relative mx-auto aspect-[3/4] w-full max-w-md">
+      {/* /preview is the full-resolution named variant. Flexible
+          variants (/w=…,h=…,fit=cover) are disabled on this CF Images
+          account — they return 403 and Vercel proxies a 502. The
+          parent's aspect-[3/4] + object-cover handle visible crop. */}
       <Image
-        src={`${CF_BASE}/${imageId}/w=900,h=1200,fit=cover`}
+        src={`${CF_BASE}/${imageId}/preview`}
         alt={imageAlt}
         fill
         sizes="(min-width: 768px) 40vw, 100vw"

@@ -10,6 +10,7 @@ import { SectionDivider } from "./section-divider";
 import { PhotoFlankedHeading } from "./photo-flanked-heading";
 import { FAQAccordion } from "./faq-accordion";
 import { ProcessSteps } from "./process-steps";
+import { AmbientBackplate } from "./ambient-backplate";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
@@ -89,26 +90,39 @@ interface LandingPageLayoutProps {
   // package tier section (afterIntro) and the trust-strip (beforeFinalCta).
   afterIntro?: ReactNode;
   beforeFinalCta?: ReactNode;
+  // Ambient backplate switch. When set, the hero swaps the static
+  // content.hero.photoCfImageId background for a curated cycling reel
+  // pulled from FRAME's photographer-favorite catalog. Default omitted
+  // so existing pages keep their static-image hero unchanged.
+  ambientCategory?: "ALL" | "WEDDING" | "ENGAGEMENT";
 }
 
 export function LandingPageLayout({
   content,
   afterIntro,
   beforeFinalCta,
+  ambientCategory,
 }: LandingPageLayoutProps) {
   return (
     <>
-      {/* Hero — full-bleed photo */}
+      {/* Hero — full-bleed photo, optionally an ambient cycling reel.
+          The bottom-up gradient stays in both modes so headline copy at
+          the bottom of the section keeps its contrast band — the
+          AmbientBackplate's flat overlay is mid-strength by design. */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-ink lg:h-[90vh]">
-        <Image
-          src={`${CF}/${content.hero.photoCfImageId}/public`}
-          alt={content.hero.photoAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
+        {ambientCategory ? (
+          <AmbientBackplate category={ambientCategory} priorityFirst />
+        ) : (
+          <Image
+            src={`${CF}/${content.hero.photoCfImageId}/public`}
+            alt={content.hero.photoAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
         <div className="relative mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <Reveal>
             <p className="mb-6 font-body text-xs uppercase tracking-widest text-paper/70">

@@ -313,6 +313,7 @@ export default async function WeddingsPage() {
       <WeddingsPageView />
       <LandingPageLayout
         content={finalContent}
+        ambientCategory="WEDDING"
         afterIntro={<PackageTiers thumbs={tierThumbs} />}
         beforeFinalCta={<TrustStrip />}
       />

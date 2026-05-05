@@ -113,8 +113,14 @@ export function AmbientBackplate({
         }
         const data = (await res.json()) as { items?: FavoriteItem[] };
         if (cancelled) return;
+        // Filter on previewUrl: in this Cloudflare Images config the
+        // "preview" variant is the full-resolution one (~430KB at 4242px
+        // long edge) while "public" is sized small (~38KB) for cards.
+        // Counter-intuitive given the variable names, but matches the
+        // operator-configured CF Images variants — and matches what the
+        // client-facing /gallery/[token] page uses for full-size renders.
         const filtered = filterByCategory(data.items ?? [], category).filter(
-          (i) => !!i.publicUrl,
+          (i) => !!i.previewUrl,
         );
         setItems(shuffle(filtered));
         setLoading(false);
@@ -158,7 +164,9 @@ export function AmbientBackplate({
       {items.map((item, idx) => {
         const isActive = idx === activeIdx;
         const opacity = item.overlayOpacity ?? 0.4;
-        const url = item.publicUrl;
+        // previewUrl is the full-resolution CF Images variant in this
+        // operator's config — see the load() effect comment above.
+        const url = item.previewUrl;
         if (!url) return null;
         return (
           <div
@@ -178,12 +186,18 @@ export function AmbientBackplate({
                   : `pds-ambient-kenburns ${zoomDuration} ease-in-out infinite alternate`,
               }}
             >
+              {/* unoptimized: bypass Vercel's _next/image re-encoding.
+                  CF Images already delivers a tuned variant at the
+                  source; an extra Vercel re-encode adds visible JPEG
+                  artifacts on full-bleed cinematic photography for no
+                  bandwidth win. fill + object-cover handle layout. */}
               <Image
                 src={url}
                 alt=""
                 fill
                 priority={idx === 0 && priorityFirst}
                 sizes="100vw"
+                unoptimized
                 className="object-cover"
               />
             </div>

@@ -7,6 +7,7 @@ import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
 import { AsymmetricPanel } from "@/components/site/asymmetric-panel";
+import { FavoritesMarquee } from "@/components/site/favorites-marquee";
 import { TrustStrip } from "@/components/site/trust-strip";
 import { AuthorityStrip } from "@/components/home/authority-strip";
 import {
@@ -83,7 +84,11 @@ export default async function Home() {
       <ServicesTeaser />
       <PortfolioTeaser />
       <TrustStrip />
-      {/* TODO: Swap to real case study when first feature is ready */}
+      {/* Featured Work — right column is a continuous marquee scroll of all
+          curated favorites pulled from FRAME. Replaces the prior single
+          static image so the section reads as range, not as one tile.
+          imageId/imageAlt remain on the panel as a fallback if photoSlot
+          is ever omitted. */}
       <AsymmetricPanel
         eyebrow="FEATURED WORK"
         pullQuote="He shows up early, watches everything, then quietly catches the moments nobody asks him to catch."
@@ -94,6 +99,15 @@ export default async function Home() {
         imageAlt="Featured wedding cinematic work by Paul Dal Studios"
         photoSide="right"
         panelVariant="ink"
+        photoSlot={
+          <FavoritesMarquee
+            category="ALL"
+            durationSeconds={60}
+            heightPx={500}
+            mobileHeightPx={320}
+            direction="left"
+          />
+        }
       />
       <SectionDivider />
       <ClosingCTA />

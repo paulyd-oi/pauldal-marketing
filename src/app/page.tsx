@@ -66,6 +66,7 @@ export default async function Home() {
         <HomepageHero
           heroGallery={heroGallery}
           gridGalleries={gridGalleries}
+          useAmbient
         />
       )}
       <AuthorityStrip />

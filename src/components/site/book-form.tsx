@@ -84,7 +84,7 @@ export function BookForm() {
 
   const [state, setState] = useState<FormState>({ status: "idle" });
   const [projectType, setProjectType] = useState<string>(initialProjectType);
-  const [dateFlexible, setDateFlexible] = useState<boolean>(false);
+  const [weddingFlexible, setDateFlexible] = useState<boolean>(false);
 
   const isWeddingMode = projectType === "Weddings";
 
@@ -132,10 +132,10 @@ export function BookForm() {
 
     if (projectType) payload.projectType = projectType.toLowerCase();
 
-    if (eventDate && !dateFlexible) {
+    if (eventDate && !weddingFlexible) {
       payload.eventDate = new Date(eventDate).toISOString();
     }
-    if (dateFlexible) payload.dateFlexible = true;
+    if (weddingFlexible) payload.weddingFlexible = true;
 
     const location = fd.get("location") as string;
     if (location) payload.location = location;
@@ -149,6 +149,14 @@ export function BookForm() {
 
       const guestCount = fd.get("guestCount") as string;
       if (guestCount) payload.guestCount = guestCount;
+
+      // Audit C-4: the wedding-mode "What's most important" textarea uses
+      // name="message" so FRAME's generic min-10 validation passes; we
+      // also mirror the value into whatsMostImportant so FRAME's wedding-
+      // specific column captures the answer (the marketing form has no
+      // separate textarea for this — same text, two destinations).
+      const message = fd.get("message") as string;
+      if (message) payload.whatsMostImportant = message;
 
       if (initialTier) payload.tier = initialTier;
     }
@@ -491,7 +499,7 @@ export function BookForm() {
             name="eventDate"
             type="date"
             min={todayISODate()}
-            disabled={dateFlexible}
+            disabled={weddingFlexible}
             aria-invalid={!!state.fieldErrors?.eventDate}
             aria-describedby={
               state.fieldErrors?.eventDate ? "eventDate-error" : undefined
@@ -510,7 +518,7 @@ export function BookForm() {
         <label className="mt-3 inline-flex cursor-pointer items-center gap-2">
           <input
             type="checkbox"
-            checked={dateFlexible}
+            checked={weddingFlexible}
             onChange={(e) => setDateFlexible(e.target.checked)}
             className="h-4 w-4 cursor-pointer accent-oxblood"
           />
@@ -539,17 +547,24 @@ export function BookForm() {
         />
       </label>
 
-      {/* Message */}
+      {/* Message — required for every projectType. For wedding mode the
+          label shifts to the higher-signal "What's most important to you"
+          phrasing; the captured text is sent both as `message` (FRAME's
+          generic Zod min(10) field) and as `whatsMostImportant` (FRAME's
+          wedding-specific column). Audit fix C-4: was previously
+          required={!isWeddingMode} which let wedding leads submit empty
+          and silently 400 on FRAME's min-10 server validation. */}
       <label className="block">
         <span className="mb-2 block font-body text-xs uppercase tracking-widest text-muted-foreground">
           {isWeddingMode
             ? "What's most important to you about your wedding film?"
             : "Message"}{" "}
-          {!isWeddingMode && <span className="text-oxblood">*</span>}
+          <span className="text-oxblood">*</span>
         </span>
         <textarea
           name="message"
-          required={!isWeddingMode}
+          required
+          minLength={10}
           rows={6}
           placeholder={
             isWeddingMode

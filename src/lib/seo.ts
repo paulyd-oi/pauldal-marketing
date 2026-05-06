@@ -5,7 +5,7 @@ import {
 } from "./portfolio-public";
 
 const SITE_NAME = "Paul Dal Studios";
-const SITE_URL = "https://pauldalstudios.com";
+const SITE_URL = "https://www.pauldalstudios.com";
 const CF_BASE = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 

@@ -21,12 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Headshots & Personal Branding San Diego — Paul Dal Studios",
     description:
       "Professional headshots that look like you on your best day. LinkedIn portraits, personal branding shoots, polished web-ready files. San Diego based.",
-    alternates: { canonical: "https://pauldalstudios.com/headshots" },
+    alternates: { canonical: "https://www.pauldalstudios.com/headshots" },
     openGraph: {
       title: "Headshots & Personal Branding — Paul Dal Studios",
       description:
         "Professional headshots that look like you on your best day. San Diego based.",
-      url: "https://pauldalstudios.com/headshots",
+      url: "https://www.pauldalstudios.com/headshots",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Headshot photography by Paul Dal Studios" }],

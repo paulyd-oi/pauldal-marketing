@@ -35,9 +35,9 @@ const serviceJsonLd = {
   "@graph": [
     {
       "@type": "LocalBusiness",
-      "@id": "https://pauldalstudios.com/#business",
+      "@id": "https://www.pauldalstudios.com/#business",
       name: "Paul Dal Studios",
-      url: "https://pauldalstudios.com",
+      url: "https://www.pauldalstudios.com",
       address: {
         "@type": "PostalAddress",
         addressLocality: "San Diego",
@@ -53,7 +53,7 @@ const serviceJsonLd = {
     {
       "@type": "Service",
       name: "Wedding Videography",
-      provider: { "@id": "https://pauldalstudios.com/#business" },
+      provider: { "@id": "https://www.pauldalstudios.com/#business" },
       areaServed: "San Diego, California",
       offers: {
         "@type": "Offer",

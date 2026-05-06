@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   description:
     "Selected wedding film work from Paul Dal Studios. 70+ weddings documented across San Diego and beyond. Cinematic films from $4,995.",
   alternates: {
-    canonical: "https://pauldalstudios.com/portfolio/weddings",
+    canonical: "https://www.pauldalstudios.com/portfolio/weddings",
   },
   openGraph: {
     title: "Wedding Films Portfolio — Paul Dal Studios",
     description:
       "Selected wedding film work from Paul Dal Studios. 70+ weddings documented across San Diego and beyond.",
-    url: "https://pauldalstudios.com/portfolio/weddings",
+    url: "https://www.pauldalstudios.com/portfolio/weddings",
     siteName: "Paul Dal Studios",
     type: "website",
     images: [

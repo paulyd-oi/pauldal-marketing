@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Book",
   description:
     "Tell Paul about your project — weddings, events, business, editorial photography in San Diego and worldwide. Response within 24 hours.",
-  alternates: { canonical: "https://pauldalstudios.com/book" },
+  alternates: { canonical: "https://www.pauldalstudios.com/book" },
   openGraph: {
     title: "Book — Paul Dal Studios",
     description:
       "Tell me about what you're planning. I'll reply within 24 hours.",
-    url: "https://pauldalstudios.com/book",
+    url: "https://www.pauldalstudios.com/book",
     siteName: "Paul Dal Studios",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],

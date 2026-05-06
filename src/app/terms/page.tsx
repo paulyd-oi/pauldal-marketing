@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Terms",
   description:
     "Plain-language terms for Paul Dal Studios. Booking, deposits, deliverables, copyright.",
-  alternates: { canonical: "https://pauldalstudios.com/terms" },
+  alternates: { canonical: "https://www.pauldalstudios.com/terms" },
   openGraph: {
     title: "Terms — Paul Dal Studios",
     description:
       "Plain-language terms for Paul Dal Studios. Booking, deposits, deliverables, copyright.",
-    url: "https://pauldalstudios.com/terms",
+    url: "https://www.pauldalstudios.com/terms",
     siteName: "Paul Dal Studios",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],

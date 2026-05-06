@@ -22,12 +22,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Milestone Celebration Photography San Diego — Paul Dal Studios",
     description:
       "Quinceañera, Sweet 16, milestone birthday photography by Paul Dal Studios. Cinematic coverage that captures the joy, the family, the details. San Diego based.",
-    alternates: { canonical: "https://pauldalstudios.com/milestones" },
+    alternates: { canonical: "https://www.pauldalstudios.com/milestones" },
     openGraph: {
       title: "Milestone Celebration Photography — Paul Dal Studios",
       description:
         "Quinceañeras, Sweet 16s, milestone birthdays. Cinematic coverage. San Diego based.",
-      url: "https://pauldalstudios.com/milestones",
+      url: "https://www.pauldalstudios.com/milestones",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Milestone celebration photography by Paul Dal Studios" }],

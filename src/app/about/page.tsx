@@ -64,7 +64,7 @@ export default async function AboutPage() {
       addressRegion: "CA",
       addressCountry: "US",
     },
-    url: "https://pauldalstudios.com/about",
+    url: "https://www.pauldalstudios.com/about",
     sameAs: [
       "https://instagram.com/pauldalstudio",
       "https://www.linkedin.com/in/paul-dal-4571443b7/",

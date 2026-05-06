@@ -52,12 +52,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Brand Photography San Diego — Paul Dal Studios",
     description:
       "Brand photography and video by Paul Dal Studios. Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands. San Diego based.",
-    alternates: { canonical: "https://pauldalstudios.com/brand-content" },
+    alternates: { canonical: "https://www.pauldalstudios.com/brand-content" },
     openGraph: {
       title: "Brand Photography San Diego — Paul Dal Studios",
       description:
         "Headshots, brand sessions, hybrid photo + video for founders, agencies, creator brands. San Diego based.",
-      url: "https://pauldalstudios.com/brand-content",
+      url: "https://www.pauldalstudios.com/brand-content",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Brand photography by Paul Dal Studios in San Diego" }],

@@ -21,12 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Live Performance Photography San Diego — Paul Dal Studios",
     description:
       "Concert, worship night, tour photography by Paul Dal Studios. Comfortable in low-light venues, fast-paced sets, behind-the-scenes moments. San Diego based.",
-    alternates: { canonical: "https://pauldalstudios.com/performances" },
+    alternates: { canonical: "https://www.pauldalstudios.com/performances" },
     openGraph: {
       title: "Live Performance Photography — Paul Dal Studios",
       description:
         "Concerts, worship nights, tours. Comfortable in low-light venues. San Diego based.",
-      url: "https://pauldalstudios.com/performances",
+      url: "https://www.pauldalstudios.com/performances",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Performance photography by Paul Dal Studios" }],

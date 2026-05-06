@@ -23,12 +23,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Engagement Photography San Diego — Paul Dal Studios",
     description:
       "Engagement photography by Paul Dal Studios. Coast, vineyard, or somewhere meaningful — find a setting that feels true to you. San Diego based, available worldwide.",
-    alternates: { canonical: "https://pauldalstudios.com/engagements" },
+    alternates: { canonical: "https://www.pauldalstudios.com/engagements" },
     openGraph: {
       title: "Engagement Photography San Diego — Paul Dal Studios",
       description:
         "Engagement sessions in settings that feel true to you. San Diego based, available worldwide.",
-      url: "https://pauldalstudios.com/engagements",
+      url: "https://www.pauldalstudios.com/engagements",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Engagement photography by Paul Dal Studios" }],

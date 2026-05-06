@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Wedding, event, business, and editorial photography + video by Paul Dal Studios. San Diego hybrid creative. Packages and process.",
-  alternates: { canonical: "https://pauldalstudios.com/services" },
+  alternates: { canonical: "https://www.pauldalstudios.com/services" },
   openGraph: {
     title: "Services — Paul Dal Studios",
     description:
       "Wedding, event, business, and editorial photography + video by Paul Dal Studios. San Diego hybrid creative.",
-    url: "https://pauldalstudios.com/services",
+    url: "https://www.pauldalstudios.com/services",
     siteName: "Paul Dal Studios",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],

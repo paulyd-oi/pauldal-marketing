@@ -4,7 +4,7 @@ import {
   CATEGORY_SLUGS,
 } from "@/lib/portfolio-public";
 
-const BASE_URL = "https://pauldalstudios.com";
+const BASE_URL = "https://www.pauldalstudios.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
@@ -13,8 +13,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: BASE_URL, priority: 1.0, changeFrequency: "weekly" },
     { url: `${BASE_URL}/about`, priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/portfolio`, priority: 0.9, changeFrequency: "weekly" },
+    { url: `${BASE_URL}/portfolio/weddings`, priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/services`, priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/book`, priority: 0.8, changeFrequency: "monthly" },
+    {
+      url: `${BASE_URL}/san-diego-christian-wedding-videographer`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+    },
     { url: `${BASE_URL}/privacy`, priority: 0.3, changeFrequency: "yearly" },
     { url: `${BASE_URL}/terms`, priority: 0.3, changeFrequency: "yearly" },
   ];

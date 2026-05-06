@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Privacy",
   description:
     "How Paul Dal Studios handles inquiry data. Plain language, no dark patterns.",
-  alternates: { canonical: "https://pauldalstudios.com/privacy" },
+  alternates: { canonical: "https://www.pauldalstudios.com/privacy" },
   openGraph: {
     title: "Privacy — Paul Dal Studios",
     description:
       "How Paul Dal Studios handles inquiry data. Plain language, no dark patterns.",
-    url: "https://pauldalstudios.com/privacy",
+    url: "https://www.pauldalstudios.com/privacy",
     siteName: "Paul Dal Studios",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Paul Dal Studios" }],

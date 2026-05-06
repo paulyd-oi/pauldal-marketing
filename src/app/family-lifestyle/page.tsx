@@ -22,12 +22,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Family & Lifestyle Photography San Diego — Paul Dal Studios",
     description:
       "Family sessions, lifestyle shoots, candid moments at home or in your favorite outdoor spots. Photography that captures who your family is right now.",
-    alternates: { canonical: "https://pauldalstudios.com/family-lifestyle" },
+    alternates: { canonical: "https://www.pauldalstudios.com/family-lifestyle" },
     openGraph: {
       title: "Family & Lifestyle Photography — Paul Dal Studios",
       description:
         "Family sessions and lifestyle shoots that capture who your family is right now. San Diego based.",
-      url: "https://pauldalstudios.com/family-lifestyle",
+      url: "https://www.pauldalstudios.com/family-lifestyle",
       siteName: "Paul Dal Studios",
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: "Family & lifestyle photography by Paul Dal Studios" }],

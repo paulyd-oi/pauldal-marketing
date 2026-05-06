@@ -35,6 +35,13 @@ export function MetaPixel() {
         id="meta-pixel-base"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
+          // Audit C-5: PageView is intentionally NOT fired here. The
+          // MetaPixelTracker effect below owns every PageView (initial
+          // mount + every client-side route change), giving Meta exactly
+          // one PageView per route. Firing here AND in the tracker
+          // double-counted every initial pageview, polluting all
+          // conversion math from the moment ad spend starts. fbq('init')
+          // stays so the queue is set up before the tracker effect runs.
           __html: `
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -45,7 +52,6 @@ export function MetaPixel() {
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${pixelId}');
-            fbq('track', 'PageView');
           `,
         }}
       />

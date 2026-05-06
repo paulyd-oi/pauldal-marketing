@@ -91,7 +91,7 @@ export default async function Home() {
       <section className="bg-paper">
         <FavoritesMarquee
           category="ALL"
-          durationSeconds={150}
+          durationSeconds={180}
           heightPx={500}
           mobileHeightPx={320}
           direction="left"

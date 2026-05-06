@@ -580,9 +580,15 @@ export function BookForm() {
         )}
       </label>
 
-      {/* Error banner */}
+      {/* Error banner — role=alert + aria-live=polite so screen readers
+          announce form-submission errors as they appear without yanking
+          focus from the field the user is currently in (audit fix 7). */}
       {state.status === "error" && state.errorMessage && (
-        <div className="border border-oxblood bg-oxblood/5 p-4">
+        <div
+          role="alert"
+          aria-live="polite"
+          className="border border-oxblood bg-oxblood/5 p-4"
+        >
           <p className="font-body text-sm text-oxblood">{state.errorMessage}</p>
         </div>
       )}

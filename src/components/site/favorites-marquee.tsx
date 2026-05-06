@@ -176,14 +176,16 @@ export function FavoritesMarquee({
   const gapPx = 16;
 
   return (
+    // Decorative atmospheric drift — not interactive content. Marked
+    // aria-hidden so screen readers skip the entire reel rather than
+    // narrating "carousel, item 1 of 26..." for each cycle. Audit fix 6.
     <div
       className={`relative overflow-hidden marquee-root ${className}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
-      aria-label="Featured photography"
-      aria-roledescription="carousel"
+      aria-hidden="true"
     >
       <div
         className="flex marquee-track"
@@ -204,8 +206,6 @@ export function FavoritesMarquee({
               key={`${item.id}-${idx}`}
               className="flex-shrink-0 marquee-item bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${url})` }}
-              role="img"
-              aria-label=""
             />
           );
         })}

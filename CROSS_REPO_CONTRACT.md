@@ -125,9 +125,14 @@ See `prisma/schema.prisma` model `Lead`. Persisted columns include:
 Service-aware. If `projectType === "weddings"`, fires
 `INQUIRY_AUTO_REPLY_WEDDING` template (DB-edited via the FRAME admin UI;
 hardcoded fallback in `src/lib/email-templates.ts`). Smart-field tokens:
-`{{name}}`, `{{wedding_date}}`, `{{venue}}`, `{{calendly_link}}`,
-`{{pdf_link}}`, `{{sample_films_link}}`. Other project types fire the
-legacy `INQUIRY_AUTO_REPLY` template.
+`{{name}}`, `{{wedding_date}}`, `{{venue}}`, `{{pdf_link}}`,
+`{{sample_films_link}}`. Other project types fire the legacy
+`INQUIRY_AUTO_REPLY` template.
+
+`{{calendly_link}}` was removed in the Mega-5 sprint when the operator
+switched the wedding auto-reply to a 24-hour manual follow-up flow. The
+dormant Calendly webhook + Lead.callScheduled / calendlyEventUri /
+scheduledAt columns are preserved if Calendly is ever re-enabled.
 
 ### CAPI
 

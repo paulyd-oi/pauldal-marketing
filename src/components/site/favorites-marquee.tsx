@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import Image from "next/image";
 
 // Continuous horizontal marquee scroll of public favorites pulled from
 // FRAME's /api/public/favorites endpoint. Drop-in for the right column of
 // AsymmetricPanel — replaces the single static image with a slow drift
 // of all curated work.
+//
+// Photos render as CSS background-images on plain divs (not <Image />)
+// so the compositor thread isn't shouldering 52 Next/Image lifecycles
+// during a transform animation. GPU-painted pixels in a transform-
+// animated track is the canonical performant marquee pattern.
 //
 // thumbnailUrl (smaller CF Images variant) — marquee cells are
 // decorative-sized (~750px wide desktop, smaller on mobile) so the
@@ -176,18 +180,11 @@ export function FavoritesMarquee({
           return (
             <div
               key={`${item.id}-${idx}`}
-              className="relative flex-shrink-0 overflow-hidden marquee-item"
-            >
-              <Image
-                src={url}
-                alt=""
-                fill
-                priority={idx < 4}
-                sizes={`${photoWidth}px`}
-                unoptimized
-                className="object-cover"
-              />
-            </div>
+              className="flex-shrink-0 marquee-item bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${url})` }}
+              role="img"
+              aria-label=""
+            />
           );
         })}
       </div>

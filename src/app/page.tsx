@@ -7,6 +7,7 @@ import { ClosingCTA } from "@/components/site/closing-cta";
 import { SectionDivider } from "@/components/site/section-divider";
 import { MarqueeTestimonial } from "@/components/site/marquee-testimonial";
 import { FavoritesMarquee } from "@/components/site/favorites-marquee";
+import { getFavorites } from "@/lib/favorites";
 import { TrustStrip } from "@/components/site/trust-strip";
 import { AuthorityStrip } from "@/components/home/authority-strip";
 import {
@@ -53,7 +54,10 @@ export default async function Home() {
   // rotation through featuredOnHomepage galleries) + scroll-revealing
   // grid of additional covers below. Falls back to all galleries if
   // none are flagged for homepage curation.
-  const homepageGalleries = await getFeaturedHomepageGalleries();
+  const [homepageGalleries, favorites] = await Promise.all([
+    getFeaturedHomepageGalleries(),
+    getFavorites(),
+  ]);
   const heroGallery =
     pickByDate(homepageGalleries) ?? homepageGalleries[0] ?? null;
   const gridGalleries = heroGallery
@@ -67,6 +71,7 @@ export default async function Home() {
           heroGallery={heroGallery}
           gridGalleries={gridGalleries}
           useAmbient
+          initialFavorites={favorites}
         />
       )}
       <AuthorityStrip />
@@ -90,6 +95,7 @@ export default async function Home() {
           this page but kept in the codebase for potential future reuse. */}
       <section className="bg-paper">
         <FavoritesMarquee
+          initialItems={favorites}
           category="ALL"
           durationSeconds={240}
           heightPx={500}

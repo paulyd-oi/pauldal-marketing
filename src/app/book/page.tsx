@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Reveal } from "@/components/site/reveal";
 import { BookForm } from "@/components/site/book-form";
 import { AmbientBackplate } from "@/components/site/ambient-backplate";
+import { getFavorites, filterByCategory } from "@/lib/favorites";
 
 const OG_IMAGE =
   "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public";
@@ -30,12 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BookPage() {
+export default async function BookPage() {
+  const initialFavorites = filterByCategory(await getFavorites(), "WEDDING");
   return (
     <>
       {/* Hero — ambient cycling reel of wedding favorites */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden bg-ink">
-        <AmbientBackplate category="WEDDING" priorityFirst />
+        <AmbientBackplate
+          category="WEDDING"
+          initialItems={initialFavorites}
+          priorityFirst
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
         <div className="relative z-10 mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-12 lg:px-12 lg:pb-20">
           <div className="max-w-2xl">

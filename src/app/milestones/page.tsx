@@ -7,6 +7,7 @@ import {
   getGalleriesByCategory,
   getLatestGalleryByCategory,
 } from "@/lib/portfolio-public";
+import { getFavorites } from "@/lib/favorites";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 const PLACEHOLDER_HERO_CF_ID = "6227ea99-0217-4ef4-35bc-247a9ee7cd00";
@@ -42,9 +43,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MilestonesPage() {
-  const [latest, all] = await Promise.all([
+  const [latest, all, initialFavorites] = await Promise.all([
     getLatestGalleryByCategory("MILESTONE_CELEBRATION"),
     getGalleriesByCategory("MILESTONE_CELEBRATION"),
+    getFavorites(),
   ]);
 
   const heroCfId = latest?.coverCfImageId ?? PLACEHOLDER_HERO_CF_ID;
@@ -87,5 +89,11 @@ export default async function MilestonesPage() {
     },
   };
 
-  return <LandingPageLayout content={content} ambientCategory="ALL" />;
+  return (
+    <LandingPageLayout
+      content={content}
+      ambientCategory="ALL"
+      initialFavorites={initialFavorites}
+    />
+  );
 }

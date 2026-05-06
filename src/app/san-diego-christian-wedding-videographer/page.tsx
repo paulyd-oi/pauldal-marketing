@@ -7,6 +7,7 @@ import { FAQAccordion } from "@/components/site/faq-accordion";
 import { TrustStrip } from "@/components/site/trust-strip";
 import { AmbientBackplate } from "@/components/site/ambient-backplate";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
+import { getFavorites, filterByCategory } from "@/lib/favorites";
 import { buildCategoryPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -187,7 +188,11 @@ const faqItems = [
 ];
 
 export default async function ChristianWeddingVideographerPage() {
-  const dynamicGalleries = await getGalleriesByCategory("WEDDING");
+  const [dynamicGalleries, allFavorites] = await Promise.all([
+    getGalleriesByCategory("WEDDING"),
+    getFavorites(),
+  ]);
+  const initialFavorites = filterByCategory(allFavorites, "WEDDING");
   // Hero is now an AmbientBackplate cycling reel — heroGallery is no longer
   // needed for a static cover photo. introGallery still provides the intro
   // section's photo.
@@ -209,7 +214,11 @@ export default async function ChristianWeddingVideographerPage() {
 
       {/* HERO — ambient cycling reel of wedding favorites */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-ink lg:h-[90vh]">
-        <AmbientBackplate category="WEDDING" priorityFirst />
+        <AmbientBackplate
+          category="WEDDING"
+          initialItems={initialFavorites}
+          priorityFirst
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/15 to-transparent" />
         <div className="relative mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <Reveal>

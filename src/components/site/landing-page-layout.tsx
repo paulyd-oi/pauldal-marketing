@@ -11,6 +11,7 @@ import { PhotoFlankedHeading } from "./photo-flanked-heading";
 import { FAQAccordion } from "./faq-accordion";
 import { ProcessSteps } from "./process-steps";
 import { AmbientBackplate } from "./ambient-backplate";
+import type { FavoriteItem } from "@/lib/favorites";
 
 const CF = "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw";
 
@@ -95,6 +96,10 @@ interface LandingPageLayoutProps {
   // pulled from FRAME's photographer-favorite catalog. Default omitted
   // so existing pages keep their static-image hero unchanged.
   ambientCategory?: "ALL" | "WEDDING" | "ENGAGEMENT";
+  // Server-fetched favorites (already filtered for the page's category)
+  // passed straight through to AmbientBackplate. When provided the hero
+  // ships with image URLs in the HTML and skips the client-side fetch.
+  initialFavorites?: FavoriteItem[];
 }
 
 export function LandingPageLayout({
@@ -102,6 +107,7 @@ export function LandingPageLayout({
   afterIntro,
   beforeFinalCta,
   ambientCategory,
+  initialFavorites,
 }: LandingPageLayoutProps) {
   return (
     <>
@@ -111,7 +117,11 @@ export function LandingPageLayout({
           AmbientBackplate's flat overlay is mid-strength by design. */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-ink lg:h-[90vh]">
         {ambientCategory ? (
-          <AmbientBackplate category={ambientCategory} priorityFirst />
+          <AmbientBackplate
+            category={ambientCategory}
+            initialItems={initialFavorites}
+            priorityFirst
+          />
         ) : (
           <Image
             src={`${CF}/${content.hero.photoCfImageId}/public`}

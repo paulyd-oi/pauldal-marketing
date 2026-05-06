@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AmbientBackplate } from "./ambient-backplate";
+import type { FavoriteItem } from "@/lib/favorites";
 
 export type HomepageHeroGallery = {
   id: string;
@@ -32,15 +33,27 @@ interface Props {
   // both modes. Default false so Storybook + future consumers keep
   // the static-image behavior.
   useAmbient?: boolean;
+  // Server-fetched favorites passed through to AmbientBackplate.
+  // Eliminates the client-side fetch wait on first paint.
+  initialFavorites?: FavoriteItem[];
 }
 
-export function HomepageHero({ heroGallery, gridGalleries, useAmbient = false }: Props) {
+export function HomepageHero({
+  heroGallery,
+  gridGalleries,
+  useAmbient = false,
+  initialFavorites,
+}: Props) {
   return (
     <>
       {/* Full-bleed primary cover */}
       <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden bg-ink">
         {useAmbient ? (
-          <AmbientBackplate category="ALL" priorityFirst />
+          <AmbientBackplate
+            category="ALL"
+            initialItems={initialFavorites}
+            priorityFirst
+          />
         ) : (
           <Image
             src={heroGallery.coverImageUrl}

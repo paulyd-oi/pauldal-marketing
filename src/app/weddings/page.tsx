@@ -11,6 +11,7 @@ import { TrustStrip } from "@/components/site/trust-strip";
 import { WeddingsPageView } from "@/components/analytics/weddings-page-view";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
 import { buildCategoryPageMetadata } from "@/lib/seo";
+import { getFavorites, filterByCategory } from "@/lib/favorites";
 
 export const revalidate = 60;
 
@@ -264,7 +265,11 @@ export default async function WeddingsPage() {
   // WEDDING category. Each section uses a different gallery so visitors
   // see varied work. Falls back to the curated hardcoded ids if zero
   // wedding galleries are tagged on FRAME.
-  const dynamicGalleries = await getGalleriesByCategory("WEDDING");
+  const [dynamicGalleries, allFavorites] = await Promise.all([
+    getGalleriesByCategory("WEDDING"),
+    getFavorites(),
+  ]);
+  const initialFavorites = filterByCategory(allFavorites, "WEDDING");
   const latestGallery = dynamicGalleries[0];
   const secondGallery = dynamicGalleries[1];
   const dynamicPhotos = dynamicGalleries.slice(0, 6).map((g) => ({
@@ -314,6 +319,7 @@ export default async function WeddingsPage() {
       <LandingPageLayout
         content={finalContent}
         ambientCategory="WEDDING"
+        initialFavorites={initialFavorites}
         afterIntro={<PackageTiers thumbs={tierThumbs} />}
         beforeFinalCta={<TrustStrip />}
       />

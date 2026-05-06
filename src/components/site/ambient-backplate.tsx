@@ -32,6 +32,15 @@ interface FavoriteItem {
 }
 
 interface AmbientBackplateProps {
+  /**
+   * Server-fetched favorites passed in by the page (see src/lib/favorites.ts).
+   * When non-empty the client-side fetch effect is a no-op — HTML ships
+   * with the first image URL already inlined so the hero paints
+   * immediately. Empty (or omitted) falls back to the original client
+   * fetch so dev hot-reload + transient FRAME outages still degrade
+   * gracefully.
+   */
+  initialItems?: FavoriteItem[];
   category?: CategoryFilter;
   className?: string;
   cycleSeconds?: number;
@@ -84,15 +93,26 @@ function filterByCategory(
 }
 
 export function AmbientBackplate({
+  initialItems,
   category = "ALL",
   className = "",
   cycleSeconds = 9,
   kenBurnsScale = 0.03,
   priorityFirst = true,
 }: AmbientBackplateProps) {
-  const [items, setItems] = useState<FavoriteItem[]>([]);
+  // Seed state from server-fetched items when present. previewUrl is the
+  // full-resolution CF Images variant in this operator's config (see
+  // /gallery/[token] for the same convention).
+  const seededItems =
+    initialItems && initialItems.length > 0
+      ? shuffle(
+          filterByCategory(initialItems, category).filter((i) => !!i.previewUrl),
+        )
+      : [];
+
+  const [items, setItems] = useState<FavoriteItem[]>(seededItems);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(seededItems.length === 0);
 
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -101,6 +121,9 @@ export function AmbientBackplate({
   );
 
   useEffect(() => {
+    // Server provided seed → skip the client fetch entirely.
+    if (initialItems && initialItems.length > 0) return;
+
     let cancelled = false;
     async function load() {
       try {
@@ -132,7 +155,7 @@ export function AmbientBackplate({
     return () => {
       cancelled = true;
     };
-  }, [category]);
+  }, [category, initialItems]);
 
   useEffect(() => {
     if (items.length <= 1) return;

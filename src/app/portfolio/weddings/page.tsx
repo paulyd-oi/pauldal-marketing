@@ -5,6 +5,7 @@ import { Reveal } from "@/components/site/reveal";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
 import { AmbientBackplate } from "@/components/site/ambient-backplate";
 import { getGalleriesByCategory } from "@/lib/portfolio-public";
+import { getFavorites, filterByCategory } from "@/lib/favorites";
 
 // Cache-bust query param — increment when shipping new OG image so iMessage,
 // Slack, Facebook, and Twitter re-fetch instead of serving stale OG cache.
@@ -43,13 +44,21 @@ export const metadata: Metadata = {
 };
 
 export default async function WeddingsPortfolioPage() {
-  const galleries = await getGalleriesByCategory("WEDDING");
+  const [galleries, allFavorites] = await Promise.all([
+    getGalleriesByCategory("WEDDING"),
+    getFavorites(),
+  ]);
+  const initialFavorites = filterByCategory(allFavorites, "WEDDING");
 
   return (
     <>
       {/* Hero — ambient cycling reel of wedding favorites */}
       <section className="relative h-[70vh] min-h-[600px] w-full overflow-hidden bg-ink">
-        <AmbientBackplate category="WEDDING" priorityFirst />
+        <AmbientBackplate
+          category="WEDDING"
+          initialItems={initialFavorites}
+          priorityFirst
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
         <div className="relative z-10 mx-auto flex h-full max-w-screen-2xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
           <Reveal>

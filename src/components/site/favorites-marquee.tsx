@@ -39,6 +39,14 @@ interface FavoriteItem {
 }
 
 interface FavoritesMarqueeProps {
+  /**
+   * Server-fetched favorites passed in by the page (see src/lib/favorites.ts).
+   * When non-empty the client-side fetch effect is a no-op — HTML ships
+   * with image URLs already in it. Empty array (or omitted) falls back to
+   * the original client-side fetch so dev hot-reload + transient FRAME
+   * outages still degrade gracefully.
+   */
+  initialItems?: FavoriteItem[];
   category?: CategoryFilter;
   durationSeconds?: number;
   heightPx?: number;
@@ -87,6 +95,7 @@ function filterByCategory(
 }
 
 export function FavoritesMarquee({
+  initialItems,
   category = "ALL",
   durationSeconds = 60,
   heightPx = 500,
@@ -94,8 +103,18 @@ export function FavoritesMarquee({
   direction = "left",
   className = "",
 }: FavoritesMarqueeProps) {
-  const [items, setItems] = useState<FavoriteItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Seed state from server-fetched items when present. Filter + shuffle
+  // happen up front so the first render shows a stable order; we don't
+  // re-shuffle on every render.
+  const seededItems =
+    initialItems && initialItems.length > 0
+      ? shuffle(
+          filterByCategory(initialItems, category).filter((i) => !!i.thumbnailUrl),
+        )
+      : [];
+
+  const [items, setItems] = useState<FavoriteItem[]>(seededItems);
+  const [loading, setLoading] = useState(seededItems.length === 0);
   const [paused, setPaused] = useState(false);
 
   const reducedMotion = useSyncExternalStore(
@@ -105,6 +124,9 @@ export function FavoritesMarquee({
   );
 
   useEffect(() => {
+    // Server provided seed → skip the client fetch entirely.
+    if (initialItems && initialItems.length > 0) return;
+
     let cancelled = false;
     async function load() {
       try {
@@ -130,7 +152,7 @@ export function FavoritesMarquee({
     return () => {
       cancelled = true;
     };
-  }, [category]);
+  }, [category, initialItems]);
 
   if (loading || items.length === 0) {
     return (

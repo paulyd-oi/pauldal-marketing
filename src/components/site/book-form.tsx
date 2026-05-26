@@ -85,6 +85,9 @@ export function BookForm() {
   const [state, setState] = useState<FormState>({ status: "idle" });
   const [projectType, setProjectType] = useState<string>(initialProjectType);
   const [weddingFlexible, setDateFlexible] = useState<boolean>(false);
+  // TCPA: default UNCHECKED. Consent is not a condition of purchase, so
+  // the form must also submit successfully without it.
+  const [smsConsent, setSmsConsent] = useState<boolean>(false);
 
   const isWeddingMode = projectType === "Weddings";
 
@@ -176,6 +179,15 @@ export function BookForm() {
     if (utm.landingPath) payload.landingPath = utm.landingPath;
     if (utm.referrer) payload.referrer = utm.referrer;
     else if (document.referrer) payload.referrer = document.referrer;
+
+    // SMS consent — TCPA audit trail. Only attach source/at when the
+    // user actually ticked the box; an unticked box submits
+    // `smsConsent: false` only so FRAME persists nothing extra.
+    payload.smsConsent = smsConsent;
+    if (smsConsent) {
+      payload.smsConsentSource = "pauldalstudios.com:wedding-inquiry-form";
+      payload.smsConsentAt = new Date().toISOString();
+    }
 
     // Honeypots — both legacy `company_website` (mapped to `honeypot=true`)
     // and the new contract `website` field. FRAME silent-blocks either.
@@ -578,6 +590,33 @@ export function BookForm() {
             {state.fieldErrors.message}
           </p>
         )}
+      </label>
+
+      {/* SMS consent — TCPA-compliant capture. UNCHECKED by default;
+          consent is purely additive, never required to submit. Source +
+          timestamp are only POSTed when the box is ticked, captured by
+          FRAME's Lead.smsConsent* columns for the audit trail. Twilio
+          SMS sending is parked pending 10DLC approval. */}
+      <label className="flex cursor-pointer items-start gap-3">
+        <input
+          type="checkbox"
+          name="smsConsent"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          className="focus-ring-tight mt-1 h-4 w-4 flex-shrink-0 border-hairline text-oxblood"
+        />
+        <span className="font-body text-sm text-ink/70">
+          I agree to receive text messages from Paul Dal Studios about
+          my inquiry. Message and data rates may apply. Reply STOP to
+          opt out at any time. Consent is not a condition of purchase.{" "}
+          <a
+            href="/privacy"
+            className="focus-ring underline underline-offset-2 hover:text-oxblood"
+          >
+            Privacy
+          </a>
+          .
+        </span>
       </label>
 
       {/* Error banner — role=alert + aria-live=polite so screen readers

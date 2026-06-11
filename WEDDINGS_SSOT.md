@@ -1,3 +1,8 @@
+> PRICING AUTHORITY: docs/PRICING.md is the canonical pricing SSOT. This file
+> mirrors it for wedding-funnel context only. If they disagree, PRICING.md wins.
+> Stepping-stone floors active ($3,995 film). Planned raise to $4,995 documented
+> in PRICING.md. Update both files together.
+
 # WEDDINGS — Single Source of Truth
 
 > Locked canonical values. Any drift between this file and code is a bug.
@@ -8,11 +13,11 @@
 
 | Token | Value |
 |---|---|
-| `PRICING_FLOOR_WEDDING` | $4,995 |
+| `PRICING_FLOOR_WEDDING` | $3,995 |
 | `PRICING_FLOOR_ELOPEMENT` | $2,000 |
-| `PRICING_TIERS` | The Vow $4,995 \| The Covenant $6,995 \| The Legacy $9,995 |
+| `PRICING_TIERS` | The Vow $3,995 \| The Covenant $6,995 \| The Legacy $9,995 |
 | `ELOPEMENT_TIER` | The Elopement Film $2,000 (≤4hr coverage, single-cam, 2-3 min film) |
-| `BUNDLE_TIERS` | Bundle 1 $7,495 \| Bundle 2 $10,995 \| Bundle 3 $14,995 |
+| `BUNDLE_TIERS` | Bundle 1 $6,495 \| Bundle 2 $9,995 \| Bundle 3 $13,995 |
 | `RETAINER_POLICY` | 50% non-refundable Tiers 1–2; 30/30/40 for Tier 3 + bundles |
 
 ## Delivery timelines
@@ -42,7 +47,7 @@ Travel tiers (FAQ):
 |---|---|
 | `WEDDINGS_HERO_SUBHEAD` | Cinematic wedding films + editorial photography. San Diego based, available worldwide. |
 | `WEDDINGS_PAGE_TITLE` | San Diego Wedding Videographer + Photographer \| Paul Dal Studios |
-| `WEDDINGS_META_DESCRIPTION` | Cinematic wedding films and editorial photography for San Diego couples. Films begin at $4,995. Photo + video bundles from $7,495. |
+| `WEDDINGS_META_DESCRIPTION` | Cinematic wedding films and editorial photography for San Diego couples. Films begin at $3,995. Photo + video bundles from $6,495. |
 | `LEAD_MAGNET_TITLE` | The Sacred Wedding Film Guide |
 | `PRIMARY_CTA_LABEL` | Check My Date |
 | `SECONDARY_CTA_LABEL` | Get the Pricing Guide |
@@ -59,12 +64,12 @@ Up to 4 hours, single camera, 2-3 minute cinematic film. Designed for
 courthouse ceremonies, micro-weddings, and vow renewals.
 ──────
 WEDDING FILMS
-── from $4,995 ──
-Most couples invest $6,000–$10,000.
+── from $3,995 ──
+Most couples invest $5,000–$9,000.
 Full-day cinematic coverage, multi-camera, highlight film + ceremony cut.
 ──────
 PHOTO + VIDEO BUNDLES
-── from $7,495 ──
+── from $6,495 ──
 Hybrid coverage with editorial photography included.
 ```
 

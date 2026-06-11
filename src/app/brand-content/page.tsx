@@ -130,7 +130,7 @@ export default async function BrandContentPage() {
       cards: [
         { label: "Half-day from", value: "$1,500" },
         { label: "Full-day from", value: "$2,800" },
-        { label: "Hybrid (photo + video)", value: "$4,500+" },
+        { label: "Hybrid (photo + video) from", value: "$4,500" },
       ],
       note: "Hourly add-on available at $300/hr.",
     },

@@ -49,6 +49,7 @@ const content: LandingPageContent = {
     cards: [
       { label: "Half-day from", value: "$1,500" },
       { label: "Full-day from", value: "$2,800" },
+      { label: "Hybrid from", value: "$3,800" },
       { label: "Multi-day", value: "Custom quote" },
     ],
     note: "Same-day teaser delivery included on every event.",

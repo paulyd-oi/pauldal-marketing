@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "San Diego Wedding Videographer + Photographer | Paul Dal Studios",
     description:
-      "Cinematic wedding films and editorial photography for San Diego couples. Films begin at $4,995. Photo + video bundles from $7,495.",
+      "Cinematic wedding films and editorial photography for San Diego couples. Films begin at $3,995. Photo + video bundles from $6,495.",
     path: "/weddings",
     ogImageAlt:
       "San Diego wedding videographer and photographer Paul Dal Studios",
@@ -58,7 +58,7 @@ const serviceJsonLd = {
       offers: {
         "@type": "Offer",
         priceCurrency: "USD",
-        price: "4995",
+        price: "3995",
       },
     },
   ],
@@ -86,13 +86,13 @@ const content: LandingPageContent = {
       },
       {
         eyebrow: "WEDDING FILMS",
-        priceLabel: "from $4,995",
+        priceLabel: "from $3,995",
         description:
-          "Most couples invest $6,000–$10,000. Full-day cinematic coverage, multi-camera, highlight film + ceremony cut.",
+          "Most couples invest $5,000–$9,000. Full-day cinematic coverage, multi-camera, highlight film + ceremony cut.",
       },
       {
         eyebrow: "PHOTO + VIDEO BUNDLES",
-        priceLabel: "from $7,495",
+        priceLabel: "from $6,495",
         description:
           "Hybrid coverage with editorial photography included.",
       },

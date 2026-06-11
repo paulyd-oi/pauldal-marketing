@@ -30,7 +30,7 @@ const TIERS: Tier[] = [
   {
     slug: "vow",
     name: "The Vow",
-    price: "$4,995",
+    price: "$3,995",
     badge: null,
     bullets: [
       "6 hours coverage, two cameras",
@@ -154,7 +154,7 @@ export function PackageTiers({ thumbs }: { thumbs?: PackageTierThumb[] }) {
         <div className="mt-16 text-center">
           <p className="font-body text-base text-ink">
             Need photo + video together? Bundles start at{" "}
-            <strong>$7,495</strong>.{" "}
+            <strong>$6,495</strong>.{" "}
             <span className="font-body text-sm italic text-ink/50">
               (Other bundle tiers available on request — ask on your discovery
               call.)

@@ -53,9 +53,9 @@ const SERVICES = [
       "Full delivery in 4–6 weeks",
     ],
     investment: [
-      "Starting from $2,500 for half-day coverage.",
-      "Most couples invest $3,500–$5,000 for full-day photo + video.",
-      "Premium packages up to $7,500.",
+      "Elopements and intimate weddings from $2,000.",
+      "Wedding films from $3,995. Most couples invest $5,000–$9,000.",
+      "Photo + video bundles from $6,495. Flagship collection $9,995.",
       "Custom quotes for destination weddings or extended coverage.",
     ],
     bg: "bg-paper",
@@ -81,6 +81,7 @@ const SERVICES = [
     investment: [
       "Half-day events from $1,500.",
       "Full-day coverage from $2,800.",
+      "Hybrid coverage from $3,800.",
       "Same-day teaser delivery included.",
     ],
     bg: "bg-cream-hover",
@@ -134,7 +135,7 @@ const SERVICES = [
     investment: [
       "Project-based pricing. Inquire with your brief for a tailored quote.",
       "Half-day editorial from $1,800.",
-      "Full-day editorial from $4,500+.",
+      "Full-day editorial from $4,500.",
     ],
     bg: "bg-cream-hover",
   },

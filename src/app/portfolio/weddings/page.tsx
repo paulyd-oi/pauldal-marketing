@@ -14,7 +14,7 @@ const OG_IMAGE = "/og-paul-dal.jpg?v=2";
 export const metadata: Metadata = {
   title: "Wedding Films Portfolio | Paul Dal Studios",
   description:
-    "Selected wedding film work from Paul Dal Studios. 70+ weddings documented across San Diego and beyond. Cinematic films from $4,995.",
+    "Selected wedding film work from Paul Dal Studios. 70+ weddings documented across San Diego and beyond. Cinematic films from $3,995.",
   alternates: {
     canonical: "https://www.pauldalstudios.com/portfolio/weddings",
   },

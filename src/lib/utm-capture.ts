@@ -18,6 +18,12 @@ export interface UtmData {
   fbclid?: string;
   landingPath?: string;
   referrer?: string;
+  // Plain `?source=...` param used by SEO landing CTAs (e.g. the
+  // Christian SEO page deep-links /book?service=weddings&source=christian-seo).
+  // FRAME has no separate `source` column; book-form aliases this to
+  // utmSource if utm_source isn't already set, so the attribution lands
+  // somewhere queryable.
+  source?: string;
 }
 
 interface StoredUtm extends UtmData {
@@ -38,6 +44,7 @@ function readUrlParams(): UtmData {
     utmTerm: params.get("utm_term") ?? undefined,
     gclid: params.get("gclid") ?? undefined,
     fbclid: params.get("fbclid") ?? undefined,
+    source: params.get("source") ?? undefined,
   };
 }
 
@@ -101,6 +108,7 @@ export function captureUtmData(): UtmData {
       utmTerm: stored.utmTerm,
       gclid: stored.gclid,
       fbclid: stored.fbclid,
+      source: stored.source,
       landingPath: stored.landingPath,
       referrer: stored.referrer,
     };

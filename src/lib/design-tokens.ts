@@ -1,8 +1,11 @@
+// Brand value swap 2026-06: oxblood → deep green #1f3d2b. Token names
+// kept (oxblood / oxbloodSoft) to avoid a 27-file rename across components;
+// only the hex value moves. Future debt: rename to brand / brandSoft.
 export const colors = {
   paper: "#faf8f3",
   ink: "#1a1a1a",
-  oxblood: "#7a2e2e",
-  oxbloodSoft: "#f3e8e3",
+  oxblood: "#1f3d2b",
+  oxbloodSoft: "#e1ebe4",
   hairline: "#d9ceb9",
   muted: "#6b5d52",
   whiteCard: "#ffffff",

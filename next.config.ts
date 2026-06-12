@@ -23,6 +23,35 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Baseline security headers. CSP is intentionally NOT set here — it
+  // needs an inventory pass for the Meta Pixel inline init script and
+  // framer-motion / gsap inline style fingerprints. Tracked as future
+  // work alongside the oxblood → brand token rename.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -65,7 +65,9 @@ const jsonLd = {
     addressCountry: "US",
   },
   areaServed: "Worldwide",
-  priceRange: "$$",
+  // Match /weddings page-level Schema.org Service.priceRange. Same
+  // @id (#business) — graph nodes must not contradict.
+  priceRange: "$$$",
   image:
     "https://imagedelivery.net/SPP6PvrwF_wGf30v_j1vDw/6227ea99-0217-4ef4-35bc-247a9ee7cd00/public",
   geo: {

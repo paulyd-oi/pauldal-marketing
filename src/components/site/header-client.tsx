@@ -26,6 +26,16 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  // Reset the services dropdown when the route changes. React's official
+  // "derive state from props during render" pattern — runs synchronously
+  // with the pathname change, no useEffect/setState-in-effect lint
+  // violation, and skips a render cycle vs. the effect-based version.
+  // See: react.dev/learn/you-might-not-need-an-effect#adjusting-state-when-a-prop-changes
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setServicesOpen(false);
+  }
   const servicesRef = useRef<HTMLDivElement>(null);
   const servicesPanelRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -62,10 +72,6 @@ export function HeaderClient({ servicesSublinks, mobileMenuLinks }: Props) {
       document.removeEventListener("keydown", handleKey);
     };
   }, [servicesOpen]);
-
-  useEffect(() => {
-    setServicesOpen(false);
-  }, [pathname]);
 
   return (
     <>

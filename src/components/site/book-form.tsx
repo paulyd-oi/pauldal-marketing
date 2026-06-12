@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { captureUtmData } from "@/lib/utm-capture";
@@ -19,8 +19,53 @@ function readCookie(name: string): string | undefined {
   return match ? match[2] : undefined;
 }
 
+// Retries on fetch REJECTION only (network down, CORS preflight failure,
+// abort, etc.). Non-OK HTTP responses (4xx/5xx) resolve normally and are
+// returned to the caller — never retried, because retrying a 4xx is
+// pointless and retrying a 5xx risks duplicate Leads on the FRAME side
+// (idempotency at /api/leads is best-effort, not guaranteed).
+//
+// Same eventId must be reused across all attempts so CAPI dedup works
+// when an attempt succeeds upstream but the response is lost on the
+// return trip.
+async function fetchWithRetry(
+  url: string,
+  init: RequestInit,
+): Promise<Response> {
+  const backoffMs = [0, 500, 1500];
+  let lastErr: unknown;
+  for (let i = 0; i < backoffMs.length; i++) {
+    if (backoffMs[i] > 0) {
+      await new Promise((r) => setTimeout(r, backoffMs[i]));
+    }
+    try {
+      return await fetch(url, init);
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  throw lastErr;
+}
+
+// The www. prefix is load-bearing: the apex studiofronthq.com 307s at the
+// Vercel platform level and redirects kill CORS preflights — incident
+// 2026-06-12. Always POST to www.studiofronthq.com directly.
 const API_BASE =
-  process.env.NEXT_PUBLIC_FRAME_API_URL ?? "https://app.pauldalstudios.com";
+  process.env.NEXT_PUBLIC_FRAME_API_URL ?? "https://www.studiofronthq.com";
+
+// Production builds fail loud if NEXT_PUBLIC_FRAME_API_URL is unset. Local
+// dev (`next dev`) keeps working with the www.studiofronthq.com fallback.
+// Gated to module-load on the server so it surfaces during `next build`'s
+// page-data collection; never throws in the browser.
+if (
+  typeof window === "undefined" &&
+  process.env.NODE_ENV === "production" &&
+  !process.env.NEXT_PUBLIC_FRAME_API_URL
+) {
+  throw new Error(
+    "[book-form] NEXT_PUBLIC_FRAME_API_URL is required in production. Set it in Vercel env to https://www.studiofronthq.com.",
+  );
+}
 
 const PROJECT_TYPES = [
   "Weddings",
@@ -89,6 +134,13 @@ export function BookForm() {
   // the form must also submit successfully without it.
   const [smsConsent, setSmsConsent] = useState<boolean>(false);
 
+  // Hard idempotency guard: a fast double-click can fire handleSubmit
+  // again before the `disabled={state.status === "submitting"}` prop
+  // commits, sending two POSTs with two distinct eventIds. That breaks
+  // CAPI dedup and creates duplicate Leads. The ref check runs
+  // synchronously and is unaffected by React's render batching.
+  const submittingRef = useRef(false);
+
   const isWeddingMode = projectType === "Weddings";
 
   useEffect(() => {
@@ -99,7 +151,16 @@ export function BookForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    try {
+      await submitInner(e);
+    } finally {
+      submittingRef.current = false;
+    }
+  }
 
+  async function submitInner(e: FormEvent<HTMLFormElement>) {
     const fd = new FormData(e.currentTarget);
     const clientErrors: Record<string, string> = {};
 
@@ -169,7 +230,12 @@ export function BookForm() {
     // current URL. The seed write happens at landing time via the
     // <AttributionCapture /> component mounted in the root layout.
     const utm = captureUtmData();
-    if (utm.utmSource) payload.utmSource = utm.utmSource;
+    // utm_source wins when both are present; ?source= falls back into
+    // utmSource so FRAME's Lead row records the SEO-landing attribution
+    // (Christian SEO page sends source=christian-seo). FRAME has no
+    // separate `source` column.
+    const effectiveUtmSource = utm.utmSource ?? utm.source;
+    if (effectiveUtmSource) payload.utmSource = effectiveUtmSource;
     if (utm.utmMedium) payload.utmMedium = utm.utmMedium;
     if (utm.utmCampaign) payload.utmCampaign = utm.utmCampaign;
     if (utm.utmContent) payload.utmContent = utm.utmContent;
@@ -208,7 +274,7 @@ export function BookForm() {
     if (fbp) payload.fbp = fbp;
 
     try {
-      const res = await fetch(`${API_BASE}/api/leads`, {
+      const res = await fetchWithRetry(`${API_BASE}/api/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
@@ -250,10 +316,17 @@ export function BookForm() {
       }
 
       if (res.status === 429) {
+        // FRAME returns Retry-After in seconds (Mega Prompt 4 contract).
+        // Fall back to 60s if header is missing/malformed.
+        const retryAfterRaw = res.headers.get("Retry-After");
+        const retryAfterSec = retryAfterRaw ? Number(retryAfterRaw) : NaN;
+        const seconds =
+          Number.isFinite(retryAfterSec) && retryAfterSec > 0
+            ? Math.max(1, Math.ceil(retryAfterSec))
+            : 60;
         setState({
           status: "error",
-          errorMessage:
-            "You're submitting too quickly. Please wait a minute and try again.",
+          errorMessage: `You're submitting too quickly. Try again in ${seconds} second${seconds === 1 ? "" : "s"}.`,
         });
         return;
       }
@@ -596,28 +669,35 @@ export function BookForm() {
           consent is purely additive, never required to submit. Source +
           timestamp are only POSTed when the box is ticked, captured by
           FRAME's Lead.smsConsent* columns for the audit trail. Twilio
-          SMS sending is parked pending 10DLC approval. */}
-      <label className="flex cursor-pointer items-start gap-3">
-        <input
-          type="checkbox"
-          name="smsConsent"
-          checked={smsConsent}
-          onChange={(e) => setSmsConsent(e.target.checked)}
-          className="focus-ring-tight mt-1 h-4 w-4 flex-shrink-0 border-hairline text-oxblood"
-        />
-        <span className="font-body text-sm text-ink/70">
-          I agree to receive text messages from Paul Dal Studios about
-          my inquiry. Message and data rates may apply. Reply STOP to
-          opt out at any time. Consent is not a condition of purchase.{" "}
-          <a
-            href="/privacy"
-            className="focus-ring underline underline-offset-2 hover:text-oxblood"
-          >
-            Privacy
-          </a>
-          .
-        </span>
-      </label>
+          SMS sending is parked pending 10DLC approval.
+
+          Wrapped in a fieldset with an sr-only legend so screen readers
+          announce "SMS consent agreement" as the group label before
+          reading the (long) consent text inline. */}
+      <fieldset>
+        <legend className="sr-only">SMS consent agreement</legend>
+        <label className="flex cursor-pointer items-start gap-3">
+          <input
+            type="checkbox"
+            name="smsConsent"
+            checked={smsConsent}
+            onChange={(e) => setSmsConsent(e.target.checked)}
+            className="focus-ring-tight mt-1 h-4 w-4 flex-shrink-0 border-hairline text-oxblood"
+          />
+          <span className="font-body text-sm text-ink/70">
+            I agree to receive text messages from Paul Dal Studios about
+            my inquiry. Message and data rates may apply. Reply STOP to
+            opt out at any time. Consent is not a condition of purchase.{" "}
+            <a
+              href="/privacy"
+              className="focus-ring underline underline-offset-2 hover:text-oxblood"
+            >
+              Privacy
+            </a>
+            .
+          </span>
+        </label>
+      </fieldset>
 
       {/* Error banner — role=alert + aria-live=polite so screen readers
           announce form-submission errors as they appear without yanking
